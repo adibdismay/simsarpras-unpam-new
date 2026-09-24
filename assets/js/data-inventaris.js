@@ -24,6 +24,16 @@
   let selectedCountBadge;
   let selectedCountText;
   let footerSelectedCount;
+  let deleteBackdrop;
+  let deletePanel;
+  let deleteItemInfo;
+  let deleteError;
+  let deleteCancelBtn;
+  let deleteConfirmBtn;
+
+  // State modal hapus
+  let deleteTargetId = null;
+  let deleteTrigger = null;
 
   /**
    * Inisialisasi elemen DOM
@@ -44,6 +54,12 @@
     selectedCountBadge = document.getElementById('selected-count-badge');
     selectedCountText = document.getElementById('selected-count-text');
     footerSelectedCount = document.getElementById('footer-selected-count');
+    deleteBackdrop = document.getElementById('delete-backdrop');
+    deletePanel = document.getElementById('delete-panel');
+    deleteItemInfo = document.getElementById('delete-item-info');
+    deleteError = document.getElementById('delete-error');
+    deleteCancelBtn = document.getElementById('delete-cancel');
+    deleteConfirmBtn = document.getElementById('delete-confirm');
   }
 
   /**
@@ -119,8 +135,13 @@
           <button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="visibility">
             <span class="material-symbols-outlined text-[18px]">visibility</span>
           </button>
-          <button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="edit">
+          <a class="inline-flex items-center gap-1 p-1.5 rounded hover:bg-surface-container text-primary hover:text-primary-container font-label-sm text-label-sm font-semibold transition-colors" href="form-inventaris.html?id=${encodeURIComponent(item.id)}" title="Edit data inventaris" aria-label="Edit">
             <span class="material-symbols-outlined text-[18px]">edit</span>
+            <span>Edit</span>
+          </a>
+          <button class="inline-flex items-center gap-1 p-1.5 rounded hover:bg-surface-container text-error hover:text-error-container font-label-sm text-label-sm font-semibold transition-colors row-delete" type="button" data-id="${item.id}" title="Hapus data inventaris" aria-label="Hapus">
+            <span class="material-symbols-outlined text-[18px]">delete</span>
+            <span>Hapus</span>
           </button>
           <button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-surface-tint transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="build">
             <span class="material-symbols-outlined text-[18px]">build</span>
@@ -232,6 +253,81 @@
       selectAllCheckbox.checked = visible.length > 0 && count === visible.length;
       selectAllCheckbox.indeterminate = count > 0 && count < visible.length;
       selectAllCheckbox.disabled = visible.length === 0;
+    }
+  }
+
+  /**
+   * Buka modal konfirmasi hapus untuk record tertentu.
+   */
+  function openDeleteModal(id, triggerButton) {
+    if (typeof InventoryStore === 'undefined') return;
+    const item = InventoryStore.getById(id);
+    if (!item || !deleteBackdrop || !deleteItemInfo) return;
+
+    deleteTargetId = id;
+    deleteTrigger = triggerButton || null;
+
+    deleteItemInfo.textContent = '';
+    const codeSpan = document.createElement('span');
+    codeSpan.className = 'font-code-sm text-code-sm font-semibold text-primary';
+    codeSpan.textContent = item.kode || '-';
+    const nameSpan = document.createElement('span');
+    nameSpan.className = 'font-body-md text-body-md font-semibold text-on-surface';
+    nameSpan.textContent = item.nama || '-';
+    deleteItemInfo.appendChild(codeSpan);
+    deleteItemInfo.appendChild(document.createTextNode(' — '));
+    deleteItemInfo.appendChild(nameSpan);
+
+    deleteError.textContent = '';
+    deleteError.classList.add('hidden');
+
+    deleteBackdrop.hidden = false;
+    deleteConfirmBtn.disabled = false;
+    deleteConfirmBtn.focus();
+  }
+
+  /**
+   * Tutup modal konfirmasi hapus tanpa menghapus.
+   */
+  function closeDeleteModal() {
+    if (!deleteBackdrop || deleteBackdrop.hidden) return;
+    deleteBackdrop.hidden = true;
+    deleteTargetId = null;
+    if (deleteTrigger) {
+      deleteTrigger.focus();
+      deleteTrigger = null;
+    }
+  }
+
+  /**
+   * Konfirmasi penghapusan: panggil store.remove dan render ulang.
+   */
+  function handleDeleteConfirm() {
+    if (deleteTargetId === null) return;
+
+    deleteConfirmBtn.disabled = true;
+    const result = InventoryStore.remove(deleteTargetId);
+
+    if (result && result.success) {
+      const triggerBeforeClose = deleteTrigger;
+      deleteBackdrop.hidden = true;
+      deleteTargetId = null;
+      deleteTrigger = null;
+      // Render ulang dengan filter aktif, sinkronkan checkbox/seleksi.
+      filterData();
+      // Pindahkan fokus ke kontrol tabel yang masih ada.
+      if (triggerBeforeClose && triggerBeforeClose.isConnected) {
+        triggerBeforeClose.focus();
+      } else if (searchInput) {
+        searchInput.focus();
+      }
+    } else {
+      deleteConfirmBtn.disabled = false;
+      const message = (result && result.errors && result.errors.length)
+        ? result.errors.join('. ')
+        : 'Gagal menghapus data inventaris';
+      deleteError.textContent = message;
+      deleteError.classList.remove('hidden');
     }
   }
 
@@ -368,6 +464,47 @@
         if (searchInput) searchInput.focus();
       });
     }
+
+    // Delegasi klik tombol Hapus pada tbody (baris dirender ulang)
+    if (tbody) {
+      tbody.addEventListener('click', function(event) {
+        const btn = event.target.closest('.row-delete');
+        if (!btn) return;
+        const id = Number(btn.getAttribute('data-id'));
+        if (Number.isInteger(id) && id > 0) {
+          openDeleteModal(id, btn);
+        }
+      });
+    }
+
+    // Modal konfirmasi hapus
+    if (deleteCancelBtn) deleteCancelBtn.addEventListener('click', closeDeleteModal);
+    if (deleteConfirmBtn) deleteConfirmBtn.addEventListener('click', handleDeleteConfirm);
+    if (deleteBackdrop) {
+      deleteBackdrop.addEventListener('click', function(event) {
+        if (event.target === deleteBackdrop) closeDeleteModal();
+      });
+    }
+    document.addEventListener('keydown', function(event) {
+      if (!deleteBackdrop || deleteBackdrop.hidden) return;
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeDeleteModal();
+        return;
+      }
+      if (event.key !== 'Tab') return;
+      const focusables = Array.from(deletePanel.querySelectorAll('button:not([disabled]), [tabindex="0"]'));
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (!first || !last) return;
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    });
   }
 
   /**
