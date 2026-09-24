@@ -1546,47 +1546,6 @@
 <script>(() => {
   'use strict';
   const byId = id => document.getElementById(id);
-  const rows = Array.from(document.querySelectorAll('#inventory-table-body tr[data-gedung]'));
-  const search = byId('search-input');
-  const filters = ['gedung','ruangan','kategori','kondisi','status'];
-  const all = byId('th-select-all');
-  function selection() {
-    const visible = rows.filter(row => !row.hidden);
-    const count = visible.filter(row => row.querySelector('.row-checkbox').checked).length;
-    byId('bulk-bar').classList.toggle('hidden', count === 0);
-    byId('selected-count-badge').textContent = count;
-    byId('selected-count-text').textContent = count;
-    byId('footer-selected-count').textContent = count + ' item terpilih';
-    all.checked = visible.length > 0 && count === visible.length;
-    all.indeterminate = count > 0 && count < visible.length;
-    all.disabled = visible.length === 0;
-  }
-  function filterRows() {
-    const query = search.value.trim().toLocaleLowerCase('id');
-    let count = 0;
-    rows.forEach(row => {
-      const match = (!query || row.textContent.toLocaleLowerCase('id').includes(query)) &&
-        filters.every(key => !byId('filter-'+key).value || row.dataset[key] === byId('filter-'+key).value);
-      row.hidden = !match;
-      if (match) count++;
-      else row.querySelector('.row-checkbox').checked = false;
-    });
-    byId('search-clear').classList.toggle('hidden', query.length === 0);
-    byId('empty-results').hidden = count !== 0;
-    byId('result-count').textContent = `Menampilkan ${count} dari ${rows.length} baris contoh`;
-    selection();
-  }
-  search.addEventListener('input', filterRows);
-  filters.forEach(key => byId('filter-'+key).addEventListener('change', filterRows));
-  byId('search-clear').addEventListener('click', () => { search.value='';filterRows();search.focus(); });
-  byId('btn-reset-filter').addEventListener('click', () => {
-    search.value='';filters.forEach(key => byId('filter-'+key).value='');filterRows();
-  });
-  all.addEventListener('change', () => {
-    rows.filter(row => !row.hidden).forEach(row => row.querySelector('.row-checkbox').checked=all.checked);
-    selection();
-  });
-  rows.forEach(row => row.querySelector('.row-checkbox').addEventListener('change',selection));
 
   // Preview only: no fake save or export success.
   const backdrop=byId('drawer-backdrop'), panel=byId('drawer-panel');
@@ -1620,8 +1579,12 @@
     if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
     else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
   });
-  filterRows();
 })();
 </script>
+
+<!-- Inventory Store & Data Inventaris Module - Milestone 3 -->
+<script src="assets/js/inventory-store.js"></script>
+<script src="assets/js/data-inventaris.js"></script>
+
 </body>
 </html>
