@@ -1,0 +1,141 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  "model": "sideway/swai/Atria-Dawn-Preview",
+
+  "provider": {
+    "sideway": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Sideway",
+      "options": {
+        "baseURL": "https://api.sideway.my.id/v1"
+      },
+      "models": {
+        "swai/Atria-Dawn-Preview": {
+          "name": "Sideway - Atria-Dawn-Preview"
+        },
+        "swai/claude-opus-4.6": {
+          "name": "Sideway - claude-opus-4.6"
+        },
+        "swai/claude-opus-4.7": {
+          "name": "Sideway - claude-opus-4.7"
+        },
+        "swai/claude-opus-4.8": {
+          "name": "Sideway - claude-opus-4.8"
+        },
+        "swai/claude-opus-5": {
+          "name": "Sideway - claude-opus-5"
+        },
+        "swai/claude-sonnet-4.6": {
+          "name": "Sideway - claude-sonnet-4.6"
+        },
+        "swai/deepseek-v4-flash": {
+          "name": "Sideway - deepseek-v4-flash"
+        },
+        "swai/deepseek-v4-pro": {
+          "name": "Sideway - deepseek-v4-pro"
+        },
+        "swai/deepseek-v4.1-flash": {
+          "name": "Sideway - deepseek-v4.1-flash"
+        },
+        "swai/gemini-3.5-flash-high": {
+          "name": "Sideway - gemini-3.5-flash-high"
+        },
+        "swai/gemini-3.6-flash-high": {
+          "name": "Sideway - gemini-3.6-flash-high"
+        },
+        "swai/gemini-3.7-flash-high": {
+          "name": "Sideway - gemini-3.7-flash-high"
+        },
+        "swai/gemini-pro-agent": {
+          "name": "Sideway - gemini-pro-agent"
+        },
+        "swai/glm-5v-turbo": {
+          "name": "Sideway - glm-5v-turbo"
+        },
+        "swai/gpt-5.6-luna": {
+          "name": "Sideway - gpt-5.6-luna"
+        },
+        "swai/gpt-5.6-sol": {
+          "name": "Sideway - gpt-5.6-sol"
+        },
+        "swai/gpt-5.6-terra": {
+          "name": "Sideway - gpt-5.6-terra"
+        },
+        "swai/gpt-6-astra": {
+          "name": "Sideway - gpt-6-astra"
+        },
+        "swai/kimi-k2.5": {
+          "name": "Sideway - kimi-k2.5"
+        },
+        "swai/kimi-k2.6": {
+          "name": "Sideway - kimi-k2.6"
+        },
+        "swai/kimi-k2.7": {
+          "name": "Sideway - kimi-k2.7"
+        },
+        "swai/kimi-k3": {
+          "name": "Sideway - kimi-k3"
+        },
+        "swai/mimo-v2.5": {
+          "name": "Sideway - mimo-v2.5"
+        },
+        "swai/minimax-m3": {
+          "name": "Sideway - minimax-m3"
+        }
+      }
+    },
+
+    "dahono": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Dahono",
+      "options": {
+        "baseURL": "https://gateway.dahono.com/v1"
+      },
+      "models": {
+        "claude-table-5": {
+          "name": "Dahono - Claude Table 5"
+        },
+        "claude-opus-4.8": {
+          "name": "Dahono - Claude Opus 4.8"
+        },
+        "claude-opus-5": {
+          "name": "Dahono - Claude Opus 5"
+        },
+        "claude-sonnet-4.5": {
+          "name": "Dahono - Claude Sonnet 4.5"
+        },
+        "claude-sonnet-5": {
+          "name": "Dahono - Claude Sonnet 5"
+        },
+        "gemini-3.1-pro": {
+          "name": "Dahono - Gemini 3.1 Pro"
+        },
+        "gpt-5.5": {
+          "name": "Dahono - GPT-5.5"
+        },
+        "gpt-5.6-luna": {
+          "name": "Dahono - GPT-5.6 Luna"
+        },
+        "gpt-5.6-sol": {
+          "name": "Dahono - GPT-5.6 Sol"
+        },
+        "gpt-5.6-sol-custom": {
+          "name": "Dahono - GPT-5.6 Sol Custom"
+        },
+        "gpt-5.6-terra": {
+          "name": "Dahono - GPT-5.6 Terra"
+        },
+        "gpt-6-astra": {
+          "name": "Dahono - GPT-6 Astra"
+        },
+        "grok-4.3": {
+          "name": "Dahono - Grok 4.3"
+        },
+        "minimax-m3": {
+          "name": "Dahono - MiniMax M3"
+        }
+      }
+    }
+  }
+}

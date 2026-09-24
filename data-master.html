@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Inventaris | SIMSARPRAS EDU — UNPAM</title>
+  <meta name="description" content="Template Data Master Inventaris SIMSARPRAS EDU untuk Milestone 2, menggunakan data simulasi.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = {
+  "darkMode": "class",
+  "theme": {
+    "extend": {
+      "colors": {
+        "on-primary-fixed-variant": "#1c3ba8",
+        "surface-tint": "#3a55c1",
+        "on-tertiary-container": "#ff7a6f",
+        "inverse-primary": "#b8c4ff",
+        "on-surface-variant": "#6B7280",
+        "on-tertiary": "#ffffff",
+        "primary-fixed": "#dde1ff",
+        "tertiary": "#500003",
+        "surface-dim": "#d2d9f4",
+        "on-primary-fixed": "#001354",
+        "primary-fixed-dim": "#b8c4ff",
+        "secondary": "#6e5e00",
+        "on-error": "#ffffff",
+        "tertiary-fixed": "#ffdad6",
+        "tertiary-fixed-dim": "#ffb4ab",
+        "surface-container-lowest": "#ffffff",
+        "surface-container": "#eaedff",
+        "inverse-surface": "#283044",
+        "error-container": "#ffdad6",
+        "on-tertiary-fixed-variant": "#93000d",
+        "background": "#F7F8FA",
+        "surface-bright": "#faf8ff",
+        "on-secondary": "#ffffff",
+        "secondary-fixed-dim": "#e6c500",
+        "on-primary": "#ffffff",
+        "error": "#DC2626",
+        "secondary-container": "#fcd801",
+        "outline-variant": "#E5E7EB",
+        "on-secondary-container": "#6f5e00",
+        "surface": "#F7F8FA",
+        "secondary-fixed": "#ffe25e",
+        "primary": "#2563EB",
+        "on-error-container": "#93000a",
+        "on-background": "#111827",
+        "outline": "#757684",
+        "on-surface": "#111827",
+        "surface-variant": "#dae2fd",
+        "on-primary-container": "#869dff",
+        "surface-container-high": "#e2e7ff",
+        "inverse-on-surface": "#eef0ff",
+        "on-tertiary-fixed": "#410002",
+        "surface-container-low": "#f2f3ff",
+        "tertiary-container": "#790008",
+        "primary-container": "#1D4ED8",
+        "surface-container-highest": "#dae2fd",
+        "on-secondary-fixed": "#221b00",
+        "on-secondary-fixed-variant": "#534600"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.125rem",
+        "lg": "0.25rem",
+        "xl": "0.5rem",
+        "full": "0.75rem"
+      },
+      "spacing": {
+        "space-xl": "2rem",
+        "gutter": "1.25rem",
+        "space-lg": "1.5rem",
+        "gutter-mobile": "0.75rem",
+        "space-xs": "0.25rem",
+        "space-sm": "0.5rem",
+        "margin-mobile": "1rem",
+        "space-md": "1rem",
+        "margin": "2rem"
+      },
+      "fontFamily": {
+        "body-lg": [
+          "Plus Jakarta Sans",
+          "Arial",
+          "sans-serif"
+        ],
+        "display-lg-mobile": [
+          "Plus Jakarta Sans",
+          "Arial",
+          "sans-serif"
+        ],
+        "headline-md": [
+          "Plus Jakarta Sans",
+          "Arial",
+          "sans-serif"
+        ],
+        "code-sm": [
+          "JetBrains Mono"
+        ],
+        "label-md": [
+          "Plus Jakarta Sans",
+          "Arial",
+          "sans-serif"
+        ],
+        "display-lg": [
+          "Plus Jakarta Sans",
+          "Arial",
+          "sans-serif"
+        ],
+        "headline-lg-mobile": [
+          "Plus Jakarta Sans",
+          "Arial",
+          "sans-serif"
+        ],
+        "body-md": [
+          "Plus Jakarta Sans",
+          "Arial",
+          "sans-serif"
+        ],
+        "label-sm": [
+          "Plus Jakarta Sans",
+          "Arial",
+          "sans-serif"
+        ],
+        "body-sm": [
+          "Plus Jakarta Sans",
+          "Arial",
+          "sans-serif"
+        ],
+        "headline-sm": [
+          "Plus Jakarta Sans",
+          "Arial",
+          "sans-serif"
+        ],
+        "label-lg": [
+          "Plus Jakarta Sans",
+          "Arial",
+          "sans-serif"
+        ],
+        "headline-lg": [
+          "Plus Jakarta Sans",
+          "Arial",
+          "sans-serif"
+        ],
+        "sans": [
+          "Plus Jakarta Sans",
+          "Arial",
+          "sans-serif"
+        ],
+        "mono": [
+          "JetBrains Mono",
+          "monospace"
+        ]
+      },
+      "fontSize": {
+        "body-lg": [
+          "16px",
+          {
+            "lineHeight": "24px",
+            "fontWeight": "400"
+          }
+        ],
+        "display-lg-mobile": [
+          "28px",
+          {
+            "lineHeight": "36px",
+            "letterSpacing": "-0.01em",
+            "fontWeight": "700"
+          }
+        ],
+        "headline-md": [
+          "22px",
+          {
+            "lineHeight": "30px",
+            "fontWeight": "600"
+          }
+        ],
+        "code-sm": [
+          "12px",
+          {
+            "lineHeight": "16px",
+            "fontWeight": "500"
+          }
+        ],
+        "label-md": [
+          "12px",
+          {
+            "lineHeight": "16px",
+            "letterSpacing": "0.02em",
+            "fontWeight": "600"
+          }
+        ],
+        "display-lg": [
+          "36px",
+          {
+            "lineHeight": "44px",
+            "letterSpacing": "-0.02em",
+            "fontWeight": "700"
+          }
+        ],
+        "headline-lg-mobile": [
+          "22px",
+          {
+            "lineHeight": "30px",
+            "letterSpacing": "-0.01em",
+            "fontWeight": "600"
+          }
+        ],
+        "body-md": [
+          "14px",
+          {
+            "lineHeight": "20px",
+            "fontWeight": "400"
+          }
+        ],
+        "label-sm": [
+          "11px",
+          {
+            "lineHeight": "14px",
+            "letterSpacing": "0.04em",
+            "fontWeight": "700"
+          }
+        ],
+        "body-sm": [
+          "12px",
+          {
+            "lineHeight": "18px",
+            "fontWeight": "400"
+          }
+        ],
+        "headline-sm": [
+          "18px",
+          {
+            "lineHeight": "26px",
+            "fontWeight": "600"
+          }
+        ],
+        "label-lg": [
+          "14px",
+          {
+            "lineHeight": "20px",
+            "letterSpacing": "0.01em",
+            "fontWeight": "600"
+          }
+        ],
+        "headline-lg": [
+          "28px",
+          {
+            "lineHeight": "36px",
+            "letterSpacing": "-0.015em",
+            "fontWeight": "700"
+          }
+        ]
+      }
+    }
+  }
+};</script>
+  <style>
+    html { scroll-padding-top: 80px; }
+    body { margin: 0; }
+    [hidden] { display: none !important; }
+    *, *::before, *::after { box-sizing: border-box; }
+    :focus-visible { outline: 2px solid #2563eb; outline-offset: 3px; }
+    .material-symbols-outlined { flex-shrink: 0; font-size: 20px; line-height: 1; vertical-align: middle; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 8px; }
+    .skip-link { position: fixed; top: -100px; left: 16px; z-index: 200; padding: 12px 16px; background: #fff; color: #2563eb; border-radius: 8px; }
+    .skip-link:focus { top: 12px; }
+
+    /* Sidebar desktop */
+    #app-sidebar { position: fixed; inset: 0 auto 0 0; z-index: 100; display: flex; flex-direction: column; width: 288px; height: 100vh; height: 100dvh; background: #fff; box-shadow: 0 1px 8px rgb(0 0 0 / 4%); }
+    .sidebar-scroll { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+    .nav-group-title { margin: 16px 0 4px; padding: 4px 16px; color: #6b7280; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+    .nav-link { display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-radius: 4px; color: #6b7280; text-decoration: none; }
+    .nav-link:hover { background: #f2f3ff; color: #111827; }
+    .nav-link[aria-current="page"] { background: #eaedff; color: #2563eb; font-weight: 700; }
+    .nav-link[aria-disabled="true"] { cursor: default; }
+
+    /* Header dan pembungkus konten */
+    #app-shell { display: flex; flex-direction: column; min-height: 100vh; min-width: 0; padding-left: 288px; }
+    #app-header { position: fixed; top: 0; right: 0; left: 288px; z-index: 40; height: 64px; background: rgb(247 248 250 / 95%); backdrop-filter: blur(16px); box-shadow: 0 1px 8px rgb(0 0 0 / 4%); }
+    .header-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 100%; padding: 0 24px; }
+    .header-search { flex: 1; min-width: 100px; max-width: 420px; }
+    .header-actions { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    #dashboard { flex: 1; min-width: 0; padding-top: 64px; }
+    .content-canvas { display: grid; gap: 24px; width: 100%; max-width: 1600px; margin: 0 auto; padding: 32px; }
+    .content-canvas > *, .min-width-zero { min-width: 0; }
+    .panel { min-width: 0; padding: 24px; border-radius: 8px; background: #fff; box-shadow: 0 1px 3px rgb(0 0 0 / 6%); }
+    .panel-title { color: #111827; font-size: 18px; line-height: 26px; font-weight: 600; }
+    .panel-description { margin-top: 4px; color: #6b7280; font-size: 12px; line-height: 18px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 10px 14px; border-radius: 4px; font-size: 12px; line-height: 18px; font-weight: 600; text-align: center; }
+    .button-primary { background: #1d4ed8; color: #fff; }
+    .button-secondary { background: #f2f3ff; color: #111827; }
+    .button:disabled { cursor: not-allowed; }
+    .icon-button { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; flex-shrink: 0; border-radius: 8px; color: #6b7280; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 8px; font-size: 11px; line-height: 16px; font-weight: 600; }
+    .badge-good { background: #f0fdf4; color: #166534; }
+    .badge-warning { background: #fffbeb; color: #92400e; }
+    .badge-danger { background: #fef2f2; color: #b91c1c; }
+    .badge-info { background: #eff6ff; color: #1d4ed8; }
+    .stat-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+    .stat-card { display: flex; flex-direction: column; justify-content: space-between; gap: 16px; }
+    .stat-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+    .stat-icon { display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; flex-shrink: 0; border-radius: 8px; background: #eaedff; color: #2563eb; }
+    .stat-icon .material-symbols-outlined { font-size: 26px; }
+    .stat-note { padding: 10px; border-radius: 4px; background: #f2f3ff; font-size: 12px; line-height: 18px; }
+    .analytics-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 24px; }
+    .monitoring-grid { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 24px; }
+    .condition-layout { display: flex; align-items: center; flex-wrap: wrap; gap: 24px; margin-top: 24px; }
+    .condition-list { flex: 1; min-width: min(100%, 220px); }
+    .condition-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding: 8px; border-radius: 4px; background: #f2f3ff; font-size: 12px; }
+    .attention-scroll { max-width: 100%; overflow-x: auto; border: 1px solid #e5e7eb; border-radius: 8px; }
+    .attention-table { width: 100%; min-width: 560px; border-collapse: collapse; text-align: left; font-size: 12px; line-height: 18px; }
+    .attention-table th, .attention-table td { padding: 14px 16px; }
+    .attention-table thead { background: #f2f3ff; color: #6b7280; }
+    .attention-table tbody tr + tr { border-top: 1px solid #e5e7eb; }
+    .attention-table tbody tr:hover { background: #f7f8fa; }
+    .activity-item { display: flex; align-items: flex-start; gap: 12px; padding: 16px 0; }
+    .activity-item + .activity-item { border-top: 1px solid #e5e7eb; }
+    .activity-icon { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; flex-shrink: 0; border-radius: 4px; background: #eff6ff; color: #1d4ed8; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .gallery-card { position: relative; height: 176px; overflow: hidden; border-radius: 8px; background: #eaedff; }
+    .gallery-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s ease; }
+    .gallery-card:hover img { transform: scale(1.04); }
+    .gallery-caption { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; color: #fff; background: linear-gradient(to top, rgb(17 24 39 / 92%), rgb(17 24 39 / 15%) 65%, transparent); }
+    .image-fallback { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; width: 100%; height: 100%; padding-bottom: 52px; color: #1d4ed8; font-size: 12px; }
+    #app-footer { margin-top: auto; padding: 20px 24px; border-top: 1px solid #e5e7eb; background: #fff; color: #6b7280; font-size: 12px; line-height: 20px; }
+    #menu-open, #menu-close, #sidebar-overlay { display: none; }
+
+    @media (max-width: 1399px) {
+      .stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .header-campus, .header-profile-text { display: none; }
+    }
+    @media (max-width: 1199px) {
+      .analytics-grid, .monitoring-grid { grid-template-columns: minmax(0, 1fr); }
+      .header-search, .header-request { display: none; }
+    }
+    @media (max-width: 1023px) {
+      #app-shell { padding-left: 0; }
+      #app-header { left: 0; }
+      #app-sidebar {
+        display:flex;
+        width:min(320px, calc(100vw - 32px));
+        transform:translateX(-105%);
+        visibility:hidden;
+        pointer-events:none;
+        transition:transform 220ms cubic-bezier(.2,.8,.2,1), visibility 0s 220ms;
+        border-radius:0 20px 20px 0;
+        box-shadow:12px 0 40px rgb(17 24 39 / 14%);
+      }
+      #app-sidebar[data-open="true"] {
+        transform:translateX(0);
+        visibility:visible;
+        pointer-events:auto;
+        transition-delay:0s;
+      }
+      #sidebar-overlay {
+        display:block;
+        position:fixed;
+        inset:0;
+        z-index:90;
+        background:rgb(17 24 39 / 40%);
+        backdrop-filter:blur(2px);
+        opacity:0;
+        visibility:hidden;
+        pointer-events:none;
+        transition:opacity 220ms ease, visibility 0s 220ms;
+      }
+      #sidebar-overlay[data-open="true"] {
+        opacity:1;
+        visibility:visible;
+        pointer-events:auto;
+        transition-delay:0s;
+      }
+      #menu-open, #menu-close {
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        width:44px;
+        height:44px;
+        padding:0;
+        flex-shrink:0;
+        border-radius:12px;
+        border:1px solid #e5e7eb;
+        background:#fff;
+        color:#2563eb;
+        cursor:pointer;
+        transition:background 160ms ease, border-color 160ms ease, transform 160ms ease;
+      }
+      #menu-open:hover, #menu-close:hover {
+        background:#eff6ff;
+        border-color:#bfdbfe;
+      }
+      #menu-open:active, #menu-close:active { transform:scale(.95); }
+      #menu-open:focus-visible, #menu-close:focus-visible {
+        outline:2px solid #2563eb;
+        outline-offset:3px;
+      }
+      .sidebar-brand {
+        position:sticky;
+        top:0;
+        z-index:1;
+        gap:8px;
+        padding:16px 12px;
+        background:white;
+        border-bottom:1px solid #f1f5f9;
+        margin-bottom:12px;
+      }
+      .sidebar-brand > .min-w-0 { flex:1; }
+      .sidebar-brand p:first-child { font-size:14px; line-height:20px; }
+      .sidebar-brand p:last-child { font-size:10px; line-height:15px; }
+      #menu-close { margin:0 0 0 auto; color:#6b7280; border-color:transparent; background:#f8fafc; }
+      .header-breadcrumb, .header-help { display: none; }
+      .header-row { padding-inline: 16px; gap: 8px; }
+      .header-actions { margin-left: auto; gap: 8px; }
+    }
+    @media (max-width: 767px) {
+      .content-canvas { padding: 16px; gap: 20px; }
+      .panel { padding: 20px; }
+      .gallery-grid { grid-template-columns: minmax(0, 1fr); }
+    }
+    @media (max-width: 479px) {
+      .stat-grid { grid-template-columns: minmax(0, 1fr); }
+      .condition-layout { justify-content: center; }
+      .condition-list { flex-basis: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+<style>
+#main-content { padding-top:64px; min-width:0; flex:1; }
+#main-content > div { max-width:1600px; margin-inline:auto; min-width:0; }
+#main-content button:disabled { cursor:not-allowed; }
+.inventory-scroll { max-width:100%; overflow-x:auto; }
+.inventory-table { min-width:1440px; }
+.inventory-table th,.inventory-table td { position:static!important; }
+.inventory-drawer-backdrop { position:fixed; inset:0; z-index:150; background:rgb(17 24 39 / 50%); }
+.inventory-drawer-panel { position:absolute; top:0; right:0; width:min(672px,100%); height:100%; background:white; display:flex; flex-direction:column; box-shadow:0 12px 40px #0003; }
+.inventory-drawer-panel > .flex-1 { min-height:0; }
+@media(max-width:767px) { #main-content .px-space-xl { padding-left:16px; padding-right:16px; } #main-content .grid { min-width:0; } #main-content .grid > * { min-width:0; } #bulk-bar > div { flex-wrap:wrap; gap:12px; } }
+</style>
+</head>
+
+<body class="bg-background font-sans text-body-md text-on-surface antialiased">
+  <a class="skip-link" href="#main-content">Lewati ke konten utama</a>
+
+  <!-- SIDEBAR -->
+  <aside id="app-sidebar" data-open="false" aria-label="Navigasi utama SIMSARPRAS EDU">
+    <div class="sidebar-scroll">
+      <div class="p-6 flex items-center gap-2 sidebar-brand">
+        <div class="w-10 h-10 flex-shrink-0">
+          <img src="assets/images/logo-unpam.png" alt="Logo Universitas Pamulang" width="40" height="40" class="h-10 w-10 object-contain" data-local-image>
+          <span hidden class="h-10 w-10 rounded-xl bg-blue-50 text-primary items-center justify-center" data-image-fallback role="img" aria-label="Logo Universitas Pamulang belum tersedia" style="display: flex;">
+            <span class="material-symbols-outlined" aria-hidden="true">school</span>
+          </span>
+        </div>
+        <div class="min-w-0">
+          <p class="text-[17px] font-bold tracking-tight leading-tight">SIMSARPRAS EDU</p>
+          <p class="text-label-sm text-on-surface-variant mt-1">Universitas Pamulang</p>
+        </div>
+      <button id="menu-close" type="button" aria-label="Tutup menu navigasi" title="Tutup menu navigasi"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button>
+    </div>
+      <div class="px-6 pb-2">
+        <span class="badge bg-surface-container text-primary"><span class="w-2 h-2 rounded-full bg-primary" aria-hidden="true"></span>Kampus Viktor</span>
+      </div>
+      <!-- Menu selain Dashboard masih berupa rancangan navigasi. -->
+      <nav class="px-2 pb-4" aria-label="Menu aplikasi">
+        <p class="nav-group-title">Menu Utama</p>
+        <a class="nav-link" href="layout.html"><span class="material-symbols-outlined" aria-hidden="true">dashboard</span>Dashboard</a>
+        <p class="nav-group-title">Data Master</p>
+        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">apartment</span>Gedung</a>
+        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">meeting_room</span>Ruangan</a>
+        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">category</span>Kategori Inventaris</a>
+        <a class="nav-link" href="data-master.html" aria-current="page"><span class="material-symbols-outlined" aria-hidden="true">inventory_2</span>Data Inventaris</a>
+        <p class="nav-group-title">Fasilitas Akademik</p>
+        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">school</span>Ruang Kelas</a>
+        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">science</span>Laboratorium</a>
+        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">local_library</span>Perpustakaan</a>
+        <p class="nav-group-title">Manajemen &amp; Pelaporan</p>
+        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">fact_check</span>Kondisi Inventaris</a>
+        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">build</span>Pemeliharaan</a>
+        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">assessment</span>Laporan &amp; Audit</a>
+        <p class="nav-group-title">Pengaturan</p>
+        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">manage_accounts</span>Pengguna &amp; Hak Akses</a>
+        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">settings</span>Pengaturan Sistem</a>
+      </nav>
+    </div>
+    <div class="p-4 m-2 bg-surface-container-low rounded-xl flex items-center gap-2 flex-shrink-0">
+      <span class="material-symbols-outlined p-2 rounded-lg bg-surface-container text-primary" aria-hidden="true">dns</span>
+      <div class="min-w-0">
+<p class="font-mono text-label-md font-semibold">v2.4.0 • Node Viktor</p>
+<p class="text-label-sm text-on-surface-variant">Sistem Sarpras Terpadu</p>
+</div>
+    </div>
+  </aside>
+
+  <!-- PEMBUNGKUS HALAMAN -->
+  <div id="app-shell">
+    <header id="app-header">
+      <div class="header-row">
+        <button id="menu-open" type="button" aria-label="Buka menu navigasi" aria-controls="app-sidebar" aria-expanded="false" title="Buka menu navigasi"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h11"></path></svg></button>
+        <div class="header-breadcrumb flex items-center gap-4">
+          <nav class="flex items-center gap-2 text-label-md" aria-label="Breadcrumb"><span class="text-on-surface-variant">Data Master</span><span class="material-symbols-outlined text-sm" aria-hidden="true">chevron_right</span><span class="font-semibold">Data Inventaris</span></nav>
+          <div class="header-campus flex items-center gap-2 px-3 py-2 rounded-lg bg-surface-container">
+<span class="material-symbols-outlined text-primary" aria-hidden="true">domain</span><span class="text-label-md">Kampus Viktor - Gedung Utama</span>
+</div>
+        </div>
+        <div class="header-search">
+          <label for="global-search" class="sr-only">Pencarian inventaris, belum tersedia</label>
+          <div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-3 text-outline" aria-hidden="true">search</span><input id="global-search" type="search" placeholder="Cari inventaris, ruangan, atau buku..." class="w-full h-10 pl-10 pr-3 bg-white rounded-xl text-body-sm shadow-sm" title="Pencarian dikembangkan pada tahap interaktivitas" disabled>
+</div>
+        </div>
+        <div class="header-actions">
+          <button type="button" class="header-request button bg-secondary-container text-on-secondary-container" title="Fitur pengajuan belum tersedia" disabled><span class="material-symbols-outlined" aria-hidden="true">add</span>Ajukan Sarpras</button>
+          <div class="relative">
+<button type="button" class="icon-button" aria-label="Notifikasi, tampilan contoh" title="Notifikasi belum tersedia" disabled><span class="material-symbols-outlined" aria-hidden="true">notifications</span></button><span class="absolute top-0 right-0 w-4 h-4 rounded-full bg-error text-white text-[10px] flex items-center justify-center">3</span>
+</div>
+          <button type="button" class="header-help icon-button" aria-label="Bantuan, belum tersedia" disabled><span class="material-symbols-outlined" aria-hidden="true">help</span></button>
+          <div class="flex items-center gap-2">
+            <span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center" aria-hidden="true"><span class="material-symbols-outlined">person</span></span>
+            <div class="header-profile-text text-label-sm">
+<p class="font-bold">Admin Sarpras</p>
+<p class="text-on-surface-variant">Universitas Pamulang - Viktor</p>
+</div>
+            <span class="material-symbols-outlined text-outline" aria-hidden="true">expand_more</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="w-full pt-16 bg-surface" id="main-content" tabindex="-1"><div class="flex flex-col w-full">
+<!-- Top Section: Header & Action Command Bar -->
+<div class="px-space-xl py-space-lg bg-surface flex flex-col gap-space-md">
+<!-- Breadcrumb & Status Marker -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant">
+<span class="hover:text-primary transition-colors cursor-pointer">Data Master</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-bold">Data Inventaris</span>
+<span class="ml-2 px-2 py-0.5 rounded-full bg-surface-container-high text-primary font-code-sm text-code-sm">Zona Viktor</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-code-sm text-code-sm bg-surface-container px-3 py-1 rounded-md">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span>
+<span>Data simulasi • Tidak terhubung ke server</span>
+</div>
+</div>
+<!-- Title & Executive Actions -->
+<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-space-md">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Data Inventaris</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">
+          Kelola seluruh data inventaris sarana dan prasarana Universitas Pamulang secara terstruktur dan terverifikasi.
+        </p>
+</div>
+<div class="flex flex-wrap items-center gap-2.5">
+<button class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-all shadow-sm" id="btn-export" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="file_download Export (Excel/PDF)">
+<span class="material-symbols-outlined text-[18px]">file_download</span>
+<span>Export (Excel/PDF)</span>
+</button>
+<button class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-all shadow-sm" id="btn-print-qr" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="qr_code_2 Cetak Barcode/QR">
+<span class="material-symbols-outlined text-[18px]">qr_code_2</span>
+<span>Cetak Barcode/QR</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-xl bg-primary text-on-primary hover:bg-primary-container font-label-md text-label-md font-bold transition-all shadow-md active:scale-95" id="btn-open-drawer" type="button" aria-label="add_circle + Tambah Inventaris" title="Buka pratinjau formulir; tidak menyimpan data">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>+ Tambah Inventaris</span>
+</button>
+</div>
+</div>
+</div>
+<!-- KPI Metric Overview Cards -->
+<div class="px-space-xl pb-space-lg grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-md">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Total Inventaris</span>
+<div class="font-headline-lg text-headline-lg text-on-surface mt-1 font-bold">1.248</div>
+</div>
+<div class="w-11 h-11 rounded-xl bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">inventory_2</span>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm bg-surface-container-low px-2.5 py-1.5 rounded-lg">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-primary">domain</span> Terdaftar di 3 Zona Kampus
+        </span>
+<span class="font-code-sm text-code-sm font-semibold text-primary">100%</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Kondisi Baik</span>
+<div class="font-headline-lg text-headline-lg text-on-surface mt-1 font-bold">1.110</div>
+</div>
+<div class="w-11 h-11 rounded-xl bg-surface-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[24px]">check_circle</span>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm bg-surface-container-low px-2.5 py-1.5 rounded-lg">
+<span class="flex items-center gap-1 text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span> Siap pakai perkuliahan
+        </span>
+<span class="font-code-sm text-code-sm font-bold text-secondary">88,9%</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Rusak Ringan &amp; Berat</span>
+<div class="font-headline-lg text-headline-lg text-on-surface mt-1 font-bold">100</div>
+</div>
+<div class="w-11 h-11 rounded-xl bg-tertiary-fixed flex items-center justify-center text-tertiary-container">
+<span class="material-symbols-outlined text-[24px]">build_circle</span>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm bg-surface-container-low px-2.5 py-1.5 rounded-lg">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-tertiary-container">warning</span> Butuh teknisi sarpras
+        </span>
+<span class="font-code-sm text-code-sm font-bold text-tertiary-container">8,0%</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Dalam Perbaikan</span>
+<div class="font-headline-lg text-headline-lg text-on-surface mt-1 font-bold">38</div>
+</div>
+<div class="w-11 h-11 rounded-xl bg-surface-container-high flex items-center justify-center text-surface-tint">
+<span class="material-symbols-outlined text-[24px]">engineering</span>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm bg-surface-container-low px-2.5 py-1.5 rounded-lg">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-surface-tint">sync</span> Ditangani vendor &amp; lab
+        </span>
+<span class="font-code-sm text-code-sm font-bold text-surface-tint">3,0%</span>
+</div>
+</div>
+</div>
+<!-- Main Filter & Search Control Panel -->
+<div class="px-space-xl pb-space-md">
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col gap-space-sm">
+<div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-space-sm">
+<!-- Search Field -->
+<div class="relative flex-1 max-w-xl">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+<input class="w-full h-10 pl-11 pr-10 bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary transition-all" id="search-input" placeholder="Cari kode inventaris, nama barang, atau serial..." type="text" aria-label="Cari pada 10 baris contoh inventaris">
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface hidden" id="search-clear" type="button" aria-label="close">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<!-- Aux Actions / Reset -->
+<div class="flex items-center gap-2 self-end lg:self-auto">
+<button class="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-md text-label-md transition-colors" id="btn-reset-filter" type="button" aria-label="restart_alt Reset Filter">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+<span>Reset Filter</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-md text-label-md transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="tune Filter Lanjutan">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+<span>Filter Lanjutan</span>
+</button>
+</div>
+</div>
+<!-- Quick Filter Dropdowns Row -->
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 pt-2">
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-outline uppercase tracking-wider" for="filter-gedung">Gedung</label>
+<select class="h-9 px-2.5 bg-surface-container-low text-on-surface font-body-sm text-body-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer" id="filter-gedung">
+<option value="">Semua Gedung</option>
+<option value="Gedung A">Gedung A</option>
+<option value="Gedung B">Gedung B</option>
+<option value="Gedung Laboratorium">Gedung Laboratorium</option>
+<option value="Gedung Perpustakaan">Gedung Perpustakaan</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-outline uppercase tracking-wider" for="filter-ruangan">Ruangan</label>
+<select class="h-9 px-2.5 bg-surface-container-low text-on-surface font-body-sm text-body-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer" id="filter-ruangan">
+<option value="">Semua Ruangan</option>
+<option value="Ruang A101">Ruang A101</option>
+<option value="Ruang A102">Ruang A102</option>
+<option value="Ruang B204">Ruang B204</option>
+<option value="Lab Komputer 1">Lab Komputer 1</option>
+<option value="Lab Komputer 2">Lab Komputer 2</option>
+<option value="Lab Jaringan">Lab Jaringan</option>
+<option value="Perpustakaan Lt. 5">Perpustakaan Lt. 5</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-outline uppercase tracking-wider" for="filter-kategori">Kategori</label>
+<select class="h-9 px-2.5 bg-surface-container-low text-on-surface font-body-sm text-body-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer" id="filter-kategori">
+<option value="">Semua Kategori</option>
+<option value="Elektronik">Elektronik</option>
+<option value="Furnitur">Furnitur</option>
+<option value="Komputer">Komputer</option>
+<option value="Perangkat Jaringan">Perangkat Jaringan</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-outline uppercase tracking-wider" for="filter-kondisi">Kondisi</label>
+<select class="h-9 px-2.5 bg-surface-container-low text-on-surface font-body-sm text-body-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer" id="filter-kondisi">
+<option value="">Semua Kondisi</option>
+<option value="Baik">Baik</option>
+<option value="Rusak Ringan">Rusak Ringan</option>
+<option value="Rusak Berat">Rusak Berat</option>
+<option value="Dalam Perbaikan">Dalam Perbaikan</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-outline uppercase tracking-wider" for="filter-status">Status Operasional</label>
+<select class="h-9 px-2.5 bg-surface-container-low text-on-surface font-body-sm text-body-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer" id="filter-status">
+<option value="">Semua Status</option>
+<option value="Aktif">Aktif</option>
+<option value="Perlu Pemeriksaan">Perlu Pemeriksaan</option>
+<option value="Nonaktif">Nonaktif</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+<!-- Bulk Action Bar (Contextual) -->
+<div class="hidden px-space-xl pb-2 transition-all" id="bulk-bar">
+<div class="bg-primary text-on-primary px-space-md py-2.5 rounded-xl shadow-md flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="w-6 h-6 rounded-full bg-secondary-container text-on-secondary-container font-code-sm text-code-sm font-bold flex items-center justify-center" id="selected-count-badge">0</span>
+<span class="font-label-md text-label-md font-semibold"><span id="selected-count-text">0</span> inventaris dipilih</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-lg bg-surface/20 hover:bg-surface/30 font-label-sm text-label-sm font-bold flex items-center gap-1.5 transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="qr_code_scanner Cetak Label Terpilih">
+<span class="material-symbols-outlined text-[16px]">qr_code_scanner</span> Cetak Label Terpilih
+        </button>
+<button class="px-3 py-1.5 rounded-lg bg-surface/20 hover:bg-surface/30 font-label-sm text-label-sm font-bold flex items-center gap-1.5 transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="swap_horiz Mutasi Lokasi">
+<span class="material-symbols-outlined text-[16px]">swap_horiz</span> Mutasi Lokasi
+        </button>
+<button class="px-3 py-1.5 rounded-lg bg-error text-on-error hover:brightness-110 font-label-sm text-label-sm font-bold flex items-center gap-1.5 transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="delete_sweep Ajukan Penghapusan">
+<span class="material-symbols-outlined text-[16px]">delete_sweep</span> Ajukan Penghapusan
+        </button>
+</div>
+</div>
+</div>
+<!-- Professional Data Table Card -->
+<div class="px-space-xl pb-space-xl">
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col">
+<!-- Responsive Scroll Container -->
+<div class="overflow-x-auto w-full inventory-scroll" tabindex="0" role="region" aria-label="Tabel inventaris; geser mendatar untuk kolom lainnya">
+<table class="w-full text-left border-collapse inventory-table" id="inventory-table">
+<caption class="text-left p-4 text-body-sm text-on-surface-variant">10 baris contoh inventaris. Ringkasan 1.248 item merupakan data simulasi terpisah. Sumber dana belum dicantumkan dalam referensi.</caption>
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+<th class="py-3 px-4 w-12 text-center" scope="col">
+<input class="w-4 h-4 rounded text-primary focus:ring-0 cursor-pointer" id="th-select-all" type="checkbox" aria-label="Pilih semua baris yang terlihat">
+</th>
+<th class="py-3 px-3  hover:text-on-surface transition-colors" scope="col">
+<div class="flex items-center gap-1">
+<span>Kode Inventaris</span>
+</div>
+</th>
+<th class="py-3 px-3  hover:text-on-surface transition-colors min-w-[220px]" scope="col">
+<div class="flex items-center gap-1">
+<span>Nama Inventaris</span>
+</div>
+</th>
+<th class="py-3 px-3" scope="col">Kategori</th>
+<th class="py-3 px-3" scope="col">Gedung</th>
+<th class="py-3 px-3" scope="col">Ruangan</th>
+<th class="py-3 px-3 text-center" scope="col">Jumlah</th>
+<th class="py-3 px-3" scope="col">Kondisi</th>
+<th class="py-3 px-3 text-center" scope="col">Tahun Pengadaan</th>
+<th scope="col" class="py-3 px-3">Sumber Dana</th>
+<th class="py-3 px-3" scope="col">Status</th>
+<th class="py-3 px-4 text-center sticky right-0 bg-surface-container-low shadow-[-4px_0_6px_rgba(0,0,0,0.02)]" scope="col">Aksi</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-on-surface" id="inventory-table-body">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors border-b border-surface-container-low" data-gedung="Gedung A" data-kategori="Elektronik" data-kondisi="Baik" data-ruangan="Ruang A101" data-status="Aktif">
+<td class="py-3 px-4 text-center">
+<input class="row-checkbox w-4 h-4 rounded text-primary focus:ring-0 cursor-pointer" type="checkbox" aria-label="Pilih INV-KLS-001">
+</td>
+<td class="py-3 px-3 font-code-sm text-code-sm font-semibold text-primary">INV-KLS-001</td>
+<td class="py-3 px-3">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">videocam</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Projector Epson EB-X06</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">SN: 4892-EPS-VIK</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 text-on-surface-variant font-body-sm text-body-sm">Elektronik</td>
+<td class="py-3 px-3 text-on-surface-variant font-body-sm text-body-sm">Gedung A</td>
+<td class="py-3 px-3 font-medium text-body-sm">Ruang A101</td>
+<td class="py-3 px-3 text-center font-code-sm text-code-sm font-semibold">1 Unit</td>
+<td class="py-3 px-3">
+<span class="badge badge-good whitespace-nowrap">
+<span class="hidden"></span> Baik
+                </span>
+</td>
+<td class="py-3 px-3 text-center font-code-sm text-code-sm text-on-surface-variant">2025</td>
+<td class="py-3 px-3 text-body-sm text-on-surface-variant">Belum diisi</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-primary-fixed text-primary font-label-sm text-label-sm font-bold">
+                  Aktif
+                </span>
+</td>
+<td class="py-3 px-4 text-center sticky right-0 bg-surface-container-lowest shadow-[-4px_0_6px_rgba(0,0,0,0.02)]">
+<div class="flex items-center justify-center gap-1">
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors" title="Fitur belum tersedia pada Milestone 2" type="button" disabled aria-label="visibility">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors" title="Fitur belum tersedia pada Milestone 2" type="button" disabled aria-label="edit">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-surface-tint transition-colors" title="Fitur belum tersedia pada Milestone 2" type="button" disabled aria-label="build">
+<span class="material-symbols-outlined text-[18px]">build</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors border-b border-surface-container-low" data-gedung="Gedung A" data-kategori="Furnitur" data-kondisi="Baik" data-ruangan="Ruang A101" data-status="Aktif">
+<td class="py-3 px-4 text-center">
+<input class="row-checkbox w-4 h-4 rounded text-primary focus:ring-0 cursor-pointer" type="checkbox" aria-label="Pilih INV-KLS-002">
+</td>
+<td class="py-3 px-3 font-code-sm text-code-sm font-semibold text-primary">INV-KLS-002</td>
+<td class="py-3 px-3">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">chair_alt</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Kursi Mahasiswa (Chitose)</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Tipe Kuliah Lipat Meja Kayu</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 text-on-surface-variant font-body-sm text-body-sm">Furnitur</td>
+<td class="py-3 px-3 text-on-surface-variant font-body-sm text-body-sm">Gedung A</td>
+<td class="py-3 px-3 font-medium text-body-sm">Ruang A101</td>
+<td class="py-3 px-3 text-center font-code-sm text-code-sm font-semibold">40 Unit</td>
+<td class="py-3 px-3">
+<span class="badge badge-good whitespace-nowrap">
+<span class="hidden"></span> Baik
+                </span>
+</td>
+<td class="py-3 px-3 text-center font-code-sm text-code-sm text-on-surface-variant">2024</td>
+<td class="py-3 px-3 text-body-sm text-on-surface-variant">Belum diisi</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-primary-fixed text-primary font-label-sm text-label-sm font-bold">
+                  Aktif
+                </span>
+</td>
+<td class="py-3 px-4 text-center sticky right-0 bg-surface-container-lowest shadow-[-4px_0_6px_rgba(0,0,0,0.02)]">
+<div class="flex items-center justify-center gap-1">
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="visibility">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="edit">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-surface-tint transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="build">
+<span class="material-symbols-outlined text-[18px]">build</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors border-b border-surface-container-low" data-gedung="Gedung Laboratorium" data-kategori="Komputer" data-kondisi="Baik" data-ruangan="Lab Komputer 1" data-status="Aktif">
+<td class="py-3 px-4 text-center">
+<input class="row-checkbox w-4 h-4 rounded text-primary focus:ring-0 cursor-pointer" type="checkbox" aria-label="Pilih INV-LAB-001">
+</td>
+<td class="py-3 px-3 font-code-sm text-code-sm font-semibold text-primary">INV-LAB-001</td>
+<td class="py-3 px-3">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">desktop_windows</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">PC Lenovo ThinkCentre M70s</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Core i7-12700 / 16GB / 512GB SSD</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 text-on-surface-variant font-body-sm text-body-sm">Komputer</td>
+<td class="py-3 px-3 text-on-surface-variant font-body-sm text-body-sm">Gedung Laboratorium</td>
+<td class="py-3 px-3 font-medium text-body-sm">Lab Komputer 1</td>
+<td class="py-3 px-3 text-center font-code-sm text-code-sm font-semibold">30 Unit</td>
+<td class="py-3 px-3">
+<span class="badge badge-good whitespace-nowrap">
+<span class="hidden"></span> Baik
+                </span>
+</td>
+<td class="py-3 px-3 text-center font-code-sm text-code-sm text-on-surface-variant">2025</td>
+<td class="py-3 px-3 text-body-sm text-on-surface-variant">Belum diisi</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-primary-fixed text-primary font-label-sm text-label-sm font-bold">
+                  Aktif
+                </span>
+</td>
+<td class="py-3 px-4 text-center sticky right-0 bg-surface-container-lowest shadow-[-4px_0_6px_rgba(0,0,0,0.02)]">
+<div class="flex items-center justify-center gap-1">
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="visibility">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="edit">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-surface-tint transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="build">
+<span class="material-symbols-outlined text-[18px]">build</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors border-b border-surface-container-low" data-gedung="Gedung Laboratorium" data-kategori="Perangkat Jaringan" data-kondisi="Baik" data-ruangan="Lab Jaringan" data-status="Aktif">
+<td class="py-3 px-4 text-center">
+<input class="row-checkbox w-4 h-4 rounded text-primary focus:ring-0 cursor-pointer" type="checkbox" aria-label="Pilih INV-LAB-002">
+</td>
+<td class="py-3 px-3 font-code-sm text-code-sm font-semibold text-primary">INV-LAB-002</td>
+<td class="py-3 px-3">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">router</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Cisco Catalyst Router 2960</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Rackmount 24 Port Gigabit PoE</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 text-on-surface-variant font-body-sm text-body-sm">Perangkat Jaringan</td>
+<td class="py-3 px-3 text-on-surface-variant font-body-sm text-body-sm">Gedung Laboratorium</td>
+<td class="py-3 px-3 font-medium text-body-sm">Lab Jaringan</td>
+<td class="py-3 px-3 text-center font-code-sm text-code-sm font-semibold">4 Unit</td>
+<td class="py-3 px-3">
+<span class="badge badge-good whitespace-nowrap">
+<span class="hidden"></span> Baik
+                </span>
+</td>
+<td class="py-3 px-3 text-center font-code-sm text-code-sm text-on-surface-variant">2025</td>
+<td class="py-3 px-3 text-body-sm text-on-surface-variant">Belum diisi</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-primary-fixed text-primary font-label-sm text-label-sm font-bold">
+                  Aktif
+                </span>
+</td>
+<td class="py-3 px-4 text-center sticky right-0 bg-surface-container-lowest shadow-[-4px_0_6px_rgba(0,0,0,0.02)]">
+<div class="flex items-center justify-center gap-1">
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="visibility">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="edit">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-surface-tint transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="build">
+<span class="material-symbols-outlined text-[18px]">build</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors border-b border-surface-container-low" data-gedung="Gedung Laboratorium" data-kategori="Komputer" data-kondisi="Rusak Ringan" data-ruangan="Lab Komputer 2" data-status="Perlu Pemeriksaan">
+<td class="py-3 px-4 text-center">
+<input class="row-checkbox w-4 h-4 rounded text-primary focus:ring-0 cursor-pointer" type="checkbox" aria-label="Pilih INV-LAB-003">
+</td>
+<td class="py-3 px-3 font-code-sm text-code-sm font-semibold text-primary">INV-LAB-003</td>
+<td class="py-3 px-3">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">monitor</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Monitor Dell 24 Inch P2419H</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">IPS FHD Flicker-free Stand</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 text-on-surface-variant font-body-sm text-body-sm">Komputer</td>
+<td class="py-3 px-3 text-on-surface-variant font-body-sm text-body-sm">Gedung Laboratorium</td>
+<td class="py-3 px-3 font-medium text-body-sm">Lab Komputer 2</td>
+<td class="py-3 px-3 text-center font-code-sm text-code-sm font-semibold">30 Unit</td>
+<td class="py-3 px-3">
+<span class="badge badge-warning whitespace-nowrap">
+<span class="hidden"></span> Rusak Ringan
+                </span>
+</td>
+<td class="py-3 px-3 text-center font-code-sm text-code-sm text-on-surface-variant">2024</td>
+<td class="py-3 px-3 text-body-sm text-on-surface-variant">Belum diisi</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-bold">
+                  Perlu Pemeriksaan
+                </span>
+</td>
+<td class="py-3 px-4 text-center sticky right-0 bg-surface-container-lowest shadow-[-4px_0_6px_rgba(0,0,0,0.02)]">
+<div class="flex items-center justify-center gap-1">
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="visibility">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="edit">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-surface-tint transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="build">
+<span class="material-symbols-outlined text-[18px]">build</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 6 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors border-b border-surface-container-low" data-gedung="Gedung Perpustakaan" data-kategori="Komputer" data-kondisi="Rusak Ringan" data-ruangan="Perpustakaan Lt. 5" data-status="Aktif">
+<td class="py-3 px-4 text-center">
+<input class="row-checkbox w-4 h-4 rounded text-primary focus:ring-0 cursor-pointer" type="checkbox" aria-label="Pilih INV-PUS-001">
+</td>
+<td class="py-3 px-3 font-code-sm text-code-sm font-semibold text-primary">INV-PUS-001</td>
+<td class="py-3 px-3">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">touch_app</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Komputer OPAC Perpustakaan</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Anjungan Pencarian Mandiri Mahasiswa</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 text-on-surface-variant font-body-sm text-body-sm">Komputer</td>
+<td class="py-3 px-3 text-on-surface-variant font-body-sm text-body-sm">Gedung Perpustakaan</td>
+<td class="py-3 px-3 font-medium text-body-sm">Perpustakaan Lt. 5</td>
+<td class="py-3 px-3 text-center font-code-sm text-code-sm font-semibold">5 Unit</td>
+<td class="py-3 px-3">
+<span class="badge badge-warning whitespace-nowrap">
+<span class="hidden"></span> Rusak Ringan
+                </span>
+</td>
+<td class="py-3 px-3 text-center font-code-sm text-code-sm text-on-surface-variant">2023</td>
+<td class="py-3 px-3 text-body-sm text-on-surface-variant">Belum diisi</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-primary-fixed text-primary font-label-sm text-label-sm font-bold">
+                  Aktif
+                </span>
+</td>
+<td class="py-3 px-4 text-center sticky right-0 bg-surface-container-lowest shadow-[-4px_0_6px_rgba(0,0,0,0.02)]">
+<div class="flex items-center justify-center gap-1">
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="visibility">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="edit">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-surface-tint transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="build">
+<span class="material-symbols-outlined text-[18px]">build</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 7 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors border-b border-surface-container-low" data-gedung="Gedung B" data-kategori="Elektronik" data-kondisi="Dalam Perbaikan" data-ruangan="Ruang B204" data-status="Aktif">
+<td class="py-3 px-4 text-center">
+<input class="row-checkbox w-4 h-4 rounded text-primary focus:ring-0 cursor-pointer" type="checkbox" aria-label="Pilih INV-KLS-003">
+</td>
+<td class="py-3 px-3 font-code-sm text-code-sm font-semibold text-primary">INV-KLS-003</td>
+<td class="py-3 px-3">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">mode_fan</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">AC Split Daikin 2 PK</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Inverter FTKC50SVM4 - Refrigrant R32</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 text-on-surface-variant font-body-sm text-body-sm">Elektronik</td>
+<td class="py-3 px-3 text-on-surface-variant font-body-sm text-body-sm">Gedung B</td>
+<td class="py-3 px-3 font-medium text-body-sm">Ruang B204</td>
+<td class="py-3 px-3 text-center font-code-sm text-code-sm font-semibold">2 Unit</td>
+<td class="py-3 px-3">
+<span class="badge badge-info whitespace-nowrap">
+<span class="hidden"></span> Dalam Perbaikan
+                </span>
+</td>
+<td class="py-3 px-3 text-center font-code-sm text-code-sm text-on-surface-variant">2023</td>
+<td class="py-3 px-3 text-body-sm text-on-surface-variant">Belum diisi</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-primary-fixed text-primary font-label-sm text-label-sm font-bold">
+                  Aktif
+                </span>
+</td>
+<td class="py-3 px-4 text-center sticky right-0 bg-surface-container-lowest shadow-[-4px_0_6px_rgba(0,0,0,0.02)]">
+<div class="flex items-center justify-center gap-1">
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="visibility">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="edit">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-surface-tint transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="build">
+<span class="material-symbols-outlined text-[18px]">build</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 8 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors border-b border-surface-container-low" data-gedung="Gedung Laboratorium" data-kategori="Perangkat Jaringan" data-kondisi="Baik" data-ruangan="Lab Jaringan" data-status="Aktif">
+<td class="py-3 px-4 text-center">
+<input class="row-checkbox w-4 h-4 rounded text-primary focus:ring-0 cursor-pointer" type="checkbox" aria-label="Pilih INV-LAB-004">
+</td>
+<td class="py-3 px-3 font-code-sm text-code-sm font-semibold text-primary">INV-LAB-004</td>
+<td class="py-3 px-3">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">hub</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Switch Mikrotik Cloud Router</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">CRS326-24G-2S+RM SwitchOS/RouterOS</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 text-on-surface-variant font-body-sm text-body-sm">Perangkat Jaringan</td>
+<td class="py-3 px-3 text-on-surface-variant font-body-sm text-body-sm">Gedung Laboratorium</td>
+<td class="py-3 px-3 font-medium text-body-sm">Lab Jaringan</td>
+<td class="py-3 px-3 text-center font-code-sm text-code-sm font-semibold">6 Unit</td>
+<td class="py-3 px-3">
+<span class="badge badge-good whitespace-nowrap">
+<span class="hidden"></span> Baik
+                </span>
+</td>
+<td class="py-3 px-3 text-center font-code-sm text-code-sm text-on-surface-variant">2025</td>
+<td class="py-3 px-3 text-body-sm text-on-surface-variant">Belum diisi</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-primary-fixed text-primary font-label-sm text-label-sm font-bold">
+                  Aktif
+                </span>
+</td>
+<td class="py-3 px-4 text-center sticky right-0 bg-surface-container-lowest shadow-[-4px_0_6px_rgba(0,0,0,0.02)]">
+<div class="flex items-center justify-center gap-1">
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="visibility">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="edit">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-surface-tint transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="build">
+<span class="material-symbols-outlined text-[18px]">build</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 9 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors border-b border-surface-container-low" data-gedung="Gedung A" data-kategori="Furnitur" data-kondisi="Baik" data-ruangan="Ruang A102" data-status="Aktif">
+<td class="py-3 px-4 text-center">
+<input class="row-checkbox w-4 h-4 rounded text-primary focus:ring-0 cursor-pointer" type="checkbox" aria-label="Pilih INV-KLS-004">
+</td>
+<td class="py-3 px-3 font-code-sm text-code-sm font-semibold text-primary">INV-KLS-004</td>
+<td class="py-3 px-3">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">crop_landscape</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Whiteboard Magnetik 120x240</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">List Aluminium Wall-mounted Board</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 text-on-surface-variant font-body-sm text-body-sm">Furnitur</td>
+<td class="py-3 px-3 text-on-surface-variant font-body-sm text-body-sm">Gedung A</td>
+<td class="py-3 px-3 font-medium text-body-sm">Ruang A102</td>
+<td class="py-3 px-3 text-center font-code-sm text-code-sm font-semibold">1 Unit</td>
+<td class="py-3 px-3">
+<span class="badge badge-good whitespace-nowrap">
+<span class="hidden"></span> Baik
+                </span>
+</td>
+<td class="py-3 px-3 text-center font-code-sm text-code-sm text-on-surface-variant">2024</td>
+<td class="py-3 px-3 text-body-sm text-on-surface-variant">Belum diisi</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-primary-fixed text-primary font-label-sm text-label-sm font-bold">
+                  Aktif
+                </span>
+</td>
+<td class="py-3 px-4 text-center sticky right-0 bg-surface-container-lowest shadow-[-4px_0_6px_rgba(0,0,0,0.02)]">
+<div class="flex items-center justify-center gap-1">
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="visibility">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="edit">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-surface-tint transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="build">
+<span class="material-symbols-outlined text-[18px]">build</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 10 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors" data-gedung="Gedung Perpustakaan" data-kategori="Furnitur" data-kondisi="Baik" data-ruangan="Perpustakaan Lt. 5" data-status="Aktif">
+<td class="py-3 px-4 text-center">
+<input class="row-checkbox w-4 h-4 rounded text-primary focus:ring-0 cursor-pointer" type="checkbox" aria-label="Pilih INV-PUS-002">
+</td>
+<td class="py-3 px-3 font-code-sm text-code-sm font-semibold text-primary">INV-PUS-002</td>
+<td class="py-3 px-3">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">shelves</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Rak Buku Baja Ganda 5 Tingkat</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Powder Coated Heavy Duty Steel</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 text-on-surface-variant font-body-sm text-body-sm">Furnitur</td>
+<td class="py-3 px-3 text-on-surface-variant font-body-sm text-body-sm">Gedung Perpustakaan</td>
+<td class="py-3 px-3 font-medium text-body-sm">Perpustakaan Lt. 5</td>
+<td class="py-3 px-3 text-center font-code-sm text-code-sm font-semibold">12 Unit</td>
+<td class="py-3 px-3">
+<span class="badge badge-good whitespace-nowrap">
+<span class="hidden"></span> Baik
+                </span>
+</td>
+<td class="py-3 px-3 text-center font-code-sm text-code-sm text-on-surface-variant">2022</td>
+<td class="py-3 px-3 text-body-sm text-on-surface-variant">Belum diisi</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-primary-fixed text-primary font-label-sm text-label-sm font-bold">
+                  Aktif
+                </span>
+</td>
+<td class="py-3 px-4 text-center sticky right-0 bg-surface-container-lowest shadow-[-4px_0_6px_rgba(0,0,0,0.02)]">
+<div class="flex items-center justify-center gap-1">
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="visibility">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="edit">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-surface-tint transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="build">
+<span class="material-symbols-outlined text-[18px]">build</span>
+</button>
+</div>
+</td>
+</tr>
+<tr id="empty-results" hidden><td colspan="12" class="p-8 text-center text-on-surface-variant">Tidak ada inventaris yang sesuai dengan pencarian atau filter.</td></tr>
+</tbody>
+</table>
+</div>
+<!-- Data Table Footer & Pagination -->
+<div class="p-4 bg-surface-container-low flex flex-wrap justify-between gap-3 text-body-sm">
+<p id="result-count" aria-live="polite">Menampilkan 10 dari 10 baris contoh</p>
+<p id="footer-selected-count">0 item terpilih</p>
+<span>Halaman 1 dari 1 • Data contoh</span>
+</div>
+</div>
+</div>
+<!-- Interactive Slide-Over Drawer: Tambah Inventaris -->
+</div>
+</main><footer id="app-footer">
+      <p class="font-semibold text-on-surface">SIMSARPRAS EDU • Universitas Pamulang</p>
+      <p>Milestone 2 — Slicing &amp; Layouting. Seluruh angka merupakan data simulasi untuk tugas akademik.</p>
+      <p>Pencarian, filter, dan pemilihan baris memakai 10 data contoh. Form tambah hanya pratinjau; penyimpanan, edit, hapus, ekspor, dan login belum tersedia.</p>
+    </footer>
+  </div>
+
+  <div id="sidebar-overlay" data-open="false" aria-hidden="true"></div>
+
+  <!-- INTERAKSI DASAR -->
+  <div class="inventory-drawer-backdrop" id="drawer-backdrop" hidden="">
+<div class="inventory-drawer-panel" id="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="inventory-form-heading">
+<!-- Drawer Header -->
+<div class="p-space-lg bg-primary text-on-primary flex items-start justify-between">
+<div>
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold mb-1.5">
+<span class="material-symbols-outlined text-[14px]">domain</span> KAMPUS VIKTOR
+          </div>
+<h2 class="font-headline-md text-headline-md font-bold tracking-tight" id="inventory-form-heading">Pratinjau Tambah Inventaris</h2>
+<p class="font-body-sm text-body-sm text-on-primary-container mt-0.5 text-white">Pratinjau formulir Milestone 2. Data tidak disimpan.</p>
+</div>
+<button class="p-2 rounded-xl text-on-primary hover:bg-primary-container transition-colors" id="btn-close-drawer" type="button" aria-label="close">
+<span class="material-symbols-outlined text-[24px]">close</span>
+</button>
+</div>
+<!-- Drawer Form Body -->
+<div class="flex-1 overflow-y-auto p-space-lg flex flex-col gap-space-md">
+<!-- Section: Identitas Barang -->
+<div class="space-y-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold">1. Identifikasi Sarpras</span>
+<span class="font-code-sm text-code-sm text-outline">*Wajib diisi</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+<div class="flex flex-col gap-1">
+<label class="font-label-md text-label-md font-semibold text-on-surface" for="drawer-kode">Kode Inventaris</label>
+<div class="relative flex items-center">
+<input class="w-full h-10 px-3 pr-10 bg-surface-container-low font-code-sm text-code-sm font-bold text-primary rounded-lg focus:outline-none" id="drawer-kode" readonly type="text" value="INV-2025-0849">
+<button class="absolute right-2 text-primary hover:rotate-180 transition-transform" title="Fitur belum tersedia pada Milestone 2" type="button" disabled aria-label="autorenew">
+<span class="material-symbols-outlined text-[18px]">autorenew</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-md text-label-md font-semibold text-on-surface" for="preview-field-1">Kategori Aset</label>
+<select class="h-10 px-3 bg-surface-container-lowest text-on-surface font-body-md text-body-md rounded-lg shadow-sm focus:ring-2 focus:ring-primary focus:outline-none" id="preview-field-1">
+<option>Elektronik</option>
+<option>Komputer &amp; IT</option>
+<option>Furnitur &amp; Mebel</option>
+<option>Perangkat Jaringan</option>
+<option>Alat Praktikum / Lab</option>
+<option>Buku &amp; Koleksi Pustaka</option>
+</select>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-md text-label-md font-semibold text-on-surface" for="preview-field-2">Nama Sarpras / Barang</label>
+<input class="h-10 px-3 bg-surface-container-lowest text-on-surface font-body-md text-body-md rounded-lg shadow-sm focus:ring-2 focus:ring-primary focus:outline-none" placeholder="Contoh: Projector Epson EB-FH52 Full HD" type="text" id="preview-field-2">
+</div>
+</div>
+<!-- Section: Penempatan & Lokasi -->
+<div class="space-y-space-sm pt-2">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold">2. Alokasi Lokasi Kampus</span>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+<div class="flex flex-col gap-1">
+<label class="font-label-md text-label-md font-semibold text-on-surface" for="preview-field-3">Gedung</label>
+<select class="h-10 px-3 bg-surface-container-lowest text-on-surface font-body-md text-body-md rounded-lg shadow-sm focus:ring-2 focus:ring-primary focus:outline-none" id="preview-field-3">
+<option>Gedung A (Rektorat &amp; Kelas)</option>
+<option>Gedung B (Perkuliahan Utama)</option>
+<option>Gedung Laboratorium Terpadu</option>
+<option>Gedung Perpustakaan &amp; Arsip</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-md text-label-md font-semibold text-on-surface" for="preview-field-4">Ruangan Sasaran</label>
+<select class="h-10 px-3 bg-surface-container-lowest text-on-surface font-body-md text-body-md rounded-lg shadow-sm focus:ring-2 focus:ring-primary focus:outline-none" id="preview-field-4">
+<option>Ruang A101 (Teori)</option>
+<option>Ruang A102 (Teori)</option>
+<option>Lab Komputer 1 (Lt. 3)</option>
+<option>Lab Komputer 2 (Lt. 3)</option>
+<option>Lab Jaringan Komputer (Lt. 4)</option>
+<option>Perpustakaan Lt. 5 (Sirkulasi)</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Section: Spesifikasi, Kuantitas & Kondisi -->
+<div class="space-y-space-sm pt-2">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold">3. Kuantitas &amp; Pengadaan</span>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-sm">
+<div class="flex flex-col gap-1">
+<label class="font-label-md text-label-md font-semibold text-on-surface" for="preview-field-5">Jumlah</label>
+<input class="h-10 px-3 bg-surface-container-lowest text-on-surface font-body-md text-body-md rounded-lg shadow-sm focus:ring-2 focus:ring-primary focus:outline-none" min="1" type="number" value="1" id="preview-field-5">
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-md text-label-md font-semibold text-on-surface" for="preview-field-6">Satuan</label>
+<select class="h-10 px-3 bg-surface-container-lowest text-on-surface font-body-md text-body-md rounded-lg shadow-sm focus:ring-2 focus:ring-primary focus:outline-none" id="preview-field-6">
+<option>Unit</option>
+<option>Set</option>
+<option>Pcs</option>
+<option>Paket</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-md text-label-md font-semibold text-on-surface" for="preview-field-7">Tahun Pengadaan</label>
+<input class="h-10 px-3 bg-surface-container-lowest text-on-surface font-body-md text-body-md rounded-lg shadow-sm focus:ring-2 focus:ring-primary focus:outline-none" type="number" value="2025" id="preview-field-7">
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+<div class="flex flex-col gap-1">
+<label class="font-label-md text-label-md font-semibold text-on-surface" for="preview-field-8">Sumber Dana</label>
+<select class="h-10 px-3 bg-surface-container-lowest text-on-surface font-body-md text-body-md rounded-lg shadow-sm focus:ring-2 focus:ring-primary focus:outline-none" id="preview-field-8">
+<option>Yayasan Sasmita Jaya</option>
+<option>Hibah Dikti / BOPTN</option>
+<option>Kerjasama Industri / Donasi</option>
+<option>Anggaran Operasional Kampus</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-md text-label-md font-semibold text-on-surface">Kondisi Awal</label>
+<div class="flex items-center gap-4 h-10">
+<label class="flex items-center gap-1.5 cursor-pointer font-body-sm text-body-sm">
+<input checked class="text-primary focus:ring-0" name="kondisi_awal" type="radio" value="Baik">
+<span>Baik</span>
+</label>
+<label class="flex items-center gap-1.5 cursor-pointer font-body-sm text-body-sm">
+<input class="text-primary focus:ring-0" name="kondisi_awal" type="radio" value="Rusak Ringan">
+<span>Rusak Ringan</span>
+</label>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-md text-label-md font-semibold text-on-surface" for="preview-field-11">Catatan Teknis / Nomor Seri</label>
+<textarea class="p-3 bg-surface-container-lowest text-on-surface font-body-md text-body-md rounded-lg shadow-sm focus:ring-2 focus:ring-primary focus:outline-none" placeholder="Masukkan nomor seri manufaktur, masa garansi, spesifikasi processor/RAM, atau instruksi pemakaian khusus..." rows="3" id="preview-field-11"></textarea>
+</div>
+</div>
+</div>
+<!-- Drawer Footer Action Bar -->
+<div class="p-space-md bg-surface-container-low flex items-center justify-end gap-space-sm">
+<button class="px-4 py-2 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors" id="btn-cancel-drawer" type="button" aria-label="Batal">
+          Batal
+        </button>
+<button class="flex items-center gap-1.5 px-5 py-2 rounded-xl bg-primary text-on-primary hover:bg-primary-container font-label-md text-label-md font-bold transition-all shadow-md" id="btn-save-inventory" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="check_circle Simpan Inventaris">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+<span>Simpan (belum tersedia)</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+    (() => {
+      "use strict";
+      const sidebar = document.getElementById("app-sidebar");
+      const shell = document.getElementById("app-shell");
+      const openButton = document.getElementById("menu-open");
+      const closeButton = document.getElementById("menu-close");
+      const overlay = document.getElementById("sidebar-overlay");
+      const mobile = window.matchMedia("(max-width: 1023px)");
+      const initialOverflow = document.body.style.overflow;
+      let menuIsOpen = false;
+
+      function setMenu(nextOpen, restoreFocus = false) {
+        menuIsOpen = mobile.matches && nextOpen;
+        sidebar.inert = mobile.matches && !menuIsOpen;
+        sidebar.dataset.open = String(menuIsOpen);
+        overlay.dataset.open = String(menuIsOpen);
+        openButton.setAttribute("aria-expanded", String(menuIsOpen));
+        document.body.style.overflow = menuIsOpen ? "hidden" : initialOverflow;
+        if (menuIsOpen) {
+          closeButton.focus();
+          shell.inert = true;
+        } else {
+          shell.inert = false;
+          if (restoreFocus && mobile.matches) openButton.focus();
+        }
+      }
+
+      openButton.addEventListener("click", () => setMenu(!menuIsOpen));
+      closeButton.addEventListener("click", () => setMenu(false, true));
+      overlay.addEventListener("click", () => setMenu(false, true));
+
+      mobile.addEventListener("change", () => {
+        const focusWasInSidebar = sidebar.contains(document.activeElement);
+        setMenu(false);
+        if (mobile.matches && focusWasInSidebar) {
+          openButton.focus();
+        } else if (!mobile.matches && (document.activeElement === openButton || document.activeElement === closeButton)) {
+          sidebar.querySelector('[aria-current="page"]').focus();
+        }
+      });
+
+      sidebar.addEventListener("click", (event) => {
+        const link = event.target.closest("a");
+        if (!link) return;
+        if (link.getAttribute("aria-disabled") === "true") {
+          event.preventDefault();
+          return;
+        }
+        if (mobile.matches) setMenu(false);
+        if (link.getAttribute("href") === "#dashboard") {
+          event.preventDefault();
+          const main = document.getElementById("dashboard");
+          main.focus({ preventScroll: true });
+          window.scrollTo({ top: 0 });
+        }
+      });
+
+      // Dropdown kampus: hanya buka/tutup, belum mengganti data.
+      const campusWrapper = document.getElementById("campus-wrapper");
+      const campusButton = document.getElementById("campus-button");
+      const campusMenu = document.getElementById("campus-menu");
+      const campusActive = document.getElementById("campus-active");
+
+      function setCampusMenu(open, restoreFocus = false) {
+        campusMenu.hidden = !open;
+        campusButton.setAttribute("aria-expanded", String(open));
+        if (restoreFocus) campusButton.focus();
+      }
+
+      if (campusButton) {
+      campusButton.addEventListener("click", () => setCampusMenu(campusMenu.hidden));
+      campusActive.addEventListener("click", () => setCampusMenu(false, true));
+      document.addEventListener("click", (event) => {
+        if (!campusWrapper.contains(event.target)) setCampusMenu(false);
+      });
+      document.addEventListener("focusin", (event) => {
+        if (!campusWrapper.contains(event.target)) setCampusMenu(false);
+      });
+
+      }
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          if (menuIsOpen) {
+            event.preventDefault();
+            setMenu(false, true);
+          } else if (campusMenu && !campusMenu.hidden) {
+            event.preventDefault();
+            setCampusMenu(false, true);
+          }
+          return;
+        }
+        if (event.key !== "Tab" || !menuIsOpen) return;
+        const focusable = Array.from(
+          sidebar.querySelectorAll('a[href], button:not([disabled]), [tabindex="0"]')
+        ).filter((element) => element.getClientRects().length > 0);
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (!first || !last) return;
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      });
+
+      // Tampilkan placeholder jika aset lokal tidak ditemukan.
+      document.querySelectorAll("[data-local-image]").forEach((image) => {
+        const fallback = image.parentElement.querySelector("[data-image-fallback]");
+        function showFallback() {
+          image.hidden = true;
+          if (fallback) fallback.hidden = false;
+        }
+        image.addEventListener("error", showFallback);
+        image.addEventListener("load", () => {
+          image.hidden = false;
+          if (fallback) fallback.hidden = true;
+        });
+        if (image.complete && image.naturalWidth === 0) showFallback();
+      });
+
+      setMenu(false);
+      if (campusButton) setCampusMenu(false);
+    })();
+  </script>
+<script>(() => {
+  'use strict';
+  const byId = id => document.getElementById(id);
+  const rows = Array.from(document.querySelectorAll('#inventory-table-body tr[data-gedung]'));
+  const search = byId('search-input');
+  const filters = ['gedung','ruangan','kategori','kondisi','status'];
+  const all = byId('th-select-all');
+  function selection() {
+    const visible = rows.filter(row => !row.hidden);
+    const count = visible.filter(row => row.querySelector('.row-checkbox').checked).length;
+    byId('bulk-bar').classList.toggle('hidden', count === 0);
+    byId('selected-count-badge').textContent = count;
+    byId('selected-count-text').textContent = count;
+    byId('footer-selected-count').textContent = count + ' item terpilih';
+    all.checked = visible.length > 0 && count === visible.length;
+    all.indeterminate = count > 0 && count < visible.length;
+    all.disabled = visible.length === 0;
+  }
+  function filterRows() {
+    const query = search.value.trim().toLocaleLowerCase('id');
+    let count = 0;
+    rows.forEach(row => {
+      const match = (!query || row.textContent.toLocaleLowerCase('id').includes(query)) &&
+        filters.every(key => !byId('filter-'+key).value || row.dataset[key] === byId('filter-'+key).value);
+      row.hidden = !match;
+      if (match) count++;
+      else row.querySelector('.row-checkbox').checked = false;
+    });
+    byId('search-clear').classList.toggle('hidden', query.length === 0);
+    byId('empty-results').hidden = count !== 0;
+    byId('result-count').textContent = `Menampilkan ${count} dari ${rows.length} baris contoh`;
+    selection();
+  }
+  search.addEventListener('input', filterRows);
+  filters.forEach(key => byId('filter-'+key).addEventListener('change', filterRows));
+  byId('search-clear').addEventListener('click', () => { search.value='';filterRows();search.focus(); });
+  byId('btn-reset-filter').addEventListener('click', () => {
+    search.value='';filters.forEach(key => byId('filter-'+key).value='');filterRows();
+  });
+  all.addEventListener('change', () => {
+    rows.filter(row => !row.hidden).forEach(row => row.querySelector('.row-checkbox').checked=all.checked);
+    selection();
+  });
+  rows.forEach(row => row.querySelector('.row-checkbox').addEventListener('change',selection));
+
+  // Preview only: no fake save or export success.
+  const backdrop=byId('drawer-backdrop'), panel=byId('drawer-panel');
+  const opener=byId('btn-open-drawer'), closer=byId('btn-close-drawer');
+  const shell=byId('app-shell'),sidebar=byId('app-sidebar');
+  let previousOverflow='';
+  function openPreview() {
+    previousOverflow=document.body.style.overflow;
+    backdrop.hidden=false;
+    closer.focus();
+    shell.inert=true;sidebar.inert=true;
+    document.body.style.overflow='hidden';
+  }
+  function closePreview() {
+    if(backdrop.hidden)return;
+    backdrop.hidden=true;
+    shell.inert=false;sidebar.inert=false;
+    document.body.style.overflow=previousOverflow;
+    opener.focus();
+  }
+  opener.addEventListener('click',openPreview);
+  closer.addEventListener('click',closePreview);
+  byId('btn-cancel-drawer').addEventListener('click',closePreview);
+  backdrop.addEventListener('click',event=>{if(event.target===backdrop)closePreview();});
+  document.addEventListener('keydown',event=>{
+    if(backdrop.hidden)return;
+    if(event.key==='Escape'){event.preventDefault();closePreview();return;}
+    if(event.key!=='Tab')return;
+    const fields=Array.from(panel.querySelectorAll('button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled])')).filter(el=>el.getClientRects().length);
+    const first=fields[0],last=fields[fields.length-1];
+    if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
+    else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
+  });
+  filterRows();
+})();
+</script>
+</body>
+</html>
