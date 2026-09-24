@@ -352,53 +352,53 @@
           <article class="panel stat-card">
             <div class="stat-top">
 <div>
-<h2 class="uppercase text-label-sm text-outline">Total Inventaris</h2>
-<p class="flex flex-wrap items-baseline gap-2 mt-1"><span class="text-display-lg font-bold">1.248</span><span class="text-label-md">Item</span></p>
+<h2 class="uppercase text-label-sm text-outline">Jumlah Record</h2>
+<p class="flex flex-wrap items-baseline gap-2 mt-1"><span class="text-display-lg font-bold" id="stat-records">0</span><span class="text-label-md">Record</span></p>
 </div>
 <span class="stat-icon" aria-hidden="true"><span class="material-symbols-outlined">inventory_2</span></span>
 </div>
             <div class="stat-note">
-<p class="text-primary font-semibold">+24 item bulan ini</p>
-<p class="text-on-surface-variant mt-1">848 Aset Tetap • 400 Bahan Habis Pakai</p>
+<p class="text-primary font-semibold">Total data inventaris tersimpan</p>
+<p class="text-on-surface-variant mt-1">Dari penyimpanan lokal peramban</p>
 </div>
           </article>
           <article class="panel stat-card">
             <div class="stat-top">
 <div>
-<h2 class="uppercase text-label-sm text-outline">Ruang Kelas</h2>
-<p class="flex flex-wrap items-baseline gap-2 mt-1"><span class="text-display-lg font-bold">32</span><span class="text-label-md">Ruangan</span></p>
+<h2 class="uppercase text-label-sm text-outline">Total Kuantitas</h2>
+<p class="flex flex-wrap items-baseline gap-2 mt-1"><span class="text-display-lg font-bold" id="stat-qty">0</span><span class="text-label-md">Unit</span></p>
 </div>
-<span class="stat-icon" aria-hidden="true"><span class="material-symbols-outlined">school</span></span>
+<span class="stat-icon" aria-hidden="true"><span class="material-symbols-outlined">warehouse</span></span>
 </div>
             <div class="stat-note">
-<p class="font-semibold">Gedung A &amp; B (Lt. 2–8)</p>
-<p class="text-on-surface-variant mt-1">29 Aktif Perkuliahan • 3 Perawatan</p>
+<p class="font-semibold">Jumlah seluruh barang</p>
+<p class="text-on-surface-variant mt-1">Akumulasi kolom jumlah</p>
 </div>
           </article>
           <article class="panel stat-card">
             <div class="stat-top">
 <div>
-<h2 class="uppercase text-label-sm text-outline">Laboratorium</h2>
-<p class="flex flex-wrap items-baseline gap-2 mt-1"><span class="text-display-lg font-bold">6</span><span class="text-label-md">Laboratorium</span></p>
+<h2 class="uppercase text-label-sm text-outline">Kondisi Baik</h2>
+<p class="flex flex-wrap items-baseline gap-2 mt-1"><span class="text-display-lg font-bold" id="stat-baik">0</span><span class="text-label-md">Unit</span></p>
 </div>
-<span class="stat-icon" aria-hidden="true"><span class="material-symbols-outlined">terminal</span></span>
+<span class="stat-icon" style="background:#dcfce7;color:#166534;" aria-hidden="true"><span class="material-symbols-outlined">check_circle</span></span>
 </div>
             <div class="stat-note">
-<p class="font-semibold">Fakultas Ilmu Komputer &amp; Teknik</p>
-<p class="text-on-surface-variant mt-1">180 Unit Workstation • 6 Server Rak</p>
+<p class="font-semibold">Siap pakai perkuliahan</p>
+<p class="text-on-surface-variant mt-1">Total kuantitas kondisi baik</p>
 </div>
           </article>
           <article class="panel stat-card">
             <div class="stat-top">
 <div>
-<h2 class="uppercase text-label-sm text-outline">Koleksi Buku</h2>
-<p class="flex flex-wrap items-baseline gap-2 mt-1"><span class="text-display-lg font-bold">3.420</span><span class="text-label-md">Buku</span></p>
+<h2 class="uppercase text-label-sm text-outline">Selain Baik</h2>
+<p class="flex flex-wrap items-baseline gap-2 mt-1"><span class="text-display-lg font-bold" id="stat-nonbaik">0</span><span class="text-label-md">Unit</span></p>
 </div>
-<span class="stat-icon" style="background:#fcd801;color:#6f5e00;" aria-hidden="true"><span class="material-symbols-outlined">auto_stories</span></span>
+<span class="stat-icon" style="background:#fffbeb;color:#92400e;" aria-hidden="true"><span class="material-symbols-outlined">build</span></span>
 </div>
             <div class="stat-note">
-<p class="font-semibold">Perpustakaan Viktor Lt. 5</p>
-<p class="text-on-surface-variant mt-1">1.120 Judul Buku • 48 Jurnal Terakreditasi</p>
+<p class="font-semibold">Perlu perhatian</p>
+<p class="text-on-surface-variant mt-1">Total kuantitas di luar kondisi baik</p>
 </div>
           </article>
         </section>
@@ -455,38 +455,16 @@
               <div class="flex items-start justify-between gap-3">
 <div>
 <h2 class="panel-title">Kondisi Inventaris Keseluruhan</h2>
-<p class="panel-description">Hasil verifikasi fisik triwulan I — data simulasi.</p>
+<p class="panel-description">Distribusi total kuantitas barang berdasarkan kondisi.</p>
 </div>
 <span class="material-symbols-outlined text-outline" aria-hidden="true">pie_chart</span>
 </div>
               <div class="condition-layout">
-                <div class="relative w-36 h-36 flex-shrink-0">
-                  <svg class="w-full h-full -rotate-90" viewbox="0 0 36 36" role="img" aria-labelledby="condition-chart-title">
-                    <title id="condition-chart-title">Kondisi inventaris sekitar 89 persen baik, 6 persen rusak ringan, 3 persen dalam perbaikan, dan 2 persen rusak berat.</title>
-                    <circle cx="18" cy="18" r="15.9155" fill="none" stroke="#EAEDFF" stroke-width="4.5"></circle>
-                    <circle cx="18" cy="18" r="15.9155" fill="none" stroke="#16A34A" stroke-width="4.5" stroke-dasharray="88.94 100"></circle>
-                    <circle cx="18" cy="18" r="15.9155" fill="none" stroke="#D97706" stroke-width="4.5" stroke-dasharray="6.01 100" stroke-dashoffset="-88.94"></circle>
-                    <circle cx="18" cy="18" r="15.9155" fill="none" stroke="#2563EB" stroke-width="4.5" stroke-dasharray="3.04 100" stroke-dashoffset="-94.95"></circle>
-                    <circle cx="18" cy="18" r="15.9155" fill="none" stroke="#DC2626" stroke-width="4.5" stroke-dasharray="2.01 100" stroke-dashoffset="-97.99"></circle>
-                  </svg>
-                  <div class="absolute inset-0 flex flex-col items-center justify-center">
-<span class="text-[24px] font-bold">89%</span><span class="text-label-sm text-on-surface-variant">BAIK</span>
-</div>
+                <div class="flex-shrink-0 w-full" style="max-width:360px;">
+                  <canvas id="condition-chart" width="360" height="360" role="img" aria-label="Grafik kondisi inventaris berdasarkan total kuantitas"></canvas>
+                  <p id="chart-fallback" class="hidden panel-description mt-2" role="alert">Grafik kondisi tidak dapat dimuat.</p>
                 </div>
-                <div class="condition-list space-y-2">
-                  <div class="condition-row">
-<span class="font-semibold">Kondisi Baik</span><span class="font-mono">1.110 Item</span><span class="badge badge-good">Siap Pakai</span>
-</div>
-                  <div class="condition-row">
-<span class="font-semibold">Rusak Ringan</span><span class="font-mono">75 Item</span><span class="badge badge-warning">Perlu Servis</span>
-</div>
-                  <div class="condition-row">
-<span class="font-semibold">Dalam Perbaikan</span><span class="font-mono">38 Item</span><span class="badge badge-info">Ditangani</span>
-</div>
-                  <div class="condition-row">
-<span class="font-semibold">Rusak Berat</span><span class="font-mono">25 Item</span><span class="badge badge-danger">Karantina</span>
-</div>
-                </div>
+                <div class="condition-list space-y-2" id="condition-list"></div>
               </div>
             </div>
             <button type="button" class="mt-6 inline-flex items-center gap-2 text-primary text-label-md font-bold self-start" title="Detail audit belum tersedia" disabled>Lihat Detail Audit Fisik<span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></button>
@@ -765,5 +743,9 @@
       setCampusMenu(false);
     })();
   </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="assets/js/inventory-store.js"></script>
+  <script src="assets/js/dashboard.js"></script>
 </body>
 </html>
