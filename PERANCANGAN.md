@@ -642,6 +642,14 @@ flowchart LR
 
 ---
 
+### Alur Masuk dan Keluar (Login/Logout)
+
+Halaman login (`login.html`) menggunakan akun demo `admin` / `Demo123!` sebagai
+simulasi client-side (bukan autentikasi aman). Setelah login berhasil, penanda sesi
+disimpan di `sessionStorage` (key `simsarpras.session.v1`); halaman dashboard, data
+inventaris, form, dan laporan memeriksa sesi dan mengarahkan ke halaman login bila
+tidak ada. Tombol **Keluar** menghapus penanda sesi dan kembali ke halaman login.
+
 # 13. User Flow Pengelolaan Buku
 
 ```mermaid
@@ -755,6 +763,11 @@ Fitur client-side yang direncanakan:
 ## Tema Visual
 
 Material Design dengan pendekatan modern educational administration dashboard.
+
+Mendukung mode terang (default) dan mode gelap. Pilihan tema disimpan di
+`localStorage` (key `simsarpras.theme.v1`); bila belum ada pilihan, mengikuti
+preferensi sistem (`prefers-color-scheme`). Tombol tema tersedia di header setiap
+halaman dan dapat digunakan dengan keyboard.
 
 ## Typography
 

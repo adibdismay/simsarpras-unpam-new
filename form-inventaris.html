@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Form Inventaris | SIMSARPRAS EDU — UNPAM</title>
   <meta name="description" content="Form tambah dan ubah data inventaris SIMSARPRAS EDU untuk Milestone 3.">
+  <script src="assets/js/theme.js"></script>
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <script src="assets/js/auth.js"></script>
+  <script>Auth.protectPage();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
@@ -322,6 +326,8 @@
 </div>
             <span class="material-symbols-outlined text-outline" aria-hidden="true">expand_more</span>
           </div>
+          <button type="button" id="theme-toggle" aria-label="Aktifkan mode gelap" title="Ubah tema terang/gelap"><span class="material-symbols-outlined theme-icon-light" aria-hidden="true">dark_mode</span><span class="material-symbols-outlined theme-icon-dark" aria-hidden="true">light_mode</span></button>
+          <button type="button" id="logout-button" class="inline-flex items-center gap-2 h-10 px-3 rounded-lg text-label-md font-semibold text-on-surface-variant hover:bg-error-container hover:text-error transition-colors" title="Keluar dari sesi demo"><span class="material-symbols-outlined" aria-hidden="true">logout</span>Keluar</button>
         </div>
       </div>
     </header>

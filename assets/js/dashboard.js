@@ -134,6 +134,10 @@
     });
   }
 
+  function chartTextColor() {
+    return document.documentElement.getAttribute('data-theme') === 'dark' ? '#e2e8f0' : '#111827';
+  }
+
   function renderChart(byCondition) {
     const canvas = byId('condition-chart');
     const fallback = byId('chart-fallback');
@@ -173,9 +177,11 @@
           plugins: {
             legend: {
               position: 'bottom',
-              labels: { usePointStyle: true, boxWidth: 8 }
+              labels: { usePointStyle: true, boxWidth: 8, color: chartTextColor() }
             },
             tooltip: {
+              titleColor: chartTextColor(),
+              bodyColor: chartTextColor(),
               callbacks: {
                 label: function(ctx) {
                   const total = ctx.dataset.data.reduce(function(a, b) { return a + b; }, 0);
@@ -206,4 +212,14 @@
   } else {
     init();
   }
+
+  // Perbarui warna teks/legend/tooltip chart saat tema berubah (tanpa instance baru).
+  window.addEventListener('themechange', function () {
+    if (!window.__conditionChart) return;
+    var c = chartTextColor();
+    window.__conditionChart.options.plugins.legend.labels.color = c;
+    window.__conditionChart.options.plugins.tooltip.titleColor = c;
+    window.__conditionChart.options.plugins.tooltip.bodyColor = c;
+    window.__conditionChart.update();
+  });
 })();
