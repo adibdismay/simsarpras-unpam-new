@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Data Inventaris | SIMSARPRAS EDU — UNPAM</title>
   <meta name="description" content="Template Data Master Inventaris SIMSARPRAS EDU untuk Milestone 2, menggunakan data simulasi.">
+  <script src="assets/js/theme.js"></script>
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <script src="assets/js/auth.js"></script>
+  <script>Auth.protectPage();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
@@ -440,6 +444,9 @@
 .inventory-drawer-backdrop { position:fixed; inset:0; z-index:150; background:rgb(17 24 39 / 50%); }
 .inventory-drawer-panel { position:absolute; top:0; right:0; width:min(672px,100%); height:100%; background:white; display:flex; flex-direction:column; box-shadow:0 12px 40px #0003; }
 .inventory-drawer-panel > .flex-1 { min-height:0; }
+.delete-modal-backdrop { position:fixed; inset:0; z-index:160; background:rgb(17 24 39 / 50%); display:flex; align-items:center; justify-content:center; padding:16px; }
+.delete-modal-panel { width:min(400px,100%); max-height:min(80vh,100%); overflow:auto; background:white; border-radius:16px; padding:24px; box-shadow:0 12px 40px #0003; }
+.delete-error { color:#DC2626; font-size:12px; line-height:18px; }
 @media(max-width:767px) { #main-content .px-space-xl { padding-left:16px; padding-right:16px; } #main-content .grid { min-width:0; } #main-content .grid > * { min-width:0; } #bulk-bar > div { flex-wrap:wrap; gap:12px; } }
 </style>
 </head>
@@ -482,7 +489,7 @@
         <p class="nav-group-title">Manajemen &amp; Pelaporan</p>
         <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">fact_check</span>Kondisi Inventaris</a>
         <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">build</span>Pemeliharaan</a>
-        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">assessment</span>Laporan &amp; Audit</a>
+        <a class="nav-link" href="laporan.html"><span class="material-symbols-outlined" aria-hidden="true">assessment</span>Laporan &amp; Audit</a>
         <p class="nav-group-title">Pengaturan</p>
         <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">manage_accounts</span>Pengguna &amp; Hak Akses</a>
         <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">settings</span>Pengaturan Sistem</a>
@@ -528,6 +535,8 @@
 </div>
             <span class="material-symbols-outlined text-outline" aria-hidden="true">expand_more</span>
           </div>
+          <button type="button" id="theme-toggle" aria-label="Aktifkan mode gelap" title="Ubah tema terang/gelap"><span class="material-symbols-outlined theme-icon-light" aria-hidden="true">dark_mode</span><span class="material-symbols-outlined theme-icon-dark" aria-hidden="true">light_mode</span></button>
+          <button type="button" id="logout-button" class="inline-flex items-center gap-2 h-10 px-3 rounded-lg text-label-md font-semibold text-on-surface-variant hover:bg-error-container hover:text-error transition-colors" title="Keluar dari sesi demo"><span class="material-symbols-outlined" aria-hidden="true">logout</span>Keluar</button>
         </div>
       </div>
     </header>
@@ -565,10 +574,10 @@
 <span class="material-symbols-outlined text-[18px]">qr_code_2</span>
 <span>Cetak Barcode/QR</span>
 </button>
-<button class="flex items-center gap-2 px-4 py-2 rounded-xl bg-primary text-on-primary hover:bg-primary-container font-label-md text-label-md font-bold transition-all shadow-md active:scale-95" id="btn-open-drawer" type="button" aria-label="add_circle + Tambah Inventaris" title="Buka pratinjau formulir; tidak menyimpan data">
+<a class="flex items-center gap-2 px-4 py-2 rounded-xl bg-primary text-on-primary hover:bg-primary-container font-label-md text-label-md font-bold transition-all shadow-md active:scale-95" id="btn-add-inventory" href="form-inventaris.html" aria-label="Tambah Inventaris" title="Tambah data inventaris baru">
 <span class="material-symbols-outlined text-[18px]">add_circle</span>
 <span>+ Tambah Inventaris</span>
-</button>
+</a>
 </div>
 </div>
 </div>
@@ -1416,6 +1425,24 @@
 </div>
 </div>
 </div>
+
+<!-- Modal Konfirmasi Hapus -->
+<div class="delete-modal-backdrop" id="delete-backdrop" hidden>
+  <div class="delete-modal-panel" id="delete-panel" role="dialog" aria-modal="true" aria-labelledby="delete-title" aria-describedby="delete-desc">
+    <h2 class="font-headline-sm text-headline-sm font-bold text-on-surface tracking-tight" id="delete-title">Hapus Inventaris</h2>
+    <p class="font-body-sm text-body-sm text-on-surface-variant mt-1" id="delete-desc">Data berikut akan dihapus permanen dari penyimpanan lokal:</p>
+    <div class="mt-4 flex flex-col gap-1 rounded-lg bg-surface-container-low p-3" id="delete-item-info"></div>
+    <p class="hidden delete-error mt-3" id="delete-error" role="alert"></p>
+    <div class="mt-5 flex items-center justify-end gap-2">
+      <button class="px-4 py-2 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors" id="delete-cancel" type="button">Batal</button>
+      <button class="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-error text-on-error hover:opacity-90 font-label-md text-label-md font-bold transition-all shadow-md disabled:opacity-60" id="delete-confirm" type="button">
+        <span class="material-symbols-outlined text-[18px]">delete</span>
+        <span>Hapus</span>
+      </button>
+    </div>
+  </div>
+</div>
+
 <script>
     (() => {
       "use strict";
@@ -1546,51 +1573,10 @@
 <script>(() => {
   'use strict';
   const byId = id => document.getElementById(id);
-  const rows = Array.from(document.querySelectorAll('#inventory-table-body tr[data-gedung]'));
-  const search = byId('search-input');
-  const filters = ['gedung','ruangan','kategori','kondisi','status'];
-  const all = byId('th-select-all');
-  function selection() {
-    const visible = rows.filter(row => !row.hidden);
-    const count = visible.filter(row => row.querySelector('.row-checkbox').checked).length;
-    byId('bulk-bar').classList.toggle('hidden', count === 0);
-    byId('selected-count-badge').textContent = count;
-    byId('selected-count-text').textContent = count;
-    byId('footer-selected-count').textContent = count + ' item terpilih';
-    all.checked = visible.length > 0 && count === visible.length;
-    all.indeterminate = count > 0 && count < visible.length;
-    all.disabled = visible.length === 0;
-  }
-  function filterRows() {
-    const query = search.value.trim().toLocaleLowerCase('id');
-    let count = 0;
-    rows.forEach(row => {
-      const match = (!query || row.textContent.toLocaleLowerCase('id').includes(query)) &&
-        filters.every(key => !byId('filter-'+key).value || row.dataset[key] === byId('filter-'+key).value);
-      row.hidden = !match;
-      if (match) count++;
-      else row.querySelector('.row-checkbox').checked = false;
-    });
-    byId('search-clear').classList.toggle('hidden', query.length === 0);
-    byId('empty-results').hidden = count !== 0;
-    byId('result-count').textContent = `Menampilkan ${count} dari ${rows.length} baris contoh`;
-    selection();
-  }
-  search.addEventListener('input', filterRows);
-  filters.forEach(key => byId('filter-'+key).addEventListener('change', filterRows));
-  byId('search-clear').addEventListener('click', () => { search.value='';filterRows();search.focus(); });
-  byId('btn-reset-filter').addEventListener('click', () => {
-    search.value='';filters.forEach(key => byId('filter-'+key).value='');filterRows();
-  });
-  all.addEventListener('change', () => {
-    rows.filter(row => !row.hidden).forEach(row => row.querySelector('.row-checkbox').checked=all.checked);
-    selection();
-  });
-  rows.forEach(row => row.querySelector('.row-checkbox').addEventListener('change',selection));
 
   // Preview only: no fake save or export success.
   const backdrop=byId('drawer-backdrop'), panel=byId('drawer-panel');
-  const opener=byId('btn-open-drawer'), closer=byId('btn-close-drawer');
+  const closer=byId('btn-close-drawer');
   const shell=byId('app-shell'),sidebar=byId('app-sidebar');
   let previousOverflow='';
   function openPreview() {
@@ -1605,9 +1591,9 @@
     backdrop.hidden=true;
     shell.inert=false;sidebar.inert=false;
     document.body.style.overflow=previousOverflow;
-    opener.focus();
+    const back=byId('btn-add-inventory')||closer;
+    if(back)back.focus();
   }
-  opener.addEventListener('click',openPreview);
   closer.addEventListener('click',closePreview);
   byId('btn-cancel-drawer').addEventListener('click',closePreview);
   backdrop.addEventListener('click',event=>{if(event.target===backdrop)closePreview();});
@@ -1620,8 +1606,12 @@
     if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
     else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
   });
-  filterRows();
 })();
 </script>
+
+<!-- Inventory Store & Data Inventaris Module - Milestone 3 -->
+<script src="assets/js/inventory-store.js"></script>
+<script src="assets/js/data-inventaris.js"></script>
+
 </body>
 </html>
