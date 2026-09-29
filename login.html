@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Masuk | SIMSARPRAS UNPAM</title>
+  <meta name="description" content="Halaman masuk demo SIMSARPRAS UNPAM — simulasi client-side, bukan autentikasi aman.">
+  <script src="assets/js/theme.js"></script>
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <script src="assets/js/auth.js"></script>
+  <script>Auth.redirectIfAuthenticated();</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/login.css">
+</head>
+<body>
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="topbar-brand">
+        <span class="portal-badge">
+          <span class="status-dot" aria-hidden="true"></span>
+          Portal Resmi
+        </span>
+        <span class="topbar-note">Sistem Informasi Manajemen Sarana &amp; Prasarana Universitas Pamulang</span>
+      </div>
+      <div class="topbar-actions">
+        <span class="campus-node">
+          <svg class="node-icon" viewBox="0 0 8 8" aria-hidden="true"><circle cx="4" cy="4" r="3"></circle></svg>
+          Node Viktor-01
+        </span>
+        <button type="button" id="theme-toggle" aria-label="Aktifkan mode gelap" title="Ubah tema terang/gelap">
+          <svg class="theme-icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+          <svg class="theme-icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Konten utama -->
+  <main class="login-main">
+    <div class="ambient" aria-hidden="true"></div>
+
+    <div class="login-wrap">
+      <!-- Robot maskot (statis, pupil terpisah untuk animasi tahap berikutnya) -->
+      <div class="mascot">
+        <div class="robot-speech" role="status" aria-live="polite">
+          <svg class="speech-icon" viewBox="0 0 20 20" aria-hidden="true">
+            <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm.75 11.25a.75.75 0 01-1.5 0v-4.5a.75.75 0 011.5 0v4.5zm0-6.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/>
+          </svg>
+          <span id="robot-message">Sistem Inventaris Siap • Silakan Masuk</span>
+        </div>
+
+        <div class="robot">
+          <svg id="robot-svg" viewBox="0 0 144 112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="robotBodyGrad" gradientUnits="userSpaceOnUse" x1="72" x2="72" y1="20" y2="108">
+                <stop stop-color="#FFFFFF"/>
+                <stop offset="1" stop-color="#EEF2F6"/>
+              </linearGradient>
+              <linearGradient id="screenGrad" gradientUnits="userSpaceOnUse" x1="72" x2="72" y1="36" y2="92">
+                <stop stop-color="#1E293B"/>
+                <stop offset="1" stop-color="#0F172A"/>
+              </linearGradient>
+              <clipPath id="leftEyeClip"><rect width="20" height="24" rx="10" x="42" y="52"/></clipPath>
+              <clipPath id="rightEyeClip"><rect width="20" height="24" rx="10" x="82" y="52"/></clipPath>
+            </defs>
+            <!-- Antena -->
+            <rect fill="#94A3B8" height="14" rx="2" width="4" x="70" y="8"></rect>
+            <circle cx="72" cy="7" fill="#F59E0B" r="5" stroke="#D97706" stroke-width="1.5"></circle>
+            <circle cx="70.5" cy="5.5" fill="#FEF3C7" r="1.5"></circle>
+            <!-- Telinga / sensor samping -->
+            <rect fill="#CBD5E1" height="18" rx="4" stroke="#64748B" stroke-width="1.5" width="8" x="18" y="54"></rect>
+            <rect fill="#CBD5E1" height="18" rx="4" stroke="#64748B" stroke-width="1.5" width="8" x="118" y="54"></rect>
+            <!-- Kepala -->
+            <rect fill="url(#robotBodyGrad)" height="88" rx="28" stroke="#64748B" stroke-width="2.5" width="96" x="24" y="20"></rect>
+            <!-- Layar wajah -->
+            <rect fill="url(#screenGrad)" height="64" rx="18" stroke="#334155" stroke-width="1.5" width="76" x="34" y="32"></rect>
+            <!-- Mata kiri -->
+            <g clip-path="url(#leftEyeClip)">
+              <rect fill="#0284C7" height="24" rx="10" width="20" x="42" y="52"></rect>
+              <circle class="robot-pupil" cx="52" cy="64" fill="#FFFFFF" r="6"></circle>
+              <circle class="robot-pupil" cx="54" cy="62" fill="#BAE6FD" r="2"></circle>
+              <rect class="robot-eyelid" x="42" y="52" width="20" height="24" rx="10" fill="#1E293B"></rect>
+            </g>
+            <!-- Mata kanan -->
+            <g clip-path="url(#rightEyeClip)">
+              <rect fill="#0284C7" height="24" rx="10" width="20" x="82" y="52"></rect>
+              <circle class="robot-pupil" cx="92" cy="64" fill="#FFFFFF" r="6"></circle>
+              <circle class="robot-pupil" cx="94" cy="62" fill="#BAE6FD" r="2"></circle>
+              <rect class="robot-eyelid" x="82" y="52" width="20" height="24" rx="10" fill="#1E293B"></rect>
+            </g>
+            <!-- Senyum -->
+            <path d="M66 84 Q72 87 78 84" fill="none" stroke="#38BDF8" stroke-linecap="round" stroke-width="2"></path>
+          </svg>
+        </div>
+
+        <div class="robot-hands" aria-hidden="true">
+          <div class="robot-hand"><span></span></div>
+          <div class="robot-hand"><span></span></div>
+        </div>
+      </div>
+
+      <!-- Kartu login -->
+      <div class="login-card">
+        <div class="card-header">
+          <img class="card-logo" src="assets/images/logo-unpam.png" alt="Logo Universitas Pamulang" width="48" height="48">
+          <div>
+            <h1>SIMSARPRAS UNPAM</h1>
+            <p>Universitas Pamulang</p>
+          </div>
+        </div>
+
+        <div class="card-heading">
+          <h2>Masuk ke panel admin</h2>
+          <p>Kelola inventaris dan fasilitas kampus secara tersentralisasi.</p>
+        </div>
+
+        <!-- Pesan umpan balik -->
+        <div class="alert" id="login-alert" role="alert" aria-live="polite" hidden>
+          <svg class="alert-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span id="login-alert-text"></span>
+        </div>
+
+        <form id="login-form" novalidate>
+          <div class="field">
+            <label for="username">Username <span class="req" aria-hidden="true">*</span></label>
+            <div class="input-wrap">
+              <span class="input-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+              </span>
+              <input id="username" name="username" type="text" autocomplete="username"
+                     placeholder="Masukkan username" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="password">Kata sandi <span class="req" aria-hidden="true">*</span></label>
+            <div class="input-wrap">
+              <span class="input-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+              </span>
+              <input id="password" name="password" type="password" autocomplete="current-password"
+                     placeholder="Masukkan kata sandi" required>
+              <button type="button" id="toggle-password" class="toggle-password"
+                      aria-label="Tampilkan kata sandi" aria-pressed="false">
+                <svg id="eye-open" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                </svg>
+                <svg id="eye-closed" viewBox="0 0 24 24" aria-hidden="true" hidden>
+                  <path d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" id="submit-button" class="submit-button">
+            <span id="submit-label">Masuk ke SIMSARPRAS</span>
+            <svg class="submit-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+          </button>
+        </form>
+
+        <!-- Keterangan akun demo -->
+        <div class="demo-box">
+          <div class="demo-cred">
+            <span class="demo-badge">Demo</span>
+            <span class="demo-text"><span class="mono">admin</span> / <span class="mono">Demo123!</span></span>
+          </div>
+          <button type="button" id="btn-autofill" class="autofill-btn">Isi Otomatis</button>
+        </div>
+
+        <div class="card-footer">
+          <span>Simulasi client-side — bukan autentikasi aman</span>
+          <span class="mono">v2.4.0</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <p>© 2025 Biro Sarana &amp; Prasarana Universitas Pamulang (UNPAM). Hak Cipta Dilindungi.</p>
+  </footer>
+
+  <script src="assets/js/login.js"></script>
+</body>
+</html>

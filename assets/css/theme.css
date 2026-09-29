@@ -1,0 +1,252 @@
+/* ============================================================
+   SIMSARPRAS UNPAM — Tema terang/gelap bersama.
+   Light = tampilan bawaan (tetap). Dark = override `data-theme="dark"`.
+   Tidak memakai filter/invert atau selector universal.
+   ============================================================ */
+
+/* ---------- Tombol tema ---------- */
+#theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: #6b7280;
+  cursor: pointer;
+}
+#theme-toggle svg { width: 20px; height: 20px; }
+#theme-toggle .material-symbols-outlined { font-size: 20px; line-height: 1; }
+#theme-toggle:hover { background: rgba(0, 0, 0, 0.05); }
+#theme-toggle .theme-icon-dark { display: none; }
+html[data-theme="dark"] #theme-toggle { color: #94a3b8; }
+html[data-theme="dark"] #theme-toggle:hover { background: rgba(255, 255, 255, 0.08); }
+html[data-theme="dark"] #theme-toggle .theme-icon-light { display: none; }
+html[data-theme="dark"] #theme-toggle .theme-icon-dark { display: inline-block; }
+
+.topbar-actions { display: flex; align-items: center; gap: 10px; }
+
+/* ============================================================
+   DARK MODE
+   ============================================================ */
+html[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Variabel login.css */
+  --primary: #3b82f6;
+  --primary-dark: #2563eb;
+  --primary-darker: #1d4ed8;
+  --primary-light: #1e3a8a;
+  --primary-container: #1e3a8a;
+  --primary-container-low: #1e293b;
+  --on-primary: #ffffff;
+  --background: #0f172a;
+  --surface: #1e293b;
+  --on-surface: #e2e8f0;
+  --on-surface-variant: #94a3b8;
+  --outline: #94a3b8;
+  --outline-variant: #334155;
+  --border: #334155;
+  --error: #f87171;
+  --error-container: #451a1a;
+  --success: #4ade80;
+  --success-container: #14532d;
+  --info: #60a5fa;
+  --info-container: #1e3a8a;
+  --gold: #fbbf24;
+}
+
+html[data-theme="dark"] body {
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+html[data-theme="dark"] :focus-visible {
+  outline-color: #60a5fa;
+}
+
+html[data-theme="dark"] ::placeholder { color: #64748b; }
+html[data-theme="dark"] ::-webkit-scrollbar-thumb { background: #475569; }
+
+/* ---------- LOGIN ---------- */
+html[data-theme="dark"] .topbar {
+  background: rgba(15, 23, 42, 0.9);
+  border-color: #334155;
+}
+html[data-theme="dark"] .portal-badge {
+  background: #1e3a8a;
+  color: #bfdbfe;
+  border-color: #1e3a8a;
+}
+html[data-theme="dark"] .campus-node {
+  background: #1e293b;
+  border-color: #334155;
+  color: #94a3b8;
+}
+html[data-theme="dark"] .robot-speech {
+  background: #1e293b;
+  border-color: #334155;
+  color: #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+html[data-theme="dark"] .robot-hand {
+  background: #283548;
+  border-color: #94a3b8;
+}
+html[data-theme="dark"] .robot-hand span { background: #475569; }
+html[data-theme="dark"] .card-header { border-color: #273449; }
+html[data-theme="dark"] .card-footer { border-color: #273449; color: #64748b; }
+html[data-theme="dark"] .toggle-password:hover { background: #273449; }
+html[data-theme="dark"] .demo-box {
+  background: rgba(30, 58, 138, 0.25);
+  border-color: #1e3a8a;
+  color: #93c5fd;
+}
+html[data-theme="dark"] .demo-text { color: #94a3b8; }
+html[data-theme="dark"] .demo-text .mono { color: #e2e8f0; }
+html[data-theme="dark"] .autofill-btn {
+  background: #1e293b;
+  border-color: #334155;
+  color: #60a5fa;
+}
+html[data-theme="dark"] .main-footer {
+  background: #0f172a;
+  border-color: #334155;
+  color: #94a3b8;
+}
+html[data-theme="dark"] .ambient { opacity: 0.35; }
+
+/* ---------- Shell: sidebar, header, footer ---------- */
+html[data-theme="dark"] #app-sidebar,
+html[data-theme="dark"] .sidebar-brand {
+  background: #0f172a;
+}
+html[data-theme="dark"] .sidebar-brand { border-color: #273449; }
+html[data-theme="dark"] #app-sidebar { box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5); }
+html[data-theme="dark"] .nav-group-title { color: #64748b; }
+html[data-theme="dark"] .nav-link { color: #94a3b8; }
+html[data-theme="dark"] .nav-link:hover { background: #1e293b; color: #e2e8f0; }
+html[data-theme="dark"] .nav-link[aria-current="page"] { background: #1e3a8a; color: #93c5fd; }
+
+html[data-theme="dark"] #app-header {
+  background: rgba(15, 23, 42, 0.92);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+}
+html[data-theme="dark"] #app-footer {
+  background: #0f172a;
+  border-color: #273449;
+  color: #94a3b8;
+}
+html[data-theme="dark"] #menu-open,
+html[data-theme="dark"] #menu-close {
+  background: #1e293b;
+  border-color: #334155;
+  color: #60a5fa;
+}
+html[data-theme="dark"] #menu-open:hover,
+html[data-theme="dark"] #menu-close:hover { background: #273449; border-color: #475569; }
+html[data-theme="dark"] #menu-close { color: #94a3b8; background: #273449; }
+html[data-theme="dark"] .skip-link { background: #1e293b; color: #60a5fa; }
+
+/* ---------- Kartu, panel, tombol, badge ---------- */
+html[data-theme="dark"] .panel {
+  background: #1e293b;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+html[data-theme="dark"] .panel-title { color: #e2e8f0; }
+html[data-theme="dark"] .panel-description { color: #94a3b8; }
+
+html[data-theme="dark"] .button-primary { background: #2563eb; color: #ffffff; }
+html[data-theme="dark"] .button-secondary { background: #273449; color: #e2e8f0; }
+html[data-theme="dark"] .icon-button { color: #94a3b8; }
+
+html[data-theme="dark"] .badge-good { background: #14532d; color: #86efac; }
+html[data-theme="dark"] .badge-warning { background: #451a03; color: #fbbf24; }
+html[data-theme="dark"] .badge-danger { background: #450a0a; color: #fca5a5; }
+html[data-theme="dark"] .badge-info { background: #1e3a8a; color: #93c5fd; }
+
+/* ---------- Statistik & aktivitas (dashboard) ---------- */
+html[data-theme="dark"] .stat-icon { background: #1e3a8a; color: #60a5fa; }
+html[data-theme="dark"] .stat-note,
+html[data-theme="dark"] .condition-row { background: #273449; }
+html[data-theme="dark"] .attention-scroll { border-color: #334155; }
+html[data-theme="dark"] .attention-table thead { background: #273449; color: #94a3b8; }
+html[data-theme="dark"] .attention-table tbody tr + tr { border-top-color: #273449; }
+html[data-theme="dark"] .attention-table tbody tr:hover { background: #1e293b; }
+html[data-theme="dark"] .activity-item + .activity-item { border-top-color: #273449; }
+html[data-theme="dark"] .activity-icon { background: #1e3a8a; color: #60a5fa; }
+html[data-theme="dark"] .gallery-card { background: #273449; }
+html[data-theme="dark"] .image-fallback { color: #60a5fa; }
+
+/* ---------- Form, input, dropdown ---------- */
+html[data-theme="dark"] #global-search,
+html[data-theme="dark"] input,
+html[data-theme="dark"] textarea,
+html[data-theme="dark"] select {
+  color: #e2e8f0;
+}
+html[data-theme="dark"] #campus-menu { background: #1e293b; border-color: #334155; }
+
+/* ---------- Drawer & modal hapus (data master) ---------- */
+html[data-theme="dark"] .inventory-drawer-panel,
+html[data-theme="dark"] .delete-modal-panel {
+  background: #1e293b;
+  color: #e2e8f0;
+}
+html[data-theme="dark"] .inventory-drawer-backdrop,
+html[data-theme="dark"] .delete-modal-backdrop { background: rgba(2, 6, 23, 0.65); }
+html[data-theme="dark"] .delete-error,
+html[data-theme="dark"] .field-error { color: #f87171; }
+
+/* ---------- Utilites Tailwind (token utama) ---------- */
+html[data-theme="dark"] .bg-background,
+html[data-theme="dark"] .bg-surface { background-color: #0f172a; }
+html[data-theme="dark"] .bg-white { background-color: #1e293b; }
+html[data-theme="dark"] .bg-surface-container-lowest { background-color: #1e293b; }
+html[data-theme="dark"] .bg-surface-container-low { background-color: #273449; }
+html[data-theme="dark"] .bg-surface-container { background-color: #2a3650; }
+html[data-theme="dark"] .bg-surface-container-high { background-color: #334155; }
+html[data-theme="dark"] .bg-surface-variant { background-color: #2a3650; }
+html[data-theme="dark"] .bg-blue-50 { background-color: #1e3a8a; }
+html[data-theme="dark"] .bg-blue-100 { background-color: #1e3a8a; }
+
+html[data-theme="dark"] .text-on-surface,
+html[data-theme="dark"] .text-on-background { color: #e2e8f0; }
+html[data-theme="dark"] .text-on-surface-variant { color: #94a3b8; }
+html[data-theme="dark"] .text-primary { color: #60a5fa; }
+html[data-theme="dark"] .text-error { color: #f87171; }
+html[data-theme="dark"] .text-outline { color: #94a3b8; }
+html[data-theme="dark"] .text-secondary { color: #eab308; }
+
+html[data-theme="dark"] .border-outline-variant,
+html[data-theme="dark"] .border-surface-container-low { border-color: #334155; }
+
+/* Opacity-modifier yang dipakai (bg-surface/20 dst.) */
+html[data-theme="dark"] .bg-surface\/20 { background-color: rgba(30, 41, 59, 0.4); }
+html[data-theme="dark"] .hover\:bg-surface\/30:hover { background-color: rgba(30, 41, 59, 0.5); }
+html[data-theme="dark"] .hover\:bg-surface-container-low\/60:hover { background-color: rgba(51, 65, 85, 0.35); }
+
+/* ---------- Print: selalu terang, kontrol tema tidak dicetak ---------- */
+@media print {
+  html[data-theme="dark"] body,
+  html[data-theme="dark"] {
+    background: #ffffff !important;
+    color: #111827 !important;
+  }
+  html[data-theme="dark"] .panel,
+  html[data-theme="dark"] .delete-modal-panel,
+  html[data-theme="dark"] .inventory-drawer-panel,
+  html[data-theme="dark"] #app-sidebar,
+  html[data-theme="dark"] #app-header,
+  html[data-theme="dark"] #app-footer {
+    background: #ffffff !important;
+    color: #111827 !important;
+  }
+  html[data-theme="dark"] .panel-title { color: #111827 !important; }
+  html[data-theme="dark"] .panel-description,
+  html[data-theme="dark"] .text-on-surface-variant { color: #4b5563 !important; }
+  #theme-toggle { display: none !important; }
+}
