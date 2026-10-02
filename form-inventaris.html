@@ -158,6 +158,7 @@
 
     @media (max-width: 1399px) {
       .header-campus, .header-profile-text { display: none; }
+      .header-breadcrumb { min-width: 0; flex-shrink: 1; overflow: hidden; }
     }
     @media (max-width: 1199px) {
       .header-search, .header-request { display: none; }
@@ -230,12 +231,29 @@
       .sidebar-brand p:first-child { font-size:14px; line-height:20px; }
       .sidebar-brand p:last-child { font-size:10px; line-height:15px; }
       #menu-close { margin:0 0 0 auto; color:#6b7280; border-color:transparent; background:#f8fafc; }
-      .header-breadcrumb, .header-help { display: none; }
-      .header-row { padding-inline: 16px; gap: 8px; }
-      .header-actions { margin-left: auto; gap: 8px; }
+      .header-breadcrumb > nav, .header-help { display: none; }
+      .header-actions { margin-left: auto; min-width: 0; flex-shrink: 1; flex-wrap: nowrap; gap: 4px; }
+      /* Perbaikan responsive header (mobile 360-430px) */
+      .header-row { min-width: 0; gap: 6px; padding-inline: 12px; }
+      .header-actions > * { flex-shrink: 0; }
+      .header-campus {
+        display: inline-flex;
+        flex-shrink: 1;
+        min-width: 0;
+        max-width: 132px;
+      }
+      .header-campus > span:last-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      #app-header { overflow: hidden; }
     }
     @media (max-width: 767px) {
       #main-content .px-space-xl { padding-left:16px; padding-right:16px; }
+    }
+    @media (max-width: 479px) {
+      .header-actions { gap: 2px; }
+      .header-campus { max-width: 92px; padding: 6px 8px; }
+      .header-profile-chevron { display: none; }
+      .logout-label { display: none; }
+      #logout-button { width: 40px; padding: 0; justify-content: center; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -324,10 +342,10 @@
 <p class="font-bold">Admin Sarpras</p>
 <p class="text-on-surface-variant">Universitas Pamulang - Viktor</p>
 </div>
-            <span class="material-symbols-outlined text-outline" aria-hidden="true">expand_more</span>
+            <span class="material-symbols-outlined text-outline header-profile-chevron" aria-hidden="true">expand_more</span>
           </div>
           <button type="button" id="theme-toggle" aria-label="Aktifkan mode gelap" title="Ubah tema terang/gelap"><span class="material-symbols-outlined theme-icon-light" aria-hidden="true">dark_mode</span><span class="material-symbols-outlined theme-icon-dark" aria-hidden="true">light_mode</span></button>
-          <button type="button" id="logout-button" class="inline-flex items-center gap-2 h-10 px-3 rounded-lg text-label-md font-semibold text-on-surface-variant hover:bg-error-container hover:text-error transition-colors" title="Keluar dari sesi demo"><span class="material-symbols-outlined" aria-hidden="true">logout</span>Keluar</button>
+          <button type="button" id="logout-button" class="inline-flex items-center gap-2 h-10 px-3 rounded-lg text-label-md font-semibold text-on-surface-variant hover:bg-error-container hover:text-error transition-colors" title="Keluar dari sesi demo"><span class="material-symbols-outlined" aria-hidden="true">logout</span><span class="logout-label">Keluar</span></button>
         </div>
       </div>
     </header>

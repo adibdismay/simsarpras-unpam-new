@@ -225,14 +225,46 @@
       });
     }
 
-    // Pelacakan pointer (nonaktif saat reduced-motion / perangkat sentuh).
+    // Pelacakan pointer (nonaktif hanya saat reduced-motion).
     if (!reducedMotion && robotSvg) {
+      /* Posisi pupil dihitung relatif terhadap getBoundingClientRect() wajah,
+         jadi rect harus disegarkan ulang setiap geometri berubah, lalu
+         transform dihitung ulang — bukan hanya rect yang diperbarui. */
+      function refreshGeometry() {
+        updateFaceRect();
+        if (!pendingFrame) {
+          pendingFrame = true;
+          requestAnimationFrame(applyTracking);
+        }
+      }
+
       updateFaceRect();
-      window.addEventListener("resize", updateFaceRect);
+
+      /* Pointer Events menutupi mouse, pen, dan touch dalam satu jalur.
+         Jangan saring pointerType: device emulation (responsive/mobile mode)
+         menyintesis mouse sebagai pointer bertipe "touch", sehingga penyaringan
+         tersebut mematikan lacakan justru di perangkat yang paling butuh. */
       window.addEventListener("pointermove", function (event) {
-        if (event.pointerType === "touch") return;
         trackPointer(event.clientX, event.clientY);
-      });
+      }, { passive: true });
+
+      /* Fallback untuk browser lama tanpa Pointer Events. */
+      if (!window.PointerEvent) {
+        window.addEventListener("mousemove", function (event) {
+          trackPointer(event.clientX, event.clientY);
+        }, { passive: true });
+        ["touchstart", "touchmove"].forEach(function (type) {
+          window.addEventListener(type, function (event) {
+            const touch = event.touches[0];
+            if (touch) trackPointer(touch.clientX, touch.clientY);
+          }, { passive: true });
+        });
+      }
+
+      window.addEventListener("resize", refreshGeometry);
+      window.addEventListener("orientationchange", refreshGeometry);
+      window.addEventListener("scroll", refreshGeometry, { passive: true });
+
       document.addEventListener("mouseleave", resetPupils);
       window.addEventListener("blur", resetPupils);
     }
