@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SIMSARPRAS UNPAM - Portal Masuk Sistem Inventaris</title>
+<!-- Google Fonts: Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN with forms plugin -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script data-purpose="tailwind-config">
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            unpam: {
+              DEFAULT: '#002b9a',
+              dark: '#002075',
+              darker: '#001859',
+              light: '#e8eeff',
+              gold: '#f59e0b',
+              goldLight: '#fef3c7'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif']
+          },
+          boxShadow: {
+            card: '0 10px 25px -5px rgba(0, 43, 154, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04)',
+            cardHover: '0 20px 30px -10px rgba(0, 43, 154, 0.12), 0 10px 15px -8px rgba(0, 0, 0, 0.06)'
+          }
+        }
+      }
+    };
+  </script>
+<!-- Custom CSS for robot animations & layout precision -->
+<style data-purpose="robot-animations">
+    /* Subtle breathing animation for robot mascot */
+    @keyframes robot-float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-4px);
+      }
+    }
+
+    .robot-container {
+      animation: robot-float 4.5s ease-in-out infinite;
+      transform-origin: bottom center;
+    }
+
+    /* Eye pupil smooth transition */
+    .robot-pupil {
+      transition: transform 0.08s ease-out;
+      will-change: transform;
+    }
+
+    /* Robot Eyelid covering animation during password focus */
+    .robot-eyelid {
+      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-origin: top center;
+    }
+
+    .robot-peeking-hands {
+      filter: drop-shadow(0 2px 3px rgba(0, 43, 154, 0.06));
+    }
+
+    /* Status indicator gentle pulse */
+    @keyframes status-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(0.9); }
+    }
+    .status-dot {
+      animation: status-pulse 2s infinite ease-in-out;
+    }
+
+    /* Accessibility preference */
+    @media (prefers-reduced-motion: reduce) {
+      .robot-container,
+      .robot-pupil,
+      .robot-eyelid,
+      .status-dot {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-800 flex flex-col justify-between font-sans antialiased selection:bg-unpam selection:text-white transition-colors duration-200">
+<!-- BEGIN: Topbar -->
+<header class="w-full border-b border-slate-200/80 bg-white/90 backdrop-blur-sm sticky top-0 z-40 px-4 sm:px-8 py-3.5 transition-colors">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<!-- Portal Tag & Institutional Identity Badge -->
+<div class="flex items-center gap-2.5">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-unpam-light text-unpam border border-blue-200/60 shadow-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-unpam status-dot"></span>
+          Portal Resmi
+        </span>
+<span class="hidden sm:inline-block text-xs font-medium text-slate-500">
+          Sistem Informasi Manajemen Sarana &amp; Prasarana Universitas Pamulang
+        </span>
+</div>
+<!-- Quick Actions / Utilities -->
+<div class="flex items-center gap-2 sm:gap-4 text-xs font-medium text-slate-600">
+<a class="hidden md:flex items-center gap-1.5 hover:text-unpam transition-colors py-1 px-2 rounded-md hover:bg-slate-100" href="#bantuan" id="help-button" title="Pusat Bantuan Teknis">
+<svg aria-hidden="true" class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+          Bantuan TI
+        </a>
+<div aria-hidden="true" class="h-4 w-[1px] bg-slate-200 hidden md:block"></div>
+<!-- Campus Node Badge -->
+<span class="inline-flex items-center gap-1 text-slate-500 bg-slate-100 px-2 py-1 rounded text-[11px] font-mono border border-slate-200">
+<svg class="w-3 h-3 text-emerald-600" fill="currentColor" viewbox="0 0 8 8">
+<circle cx="4" cy="4" r="3"></circle>
+</svg>
+          Node Viktor-01
+        </span>
+</div>
+</div>
+</header>
+<!-- END: Topbar -->
+<!-- BEGIN: MainContent -->
+<main class="flex-1 flex flex-col items-center justify-center px-4 sm:px-6 py-10 sm:py-14 relative overflow-hidden" data-purpose="login-view-wrapper">
+<!-- Subtle institutional background ambient glow -->
+<div class="absolute inset-0 pointer-events-none -z-10 flex items-center justify-center opacity-60">
+<div class="w-[650px] h-[650px] rounded-full bg-gradient-to-tr from-blue-100/50 via-indigo-50/40 to-amber-50/30 blur-3xl"></div>
+</div>
+<!-- Login Card & Robot Composite Wrapper (Max 420px desktop width) -->
+<div class="w-full max-w-[420px] mx-auto flex flex-col items-center relative">
+<!-- BEGIN: MascotSection -->
+<div class="robot-container relative z-10 flex flex-col items-center select-none -mb-3 transition-transform" data-purpose="interactive-mascot">
+<!-- Robot Speech Bubble / Status Chip -->
+<div class="mb-2 bg-white/95 border border-slate-200 text-slate-700 shadow-sm px-3.5 py-1 rounded-full text-xs font-medium flex items-center gap-1.5 transition-all duration-300" data-purpose="robot-status-bubble" id="robot-speech">
+<svg class="w-3.5 h-3.5 text-unpam shrink-0" fill="currentColor" viewbox="0 0 20 20">
+<path d="M10 2a8 8 0 100 16 8 8 0 000-16zm.75 11.25a.75.75 0 01-1.5 0v-4.5a.75.75 0 011.5 0v4.5zm0-6.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"></path>
+</svg>
+<span class="tracking-tight text-slate-700" id="robot-message-text">Sistem Inventaris Siap • Silakan Masuk</span>
+</div>
+<!-- Robot Head & Peeking SVG Assembly -->
+<div class="relative w-36 h-28 flex justify-center">
+<svg class="w-full h-full overflow-visible" fill="none" id="robot-svg" viewbox="0 0 144 112" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="robotBodyGrad" x1="72" x2="72" y1="20" y2="108">
+<stop stop-color="#FFFFFF"></stop>
+<stop offset="1" stop-color="#EEF2F6"></stop>
+</lineargradient>
+<lineargradient gradientunits="userSpaceOnUse" id="screenGrad" x1="72" x2="72" y1="36" y2="92">
+<stop stop-color="#1E293B"></stop>
+<stop offset="1" stop-color="#0F172A"></stop>
+</lineargradient>
+<clippath id="leftEyeClip">
+<rect height="24" rx="10" width="20" x="42" y="52"></rect>
+</clippath>
+<clippath id="rightEyeClip">
+<rect height="24" rx="10" width="20" x="82" y="52"></rect>
+</clippath>
+</defs>
+<!-- Antenna stem and light -->
+<rect fill="#94A3B8" height="14" rx="2" width="4" x="70" y="8"></rect>
+<circle cx="72" cy="7" fill="#f59e0b" r="5" stroke="#D97706" stroke-width="1.5"></circle>
+<circle cx="70.5" cy="5.5" fill="#FEF3C7" r="1.5"></circle>
+<!-- Ears / Side Bolt sensors -->
+<rect fill="#CBD5E1" height="18" rx="4" stroke="#64748B" stroke-width="1.5" width="8" x="18" y="54"></rect>
+<rect fill="#CBD5E1" height="18" rx="4" stroke="#64748B" stroke-width="1.5" width="8" x="118" y="54"></rect>
+<!-- Main Head Outer Capsule -->
+<rect fill="url(#robotBodyGrad)" height="88" rx="28" stroke="#64748B" stroke-width="2.5" width="96" x="24" y="20"></rect>
+<!-- Dark Screen Display Frame -->
+<rect fill="url(#screenGrad)" height="64" rx="18" stroke="#334155" stroke-width="1.5" width="76" x="34" y="32"></rect>
+<!-- Robot Eyes Container -->
+<!-- Left Eye Socket -->
+<g clip-path="url(#leftEyeClip)">
+<!-- Eye background -->
+<rect fill="#0284C7" height="24" rx="10" width="20" x="42" y="52"></rect>
+<!-- Pupil -->
+<circle class="robot-pupil" cx="52" cy="64" fill="#FFFFFF" id="left-pupil" r="6"></circle>
+<!-- Pupil highlight -->
+<circle class="robot-pupil" cx="54" cy="62" fill="#BAE6FD" id="left-pupil-dot" r="2"></circle>
+<!-- Upper Eyelid for Closing Effect -->
+<rect class="robot-eyelid" fill="#1E293B" height="24" id="left-eyelid" rx="2" style="transform: translateY(-100%);" width="20" x="42" y="34"></rect>
+</g>
+<!-- Right Eye Socket -->
+<g clip-path="url(#rightEyeClip)">
+<!-- Eye background -->
+<rect fill="#0284C7" height="24" rx="10" width="20" x="82" y="52"></rect>
+<!-- Pupil -->
+<circle class="robot-pupil" cx="92" cy="64" fill="#FFFFFF" id="right-pupil" r="6"></circle>
+<!-- Pupil highlight -->
+<circle class="robot-pupil" cx="94" cy="62" fill="#BAE6FD" id="right-pupil-dot" r="2"></circle>
+<!-- Upper Eyelid for Closing Effect -->
+<rect class="robot-eyelid" fill="#1E293B" height="24" id="right-eyelid" rx="2" style="transform: translateY(-100%);" width="20" x="82" y="34"></rect>
+</g>
+<!-- Cheerful smile / status mouth line -->
+<path d="M66 84 Q72 87 78 84" fill="none" id="robot-mouth" stroke="#38BDF8" stroke-linecap="round" stroke-width="2"></path>
+</svg>
+</div>
+<!-- Robot Rounded Hands Overlapping the Login Card Top Border -->
+<div class="w-full flex justify-between px-16 relative z-30 -mb-3.5 robot-peeking-hands pointer-events-none">
+<!-- Left rounded hand gripping the card -->
+<div class="w-9 h-6 bg-slate-100 border-2 border-slate-500 rounded-t-xl rounded-b-md shadow-xs flex items-center justify-center">
+<div class="w-4 h-1 bg-slate-300 rounded-full"></div>
+</div>
+<!-- Right rounded hand gripping the card -->
+<div class="w-9 h-6 bg-slate-100 border-2 border-slate-500 rounded-t-xl rounded-b-md shadow-xs flex items-center justify-center">
+<div class="w-4 h-1 bg-slate-300 rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- END: MascotSection -->
+<!-- BEGIN: CardWrapper -->
+<div class="w-full bg-white rounded-2xl border border-slate-200/90 shadow-card hover:shadow-cardHover transition-shadow duration-300 relative z-20 pt-8 pb-7 px-6 sm:px-8" data-purpose="login-card">
+<!-- Institutional Header & UNPAM Identity -->
+<div class="flex items-center gap-3.5 pb-6 border-b border-slate-100">
+<!-- Official UNPAM Logo -->
+<img alt="Logo Resmi Universitas Pamulang" class="h-12 w-12 object-contain shrink-0 drop-shadow-xs" loading="eager" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7OKHyUUeIkbq0qm3vEj7VNfIgeQltHnIn0ctuN4HrCCWo70lCvdDthPcx_iOVSZ28C7NTVUmKeD5ATokX3G3MGW9hMkiGu8lkgC1vZzDkLDFbPGaEK_tfirIkD9cP9ASZhU4plGDOUMcCKw2d5feqN9OoF2nNz1zPN-zEdXg9dUea2UrRQG-CvlxlKq1ucef7RrbGDxVE9TQd7U3TcQ_4J1faC_SUklWrjFtTZZdBUAHa9fcuIOV1fEkTxTl4hZOJ"/>
+<div>
+<h1 class="text-base font-bold text-slate-900 tracking-tight leading-tight">
+              SIMSARPRAS UNPAM
+            </h1>
+<p class="text-xs font-semibold text-unpam uppercase tracking-wide">
+              Universitas Pamulang
+            </p>
+</div>
+</div>
+<!-- Heading & Context Description -->
+<div class="pt-5 pb-4">
+<h2 class="text-lg font-bold text-slate-800 tracking-tight">
+            Masuk ke panel admin
+          </h2>
+<p class="text-xs text-slate-500 mt-0.5">
+            Kelola inventaris dan fasilitas kampus secara tersentralisasi.
+          </p>
+</div>
+<!-- Feedback Alert Container (Reserved Slot to Prevent Layout Shift) -->
+<div aria-live="polite" class="hidden mb-4 p-3 rounded-lg text-xs border items-start gap-2" id="login-alert" role="alert">
+<svg class="w-4 h-4 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="flex-1 font-medium" id="login-alert-text"></span>
+</div>
+<!-- BEGIN: LoginForm -->
+<form class="space-y-4" id="simsarpras-login-form" novalidate="">
+<!-- Input 1: Username / NIDN / NIK -->
+<div>
+<label class="block text-xs font-semibold text-slate-700 mb-1.5" for="identifier">
+              Username / NIDN / NIK <span class="text-rose-500">*</span>
+</label>
+<div class="relative rounded-lg shadow-xs">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+<!-- User ID Card Icon -->
+<svg class="h-4 w-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<input autocomplete="username" class="block w-full pl-9 pr-3.5 py-2.5 text-xs sm:text-sm rounded-lg border-slate-300 text-slate-800 placeholder-slate-400 focus:border-unpam focus:ring-2 focus:ring-unpam/20 transition-all" id="identifier" name="identifier" placeholder="contoh: admin.sarpras / 04123456" required="" type="text"/>
+</div>
+</div>
+<!-- Input 2: Kata Sandi -->
+<div>
+<div class="flex items-center justify-between mb-1.5">
+<label class="block text-xs font-semibold text-slate-700" for="password">
+                Kata Sandi <span class="text-rose-500">*</span>
+</label>
+<a class="text-[11px] font-medium text-unpam hover:text-unpam-dark hover:underline transition-colors" href="#lupa-sandi" id="forgot-password-link">
+                Lupa kata sandi?
+              </a>
+</div>
+<div class="relative rounded-lg shadow-xs">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+<!-- Lock Icon -->
+<svg class="h-4 w-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<input autocomplete="current-password" class="block w-full pl-9 pr-10 py-2.5 text-xs sm:text-sm rounded-lg border-slate-300 text-slate-800 placeholder-slate-400 focus:border-unpam focus:ring-2 focus:ring-unpam/20 transition-all" id="password" name="password" placeholder="Masukkan kata sandi akun" required="" type="password"/>
+<!-- Password Toggle Visibility Button -->
+<button aria-label="Tampilkan atau sembunyikan kata sandi" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none focus:text-unpam" id="toggle-password-btn" type="button">
+<!-- Eye Open Icon -->
+<svg class="h-4 w-4" fill="none" id="eye-icon-open" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<!-- Eye Slash Icon (hidden by default) -->
+<svg class="h-4 w-4 hidden" fill="none" id="eye-icon-closed" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+</div>
+<!-- Remember Session Checkbox -->
+<div class="flex items-center pt-0.5">
+<input class="h-4 w-4 rounded border-slate-300 text-unpam focus:ring-unpam/30 cursor-pointer" id="remember-me" name="remember-me" type="checkbox"/>
+<label class="ml-2 block text-xs text-slate-600 select-none cursor-pointer" for="remember-me">
+              Ingat sesi saya di komputer ini
+            </label>
+</div>
+<!-- Action Button: Masuk -->
+<button class="w-full mt-2 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-unpam hover:bg-unpam-dark active:bg-unpam-darker text-white text-xs sm:text-sm font-semibold tracking-wide shadow-md shadow-unpam/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-unpam transition-all duration-150" id="submit-button" type="submit">
+<span>Masuk ke SIMSARPRAS</span>
+<svg class="w-4 h-4 text-white/90" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</form>
+<!-- END: LoginForm -->
+<!-- Demo Mode Badge / Auto-Fill helper -->
+<div class="mt-5 p-2.5 rounded-lg bg-blue-50/70 border border-blue-100 flex items-center justify-between text-xs text-blue-900" data-purpose="demo-account-helper">
+<div class="flex items-center gap-2 truncate pr-2">
+<span class="inline-block px-1.5 py-0.5 text-[10px] font-bold uppercase rounded bg-unpam text-white">Demo</span>
+<span class="truncate text-[11px] text-slate-700 font-mono">admin.sarpras@unpam.ac.id</span>
+</div>
+<button class="shrink-0 text-[11px] font-semibold text-unpam hover:text-unpam-dark bg-white hover:bg-blue-50/80 px-2 py-1 rounded border border-blue-200 transition-colors shadow-2xs" id="btn-autofill" title="Isi form otomatis dengan akun demo" type="button">
+            Isi Otomatis
+          </button>
+</div>
+<!-- System Version & Footer Card Note -->
+<div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
+<span>Keamanan: SSO Kampus Viktor</span>
+<span class="font-mono text-slate-400">v2.4.0-prod</span>
+</div>
+</div>
+<!-- END: CardWrapper -->
+</div>
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: MainFooter -->
+<footer class="w-full py-4 px-4 text-center border-t border-slate-200 bg-white text-xs text-slate-500">
+<div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px]">
+<p>© 2025 Biro Sarana &amp; Prasarana Universitas Pamulang (UNPAM). Hak Cipta Dilindungi.</p>
+<div class="flex items-center gap-4 text-slate-400">
+<a class="hover:text-slate-600 transition-colors" href="#kebijakan">Kebijakan Penggunaan Sarpras</a>
+<span>•</span>
+<a class="hover:text-slate-600 transition-colors" href="#kontak">Kontak Pengelola Kampus</a>
+</div>
+</div>
+</footer>
+<!-- END: MainFooter -->
+<!-- BEGIN: InteractiveScript -->
+<script data-purpose="interactive-login-logic">
+    document.addEventListener('DOMContentLoaded', () => {
+      // Elements targeting
+      const identifierInput = document.getElementById('identifier');
+      const passwordInput = document.getElementById('password');
+      const togglePasswordBtn = document.getElementById('toggle-password-btn');
+      const eyeIconOpen = document.getElementById('eye-icon-open');
+      const eyeIconClosed = document.getElementById('eye-icon-closed');
+      const leftPupil = document.getElementById('left-pupil');
+      const leftPupilDot = document.getElementById('left-pupil-dot');
+      const rightPupil = document.getElementById('right-pupil');
+      const rightPupilDot = document.getElementById('right-pupil-dot');
+      const leftEyelid = document.getElementById('left-eyelid');
+      const rightEyelid = document.getElementById('right-eyelid');
+      const robotMouth = document.getElementById('robot-mouth');
+      const robotSpeech = document.getElementById('robot-message-text');
+      const btnAutofill = document.getElementById('btn-autofill');
+      const loginForm = document.getElementById('simsarpras-login-form');
+      const alertBox = document.getElementById('login-alert');
+      const alertText = document.getElementById('login-alert-text');
+
+      // Check user reduced motion preference
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // 1. Password Visibility Toggle
+      if (togglePasswordBtn && passwordInput) {
+        togglePasswordBtn.addEventListener('click', () => {
+          const isPassword = passwordInput.getAttribute('type') === 'password';
+          passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+          eyeIconOpen.classList.toggle('hidden', isPassword);
+          eyeIconClosed.classList.toggle('hidden', !isPassword);
+
+          // Update eyelids if password is shown
+          if (!prefersReducedMotion) {
+            if (isPassword) {
+              // Password visible: peek with small eye opening
+              leftEyelid.style.transform = 'translateY(-40%)';
+              rightEyelid.style.transform = 'translateY(-40%)';
+              robotSpeech.textContent = "Sandi terlihat • Pastikan aman!";
+            } else {
+              // Password hidden: completely covered
+              leftEyelid.style.transform = 'translateY(0%)';
+              rightEyelid.style.transform = 'translateY(0%)';
+              robotSpeech.textContent = "Sandi terlindungi...";
+            }
+          }
+        });
+      }
+
+      // 2. Robot Eyes Mouse Tracking (Smooth 2D pupil translation)
+      if (!prefersReducedMotion) {
+        window.addEventListener('mousemove', (e) => {
+          // If password is focused, eyes stay closed/shy, don't move pupils
+          if (document.activeElement === passwordInput) return;
+
+          const robotSvg = document.getElementById('robot-svg');
+          if (!robotSvg) return;
+
+          const rect = robotSvg.getBoundingClientRect();
+          const robotCenterX = rect.left + rect.width / 2;
+          const robotCenterY = rect.top + rect.height / 2;
+
+          const deltaX = e.clientX - robotCenterX;
+          const deltaY = e.clientY - robotCenterY;
+
+          // Compute bounded shift (-4px to +4px)
+          const angle = Math.atan2(deltaY, deltaX);
+          const distance = Math.min(Math.hypot(deltaX, deltaY) / 35, 4.5);
+
+          const moveX = Math.cos(angle) * distance;
+          const moveY = Math.sin(angle) * distance;
+
+          const transformStr = `translate(${moveX}px, ${moveY}px)`;
+          if (leftPupil) leftPupil.style.transform = transformStr;
+          if (leftPupilDot) leftPupilDot.style.transform = transformStr;
+          if (rightPupil) rightPupil.style.transform = transformStr;
+          if (rightPupilDot) rightPupilDot.style.transform = transformStr;
+        });
+      }
+
+      // 3. Password Input Focus: Robot covers eyes (eyelids down)
+      if (passwordInput && !prefersReducedMotion) {
+        passwordInput.addEventListener('focus', () => {
+          const isText = passwordInput.getAttribute('type') === 'text';
+          if (!isText) {
+            leftEyelid.style.transform = 'translateY(0%)';
+            rightEyelid.style.transform = 'translateY(0%)';
+          } else {
+            leftEyelid.style.transform = 'translateY(-40%)';
+            rightEyelid.style.transform = 'translateY(-40%)';
+          }
+          if (robotMouth) robotMouth.setAttribute('d', 'M67 85 Q72 84 77 85');
+          robotSpeech.textContent = "Mode aman • Menutup pandangan...";
+        });
+
+        passwordInput.addEventListener('blur', () => {
+          // Reset eyelid to fully opened
+          leftEyelid.style.transform = 'translateY(-100%)';
+          rightEyelid.style.transform = 'translateY(-100%)';
+          if (robotMouth) robotMouth.setAttribute('d', 'M66 84 Q72 87 78 84');
+          robotSpeech.textContent = "Sistem Inventaris Siap • Silakan Masuk";
+        });
+      }
+
+      // 4. Identifier Input Focus Greeting
+      if (identifierInput) {
+        identifierInput.addEventListener('focus', () => {
+          robotSpeech.textContent = "Silakan ketik NIDN / NIK Anda...";
+        });
+        identifierInput.addEventListener('blur', () => {
+          if (document.activeElement !== passwordInput) {
+            robotSpeech.textContent = "Sistem Inventaris Siap • Silakan Masuk";
+          }
+        });
+      }
+
+      // 5. Auto-Fill Demo Handler
+      if (btnAutofill) {
+        btnAutofill.addEventListener('click', () => {
+          identifierInput.value = 'admin.sarpras@unpam.ac.id';
+          passwordInput.value = 'SarprasViktor2025!';
+          showAlert('info', 'Kredensial demo berhasil diisikan ke formulir.');
+          robotSpeech.textContent = "Kredensial demo siap digunakan!";
+          identifierInput.focus();
+        });
+      }
+
+      // 6. Form Submission Simulation & Feedback Helper
+      function showAlert(type, message) {
+        if (!alertBox || !alertText) return;
+        alertBox.classList.remove('hidden', 'bg-rose-50', 'text-rose-700', 'border-rose-200', 'bg-emerald-50', 'text-emerald-700', 'border-emerald-200', 'bg-blue-50', 'text-blue-700', 'border-blue-200');
+
+        if (type === 'error') {
+          alertBox.classList.add('bg-rose-50', 'text-rose-700', 'border-rose-200');
+        } else if (type === 'success') {
+          alertBox.classList.add('bg-emerald-50', 'text-emerald-700', 'border-emerald-200');
+        } else {
+          alertBox.classList.add('bg-blue-50', 'text-blue-700', 'border-blue-200');
+        }
+
+        alertText.textContent = message;
+        alertBox.classList.remove('hidden');
+      }
+
+      if (loginForm) {
+        loginForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const identifier = identifierInput.value.trim();
+          const password = passwordInput.value;
+
+          if (!identifier || !password) {
+            showAlert('error', 'Mohon lengkapi username/NIDN dan kata sandi Anda.');
+            robotSpeech.textContent = "Ups! Data login belum lengkap.";
+            return;
+          }
+
+          // Simulate processing state
+          const submitBtn = document.getElementById('submit-button');
+          submitBtn.disabled = true;
+          submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+          submitBtn.innerHTML = `
+            <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+            </svg>
+            Memverifikasi data...
+          `;
+          robotSpeech.textContent = "Memeriksa kredensial ke server...";
+
+          setTimeout(() => {
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+            submitBtn.innerHTML = `
+              <span>Masuk ke SIMSARPRAS</span>
+              <svg class="w-4 h-4 text-white/90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+              </svg>
+            `;
+
+            // Success feedback
+            showAlert('success', 'Autentikasi berhasil! Mengalihkan ke Dashboard Sarpras...');
+            robotSpeech.textContent = "Akses diterima. Selamat datang!";
+          }, 1100);
+        });
+      }
+    });
+  </script>
+<!-- END: InteractiveScript -->
+</body></html>
