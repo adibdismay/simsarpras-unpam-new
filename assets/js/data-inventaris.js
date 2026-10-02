@@ -85,6 +85,88 @@
   }
 
   /**
+   * Format angka gaya Indonesia (pemisah ribuan titik)
+   */
+  function formatNumber(n) {
+    return Number(n).toLocaleString('id-ID');
+  }
+
+  /**
+   * Format persen satu angka desimal dengan koma (gaya Indonesia)
+   */
+  function formatPercent(v) {
+    return Number(v).toFixed(1).replace('.', ',');
+  }
+
+  /**
+   * Render KPI cards + caption dari TOTAL data inventaris (mengabaikan filter).
+   * Semua akses DOM di-guard agar aman bila salah satu id tidak ada.
+   */
+  function renderKpi() {
+    if (typeof InventoryStore === 'undefined') return;
+    const data = InventoryStore.getAll();
+
+    let totalQty = 0;
+    let qtyBaik = 0;
+    let qtyRusak = 0;
+    let qtyPerbaikan = 0;
+    const gedungSet = {};
+
+    data.forEach(item => {
+      const jumlah = Number(item.jumlah) || 0;
+      const kondisi = (item.kondisi || '').trim().toLowerCase();
+      totalQty += jumlah;
+      if (kondisi === 'baik') qtyBaik += jumlah;
+      if (kondisi === 'rusak ringan' || kondisi === 'rusak berat') qtyRusak += jumlah;
+      if (kondisi === 'dalam perbaikan') qtyPerbaikan += jumlah;
+      const gedung = (item.gedung || '').trim();
+      if (gedung) gedungSet[gedung] = true;
+    });
+
+    const distinctGedung = Object.keys(gedungSet).length;
+    const pctBaik = totalQty ? (qtyBaik / totalQty) * 100 : 0;
+    const pctRusak = totalQty ? (qtyRusak / totalQty) * 100 : 0;
+    const pctPerbaikan = totalQty ? (qtyPerbaikan / totalQty) * 100 : 0;
+
+    const recordsEl = document.getElementById('kpi-records');
+    if (recordsEl) recordsEl.textContent = formatNumber(data.length);
+
+    const totalQtyEl = document.getElementById('kpi-total-qty');
+    if (totalQtyEl) totalQtyEl.textContent = 'Total ' + formatNumber(totalQty) + ' unit';
+
+    const gedungEl = document.getElementById('kpi-gedung');
+    if (gedungEl) {
+      // Pertahankan ikon di dalam span; ganti hanya teks setelah ikon.
+      const icon = gedungEl.querySelector('.material-symbols-outlined');
+      gedungEl.textContent = '';
+      if (icon) gedungEl.appendChild(icon);
+      gedungEl.appendChild(document.createTextNode(' Terdaftar di ' + formatNumber(distinctGedung) + ' Gedung'));
+    }
+
+    const baikEl = document.getElementById('kpi-qty-baik');
+    if (baikEl) baikEl.textContent = formatNumber(qtyBaik);
+    const pctBaikEl = document.getElementById('kpi-pct-baik');
+    if (pctBaikEl) pctBaikEl.textContent = formatPercent(pctBaik) + '%';
+
+    const rusakEl = document.getElementById('kpi-qty-rusak');
+    if (rusakEl) rusakEl.textContent = formatNumber(qtyRusak);
+    const pctRusakEl = document.getElementById('kpi-pct-rusak');
+    if (pctRusakEl) pctRusakEl.textContent = formatPercent(pctRusak) + '%';
+
+    const perbaikanEl = document.getElementById('kpi-qty-perbaikan');
+    if (perbaikanEl) perbaikanEl.textContent = formatNumber(qtyPerbaikan);
+    const pctPerbaikanEl = document.getElementById('kpi-pct-perbaikan');
+    if (pctPerbaikanEl) pctPerbaikanEl.textContent = formatPercent(pctPerbaikan) + '%';
+
+    const captionEl = document.getElementById('table-caption');
+    if (captionEl) {
+      captionEl.textContent =
+        formatNumber(data.length) + ' record inventaris · total kuantitas ' + formatNumber(totalQty) +
+        ' unit · ' + formatNumber(distinctGedung) + ' gedung. Sumber dana belum dicantumkan pada referensi.';
+    }
+  }
+
+  /**
    * Render satu baris tabel
    */
   function renderRow(item) {
@@ -184,6 +266,9 @@
    * Render tabel inventaris
    */
   function renderTable(data) {
+    // KPI selalu menampilkan TOTAL, bukan hasil filter.
+    renderKpi();
+
     if (!tbody) {
       console.error('Elemen tbody tidak ditemukan');
       return;

@@ -603,18 +603,18 @@
 <div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
 <div class="flex items-start justify-between">
 <div>
-<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Total Inventaris</span>
-<div class="font-headline-lg text-headline-lg text-on-surface mt-1 font-bold">1.248</div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Jumlah Record</span>
+<div class="font-headline-lg text-headline-lg text-on-surface mt-1 font-bold" id="kpi-records">0</div>
 </div>
 <div class="w-11 h-11 rounded-xl bg-primary-fixed flex items-center justify-center text-primary">
 <span class="material-symbols-outlined text-[24px]">inventory_2</span>
 </div>
 </div>
 <div class="mt-4 pt-3 flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm bg-surface-container-low px-2.5 py-1.5 rounded-lg">
-<span class="flex items-center gap-1">
-<span class="material-symbols-outlined text-[15px] text-primary">domain</span> Terdaftar di 3 Zona Kampus
+<span class="flex items-center gap-1" id="kpi-gedung">
+<span class="material-symbols-outlined text-[15px] text-primary">domain</span> Terdaftar di 0 Gedung
         </span>
-<span class="font-code-sm text-code-sm font-semibold text-primary">100%</span>
+<span class="font-code-sm text-code-sm font-semibold text-primary" id="kpi-total-qty">Total 0 unit</span>
 </div>
 </div>
 <!-- Card 2 -->
@@ -622,7 +622,7 @@
 <div class="flex items-start justify-between">
 <div>
 <span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Kondisi Baik</span>
-<div class="font-headline-lg text-headline-lg text-on-surface mt-1 font-bold">1.110</div>
+<div class="font-headline-lg text-headline-lg text-on-surface mt-1 font-bold" id="kpi-qty-baik">0</div>
 </div>
 <div class="w-11 h-11 rounded-xl bg-surface-container flex items-center justify-center text-secondary">
 <span class="material-symbols-outlined text-[24px]">check_circle</span>
@@ -632,7 +632,7 @@
 <span class="flex items-center gap-1 text-on-surface-variant">
 <span class="w-2 h-2 rounded-full bg-secondary-container"></span> Siap pakai perkuliahan
         </span>
-<span class="font-code-sm text-code-sm font-bold text-secondary">88,9%</span>
+<span class="font-code-sm text-code-sm font-bold text-secondary" id="kpi-pct-baik">0,0%</span>
 </div>
 </div>
 <!-- Card 3 -->
@@ -640,7 +640,7 @@
 <div class="flex items-start justify-between">
 <div>
 <span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Rusak Ringan &amp; Berat</span>
-<div class="font-headline-lg text-headline-lg text-on-surface mt-1 font-bold">100</div>
+<div class="font-headline-lg text-headline-lg text-on-surface mt-1 font-bold" id="kpi-qty-rusak">0</div>
 </div>
 <div class="w-11 h-11 rounded-xl bg-tertiary-fixed flex items-center justify-center text-tertiary-container">
 <span class="material-symbols-outlined text-[24px]">build_circle</span>
@@ -650,7 +650,7 @@
 <span class="flex items-center gap-1">
 <span class="material-symbols-outlined text-[15px] text-tertiary-container">warning</span> Butuh teknisi sarpras
         </span>
-<span class="font-code-sm text-code-sm font-bold text-tertiary-container">8,0%</span>
+<span class="font-code-sm text-code-sm font-bold text-tertiary-container" id="kpi-pct-rusak">0,0%</span>
 </div>
 </div>
 <!-- Card 4 -->
@@ -658,7 +658,7 @@
 <div class="flex items-start justify-between">
 <div>
 <span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Dalam Perbaikan</span>
-<div class="font-headline-lg text-headline-lg text-on-surface mt-1 font-bold">38</div>
+<div class="font-headline-lg text-headline-lg text-on-surface mt-1 font-bold" id="kpi-qty-perbaikan">0</div>
 </div>
 <div class="w-11 h-11 rounded-xl bg-surface-container-high flex items-center justify-center text-surface-tint">
 <span class="material-symbols-outlined text-[24px]">engineering</span>
@@ -668,7 +668,7 @@
 <span class="flex items-center gap-1">
 <span class="material-symbols-outlined text-[15px] text-surface-tint">sync</span> Ditangani vendor &amp; lab
         </span>
-<span class="font-code-sm text-code-sm font-bold text-surface-tint">3,0%</span>
+<span class="font-code-sm text-code-sm font-bold text-surface-tint" id="kpi-pct-perbaikan">0,0%</span>
 </div>
 </div>
 </div>
@@ -679,7 +679,7 @@
 <!-- Search Field -->
 <div class="relative flex-1 max-w-xl">
 <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
-<input class="w-full h-10 pl-11 pr-10 bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary transition-all" id="search-input" placeholder="Cari kode inventaris, nama barang, atau serial..." type="text" aria-label="Cari pada 10 baris contoh inventaris">
+<input class="w-full h-10 pl-11 pr-10 bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary transition-all" id="search-input" placeholder="Cari kode inventaris, nama barang, atau serial..." type="text" aria-label="Cari pada daftar inventaris">
 <button class="absolute right-3 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface hidden" id="search-clear" type="button" aria-label="close">
 <span class="material-symbols-outlined text-[18px]">close</span>
 </button>
@@ -779,7 +779,7 @@
 <!-- Responsive Scroll Container -->
 <div class="overflow-x-auto w-full inventory-scroll" tabindex="0" role="region" aria-label="Tabel inventaris; geser mendatar untuk kolom lainnya">
 <table class="w-full text-left border-collapse inventory-table" id="inventory-table">
-<caption class="text-left p-4 text-body-sm text-on-surface-variant">10 baris contoh inventaris. Ringkasan 1.248 item merupakan data simulasi terpisah. Sumber dana belum dicantumkan dalam referensi.</caption>
+<caption class="text-left p-4 text-body-sm text-on-surface-variant" id="table-caption">0 record inventaris · total kuantitas 0 unit · 0 gedung. Sumber dana belum dicantumkan pada referensi.</caption>
 <thead>
 <tr class="bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
 <th class="py-3 px-4 w-12 text-center" scope="col">
@@ -1293,8 +1293,8 @@
 </div>
 </main><footer id="app-footer">
       <p class="font-semibold text-on-surface">SIMSARPRAS EDU • Universitas Pamulang</p>
-      <p>Milestone 2 — Slicing &amp; Layouting. Seluruh angka merupakan data simulasi untuk tugas akademik.</p>
-      <p>Pencarian, filter, dan pemilihan baris memakai 10 data contoh. Form tambah hanya pratinjau; penyimpanan, edit, hapus, ekspor, dan login belum tersedia.</p>
+      <p>Milestone 2 — Slicing &amp; Layouting. KPI dihitung dari data inventaris yang tersimpan di localStorage browser.</p>
+      <p>Penyimpanan, edit, hapus, pencarian, filter, dan login sudah berfungsi. Ekspor, bulk action, dan data master gedung/ruangan/kategori belum tersedia pada tahap ini.</p>
     </footer>
   </div>
 

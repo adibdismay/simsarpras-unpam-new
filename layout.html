@@ -438,36 +438,11 @@
 <button type="button" class="px-3 py-2 bg-white rounded-lg text-primary font-bold shadow-sm" disabled>Semua</button><button type="button" class="px-3 py-2 text-on-surface-variant" title="Filter gedung belum tersedia" disabled>Gedung A</button><button type="button" class="px-3 py-2 text-on-surface-variant" title="Filter gedung belum tersedia" disabled>Gedung B</button>
 </div>
               </div>
-              <div class="mt-6 space-y-6">
-                <div>
-                  <div class="flex flex-wrap justify-between gap-2 text-label-md mb-2">
-<p class="flex items-center gap-2 font-bold"><span class="material-symbols-outlined text-primary" aria-hidden="true">chair</span>Ruang Kelas</p>
-<p><span class="font-bold text-primary">540 item</span> <span class="font-mono text-on-surface-variant">(43,3%)</span></p>
-</div>
-                  <div class="h-3 rounded-full bg-surface-container overflow-hidden" aria-hidden="true"><div class="h-full rounded-full bg-primary-container" style="width:43.3%;"></div></div>
-                  <p class="panel-description mt-2">Kursi mahasiswa, meja dosen, Projector Epson, AC Split, dan whiteboard magnetik.</p>
-                </div>
-                <div>
-                  <div class="flex flex-wrap justify-between gap-2 text-label-md mb-2">
-<p class="flex items-center gap-2 font-bold"><span class="material-symbols-outlined text-surface-tint" aria-hidden="true">memory</span>Laboratorium</p>
-<p><span class="font-bold text-surface-tint">430 item</span> <span class="font-mono text-on-surface-variant">(34,5%)</span></p>
-</div>
-                  <div class="h-3 rounded-full bg-surface-container overflow-hidden" aria-hidden="true"><div class="h-full rounded-full bg-surface-tint" style="width:34.5%;"></div></div>
-                  <p class="panel-description mt-2">Desktop PC Core i7, monitor LED, Cisco Router &amp; Switch, dan meja lab komputer.</p>
-                </div>
-                <div>
-                  <div class="flex flex-wrap justify-between gap-2 text-label-md mb-2">
-<p class="flex items-center gap-2 font-bold"><span class="material-symbols-outlined text-secondary" aria-hidden="true">local_library</span>Perpustakaan</p>
-<p><span class="font-bold text-secondary">278 item</span> <span class="font-mono text-on-surface-variant">(22,3%)</span></p>
-</div>
-                  <div class="h-3 rounded-full bg-surface-container overflow-hidden" aria-hidden="true"><div class="h-full rounded-full bg-secondary-container" style="width:22.3%;"></div></div>
-                  <p class="panel-description mt-2">Rak buku baja ganda, meja baca partisi, PC OPAC katalog, dan printer laser.</p>
-                </div>
-              </div>
+              <div class="mt-6 space-y-6" id="category-distribution"></div>
               <p class="text-label-sm text-on-surface-variant mt-3">Persentase dibulatkan ke satu angka desimal.</p>
             </div>
             <div class="mt-6 p-4 rounded-xl bg-surface-container-low flex flex-wrap items-center justify-between gap-3">
-<p class="flex items-start gap-2 text-body-sm text-on-surface-variant"><span class="material-symbols-outlined text-primary" aria-hidden="true">fact_check</span><span>Kapasitas fasilitas terpakai 88,4% dari total alokasi inventaris aktif.</span></p>
+<p class="flex items-start gap-2 text-body-sm text-on-surface-variant"><span class="material-symbols-outlined text-primary" aria-hidden="true">fact_check</span><span id="capacity-pct">Kapasitas fasilitas terpakai 0,0% dari total alokasi inventaris aktif.</span></p>
 <span class="font-mono text-label-sm text-primary font-semibold">UNPAM-VK-2025</span>
 </div>
           </section>
@@ -499,42 +474,23 @@
             <div class="flex flex-wrap items-start justify-between gap-3 mb-5">
 <div>
 <h2 id="attention-heading" class="panel-title">Inventaris Perlu Perhatian</h2>
-<p class="panel-description">Contoh inventaris yang membutuhkan tindak lanjut.</p>
+<p class="panel-description">Daftar inventaris dengan kondisi Rusak Ringan, Rusak Berat, Dalam Perbaikan, atau Perlu Pemeriksaan.</p>
 </div>
-<span class="badge badge-warning">3 contoh inventaris</span>
+<span class="badge badge-warning" id="attention-badge">0 inventaris</span>
 </div>
             <div class="attention-scroll" role="region" aria-label="Tabel inventaris perlu perhatian, geser jika diperlukan" tabindex="0">
               <table class="attention-table">
-                <caption class="sr-only">Contoh data inventaris rusak atau dalam perbaikan. Bukan seluruh inventaris bermasalah.</caption>
+                <caption class="sr-only">Daftar inventaris yang kondisi barangnya tidak baik dan perlu tindak lanjut.</caption>
                 <thead><tr>
 <th scope="col">Inventaris</th>
 <th scope="col">Lokasi</th>
 <th scope="col">Kondisi</th>
 <th scope="col">Tindak Lanjut</th>
 </tr></thead>
-                <tbody>
-                  <tr>
-<th scope="row" class="font-semibold">Projector Epson</th>
-<td>Ruang A103</td>
-<td><span class="badge badge-warning whitespace-nowrap">Rusak Ringan</span></td>
-<td>Jadwalkan pemeriksaan</td>
-</tr>
-                  <tr>
-<th scope="row" class="font-semibold">PC Lenovo 04</th>
-<td>Lab Komputer</td>
-<td><span class="badge badge-danger whitespace-nowrap">Rusak Berat</span></td>
-<td>Evaluasi perbaikan</td>
-</tr>
-                  <tr>
-<th scope="row" class="font-semibold">AC Panasonic</th>
-<td>Lab Jaringan</td>
-<td><span class="badge badge-info whitespace-nowrap">Dalam Perbaikan</span></td>
-<td>Pantau progres servis</td>
-</tr>
-                </tbody>
+                <tbody id="attention-tbody"></tbody>
               </table>
             </div>
-            <p class="panel-description mt-3">Data simulasi untuk tampilan awal. Pengelolaan inventaris dikembangkan pada tahap interaktivitas.</p>
+            <p class="panel-description mt-3">Data diambil dari inventaris yang tersimpan di localStorage browser.</p>
           </section>
           <section class="panel" aria-labelledby="activity-heading">
             <h2 id="activity-heading" class="panel-title">Aktivitas Terbaru</h2>
