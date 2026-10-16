@@ -31,6 +31,10 @@ const SESSION_TTL_MS = 12 * 60 * 60 * 1000; // 12 jam
 const SESSION_COOKIE = 'simsarpras.sid';
 const MAX_BODY_BYTES = 256 * 1024; // 256 KB
 
+// Lingkungan: 'production' menonaktifkan akun demo & mengharuskan bootstrap admin via env.
+const NODE_ENV = process.env.NODE_ENV || 'development';
+const IS_PROD = NODE_ENV === 'production';
+
 const JENIS_PENGAJUAN = ['peminjaman', 'perbaikan'];
 const STATUS_MENUNGGU = 'menunggu';
 const STATUS_AKHIR = ['disetujui', 'ditolak'];
@@ -101,13 +105,35 @@ function verifyPassword(password, stored) {
 
 function seedUsers(db) {
   const now = new Date().toISOString();
+  const insert = db.prepare(
+    'INSERT OR IGNORE INTO users (username, password_hash, nama, role, status, created_at) VALUES (?, ?, ?, ?, ?, ?)'
+  );
+  if (IS_PROD) {
+    // Produksi: JANGAN pernah seed akun demo. Bootstrap admin hanya dari env,
+    // dan hanya saat tabel users masih kosong. Password tidak pernah dicetak ke log.
+    const existing = db.prepare('SELECT COUNT(*) AS c FROM users').get().c;
+    if (existing > 0) return;
+    const adminUser = (process.env.ADMIN_USERNAME || '').trim();
+    const adminPass = process.env.ADMIN_PASSWORD || '';
+    if (!adminUser || !adminPass) {
+      console.warn(
+        '[server] PRODUKSI: tabel users kosong dan ADMIN_USERNAME/ADMIN_PASSWORD tidak diset. ' +
+        'Tidak ada akun yang dibuat. Set kedua env var lalu restart server.'
+      );
+      return;
+    }
+    if (adminPass.length < 12) {
+      console.warn('[server] PERINGATAN: ADMIN_PASSWORD kurang dari 12 karakter. Gunakan password yang lebih kuat.');
+    }
+    insert.run(adminUser, hashPassword(adminPass), 'Administrator', 'admin', 'aktif', now);
+    console.log(`[server] akun admin awal "${adminUser}" dibuat dari environment variables.`);
+    return;
+  }
+  // Dev/test: akun demo untuk kemudahan pengujian lokal.
   const seeds = [
     { username: 'admin', password: 'Demo123!', nama: 'Administrator', role: 'admin' },
     { username: 'mahasiswa', password: 'Demo123!', nama: 'Mahasiswa Demo', role: 'mahasiswa' },
   ];
-  const insert = db.prepare(
-    'INSERT OR IGNORE INTO users (username, password_hash, nama, role, status, created_at) VALUES (?, ?, ?, ?, ?, ?)'
-  );
   for (const s of seeds) {
     insert.run(s.username, hashPassword(s.password), s.nama, s.role, 'aktif', now);
   }
@@ -188,14 +214,67 @@ function parseCookies(req) {
   return out;
 }
 
-function sessionCookieHeader(token, maxAgeSec) {
-  // httpOnly: tidak bisa dibaca JS (anti XSS); SameSite=Lax cukup untuk satu origin.
-  return `${SESSION_COOKIE}=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${maxAgeSec}`;
+function isHttpsRequest(req) {
+  // Railway & reverse proxy sejenis menghentikan TLS di edge dan meneruskan
+  // 'x-forwarded-proto: https'. Override eksplisit via COOKIE_SECURE=1/0.
+  if (process.env.COOKIE_SECURE === '1') return true;
+  if (process.env.COOKIE_SECURE === '0') return false;
+  const proto = req.headers['x-forwarded-proto'];
+  return typeof proto === 'string' && proto.split(',')[0].trim().toLowerCase() === 'https';
 }
 
-function clearSessionCookieHeader() {
-  return `${SESSION_COOKIE}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0`;
+function sessionCookieHeader(token, maxAgeSec, secure) {
+  // httpOnly: tidak bisa dibaca JS (anti XSS); SameSite=Lax cukup untuk satu origin.
+  // Secure hanya saat HTTPS agar pengujian lokal via HTTP tidak rusak.
+  return `${SESSION_COOKIE}=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${maxAgeSec}${secure ? '; Secure' : ''}`;
 }
+
+function clearSessionCookieHeader(secure) {
+  return `${SESSION_COOKIE}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0${secure ? '; Secure' : ''}`;
+}
+
+/* ---------------- Rate limiting login ---------------- */
+// Sederhana & in-memory: maks 10 percobaan gagal per IP tiap 15 menit.
+// Cukup untuk menghambat brute force pada satu instance.
+const LOGIN_RL_WINDOW_MS = 15 * 60 * 1000;
+const LOGIN_RL_MAX_FAILS = 10;
+const loginFailures = new Map(); // ip -> { count, resetAt }
+
+function loginRateLimitStatus(ip) {
+  const now = Date.now();
+  const rec = loginFailures.get(ip);
+  if (!rec || now >= rec.resetAt) {
+    loginFailures.set(ip, { count: 0, resetAt: now + LOGIN_RL_WINDOW_MS });
+    return { limited: false, remaining: LOGIN_RL_MAX_FAILS };
+  }
+  return { limited: rec.count >= LOGIN_RL_MAX_FAILS, remaining: Math.max(0, LOGIN_RL_MAX_FAILS - rec.count) };
+}
+
+function loginRateLimitFail(ip) {
+  const now = Date.now();
+  let rec = loginFailures.get(ip);
+  if (!rec || now >= rec.resetAt) rec = { count: 0, resetAt: now + LOGIN_RL_WINDOW_MS };
+  rec.count += 1;
+  loginFailures.set(ip, rec);
+}
+
+function loginRateLimitReset(ip) {
+  loginFailures.delete(ip);
+}
+
+function clientIp(req) {
+  const fwd = req.headers['x-forwarded-for'];
+  if (typeof fwd === 'string' && fwd.length > 0) return fwd.split(',')[0].trim();
+  return (req.socket && req.socket.remoteAddress) || 'unknown';
+}
+
+// Bersihkan entri kedaluwarsa tiap 5 menit agar Map tidak membesar.
+setInterval(() => {
+  const now = Date.now();
+  for (const [ip, rec] of loginFailures) {
+    if (now >= rec.resetAt) loginFailures.delete(ip);
+  }
+}, 5 * 60 * 1000).unref();
 
 /* ---------------- Sesi & auth ---------------- */
 
@@ -356,6 +435,11 @@ async function handleApi(req, res, url) {
 
   // --- login ---
   if (pathname === '/api/auth/login' && method === 'POST') {
+    const ip = clientIp(req);
+    const rl = loginRateLimitStatus(ip);
+    if (rl.limited) {
+      return sendJson(res, 429, { ok: false, errors: ['Terlalu banyak percobaan login. Coba lagi nanti.'] }, { 'Retry-After': '900' });
+    }
     let body;
     try {
       body = await readJsonBody(req);
@@ -369,14 +453,17 @@ async function handleApi(req, res, url) {
     }
     const user = db.prepare('SELECT * FROM users WHERE username = ?').get(username);
     if (!user || user.status !== 'aktif' || !verifyPassword(password, user.password_hash)) {
+      loginRateLimitFail(ip);
       return sendJson(res, 401, { ok: false, errors: ['Username atau kata sandi salah.'] });
     }
+    loginRateLimitReset(ip);
     const { token } = createSession(user.id);
+    const secure = isHttpsRequest(req);
     return sendJson(
       res,
       200,
       { ok: true, user: publicUser(user) },
-      { 'Set-Cookie': sessionCookieHeader(token, Math.floor(SESSION_TTL_MS / 1000)) }
+      { 'Set-Cookie': sessionCookieHeader(token, Math.floor(SESSION_TTL_MS / 1000), secure) }
     );
   }
 
@@ -384,7 +471,7 @@ async function handleApi(req, res, url) {
   if (pathname === '/api/auth/logout' && method === 'POST') {
     const { [SESSION_COOKIE]: token } = parseCookies(req);
     destroySession(token);
-    return sendJson(res, 200, { ok: true }, { 'Set-Cookie': clearSessionCookieHeader() });
+    return sendJson(res, 200, { ok: true }, { 'Set-Cookie': clearSessionCookieHeader(isHttpsRequest(req)) });
   }
 
   // --- me ---
@@ -558,10 +645,25 @@ function serveStatic(req, res, url) {
   });
 }
 
+/* ---------------- Security headers ---------------- */
+function securityHeaders(req) {
+  const h = {
+    'X-Content-Type-Options': 'nosniff',
+    'X-Frame-Options': 'DENY',
+    'Referrer-Policy': 'no-referrer',
+  };
+  // HSTS hanya saat HTTPS (jangan di localhost HTTP agar tidak mengunci browser).
+  if (isHttpsRequest(req)) {
+    h['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains';
+  }
+  return h;
+}
+
 /* ---------------- Server ---------------- */
 
 const server = http.createServer(async (req, res) => {
   try {
+    for (const [k, v] of Object.entries(securityHeaders(req))) res.setHeader(k, v);
     const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
     if (url.pathname === '/api' || url.pathname.startsWith('/api/')) {
       await handleApi(req, res, url);
