@@ -7,118 +7,10 @@
   <meta name="description" content="Form tambah dan ubah data inventaris SIMSARPRAS EDU untuk Milestone 3.">
   <script src="assets/js/theme.js"></script>
   <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
   <script src="assets/js/auth.js"></script>
   <script>Auth.protectPage();</script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>tailwind.config = {
-  "darkMode": "class",
-  "theme": {
-    "extend": {
-      "colors": {
-        "on-primary-fixed-variant": "#1c3ba8",
-        "surface-tint": "#3a55c1",
-        "on-tertiary-container": "#ff7a6f",
-        "inverse-primary": "#b8c4ff",
-        "on-surface-variant": "#6B7280",
-        "on-tertiary": "#ffffff",
-        "primary-fixed": "#dde1ff",
-        "tertiary": "#500003",
-        "surface-dim": "#d2d9f4",
-        "on-primary-fixed": "#001354",
-        "primary-fixed-dim": "#b8c4ff",
-        "secondary": "#6e5e00",
-        "on-error": "#ffffff",
-        "tertiary-fixed": "#ffdad6",
-        "tertiary-fixed-dim": "#ffb4ab",
-        "surface-container-lowest": "#ffffff",
-        "surface-container": "#eaedff",
-        "inverse-surface": "#283044",
-        "error-container": "#ffdad6",
-        "on-tertiary-fixed-variant": "#93000d",
-        "background": "#F7F8FA",
-        "surface-bright": "#faf8ff",
-        "on-secondary": "#ffffff",
-        "secondary-fixed-dim": "#e6c500",
-        "on-primary": "#ffffff",
-        "error": "#DC2626",
-        "secondary-container": "#fcd801",
-        "outline-variant": "#E5E7EB",
-        "on-secondary-container": "#6f5e00",
-        "surface": "#F7F8FA",
-        "secondary-fixed": "#ffe25e",
-        "primary": "#2563EB",
-        "on-error-container": "#93000a",
-        "on-background": "#111827",
-        "outline": "#757684",
-        "on-surface": "#111827",
-        "surface-variant": "#dae2fd",
-        "on-primary-container": "#869dff",
-        "surface-container-high": "#e2e7ff",
-        "inverse-on-surface": "#eef0ff",
-        "on-tertiary-fixed": "#410002",
-        "surface-container-low": "#f2f3ff",
-        "tertiary-container": "#790008",
-        "primary-container": "#1D4ED8",
-        "surface-container-highest": "#dae2fd",
-        "on-secondary-fixed": "#221b00",
-        "on-secondary-fixed-variant": "#534600"
-      },
-      "borderRadius": {
-        "DEFAULT": "0.125rem",
-        "lg": "0.25rem",
-        "xl": "0.5rem",
-        "full": "0.75rem"
-      },
-      "spacing": {
-        "space-xl": "2rem",
-        "gutter": "1.25rem",
-        "space-lg": "1.5rem",
-        "gutter-mobile": "0.75rem",
-        "space-xs": "0.25rem",
-        "space-sm": "0.5rem",
-        "margin-mobile": "1rem",
-        "space-md": "1rem",
-        "margin": "2rem"
-      },
-      "fontFamily": {
-        "body-lg": ["Plus Jakarta Sans", "Arial", "sans-serif"],
-        "display-lg-mobile": ["Plus Jakarta Sans", "Arial", "sans-serif"],
-        "headline-md": ["Plus Jakarta Sans", "Arial", "sans-serif"],
-        "code-sm": ["JetBrains Mono", "monospace"],
-        "label-md": ["Plus Jakarta Sans", "Arial", "sans-serif"],
-        "display-lg": ["Plus Jakarta Sans", "Arial", "sans-serif"],
-        "headline-lg-mobile": ["Plus Jakarta Sans", "Arial", "sans-serif"],
-        "body-md": ["Plus Jakarta Sans", "Arial", "sans-serif"],
-        "label-sm": ["Plus Jakarta Sans", "Arial", "sans-serif"],
-        "body-sm": ["Plus Jakarta Sans", "Arial", "sans-serif"],
-        "headline-sm": ["Plus Jakarta Sans", "Arial", "sans-serif"],
-        "label-lg": ["Plus Jakarta Sans", "Arial", "sans-serif"],
-        "headline-lg": ["Plus Jakarta Sans", "Arial", "sans-serif"],
-        "sans": ["Plus Jakarta Sans", "Arial", "sans-serif"],
-        "mono": ["JetBrains Mono", "monospace"]
-      },
-      "fontSize": {
-        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
-        "display-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
-        "headline-md": ["22px", { "lineHeight": "30px", "fontWeight": "600" }],
-        "code-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
-        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
-        "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
-        "headline-lg-mobile": ["22px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
-        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
-        "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "700" }],
-        "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
-        "headline-sm": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
-        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
-        "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "700" }]
-      }
-    }
-  }
-};</script>
+  <link rel="stylesheet" href="assets/css/tailwind.css">
   <style>
     html { scroll-padding-top: 80px; }
     body { margin: 0; }
@@ -253,7 +145,7 @@
         <div class="w-10 h-10 flex-shrink-0">
           <img src="assets/images/logo-unpam.png" alt="Logo Universitas Pamulang" width="40" height="40" class="h-10 w-10 object-contain" data-local-image>
           <span hidden class="h-10 w-10 rounded-xl bg-blue-50 text-primary items-center justify-center" data-image-fallback role="img" aria-label="Logo Universitas Pamulang belum tersedia" style="display: flex;">
-            <span class="material-symbols-outlined" aria-hidden="true">school</span>
+            <span class="material-symbols-outlined" aria-hidden="true">&#xe80c;</span>
           </span>
         </div>
         <div class="min-w-0">
@@ -267,27 +159,27 @@
       </div>
       <nav class="px-2 pb-4" aria-label="Menu aplikasi">
         <p class="nav-group-title">Menu Utama</p>
-        <a class="nav-link" href="layout.html"><span class="material-symbols-outlined" aria-hidden="true">dashboard</span>Dashboard</a>
+        <a class="nav-link" href="layout.html"><span class="material-symbols-outlined" aria-hidden="true">&#xe871;</span>Dashboard</a>
         <p class="nav-group-title">Data Master</p>
-        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">apartment</span>Gedung</a>
-        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">meeting_room</span>Ruangan</a>
-        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">category</span>Kategori Inventaris</a>
-        <a class="nav-link" href="data-master.html" aria-current="page"><span class="material-symbols-outlined" aria-hidden="true">inventory_2</span>Data Inventaris</a>
+        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">&#xea40;</span>Gedung</a>
+        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">&#xeb4f;</span>Ruangan</a>
+        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">&#xe574;</span>Kategori Inventaris</a>
+        <a class="nav-link" href="data-master.html" aria-current="page"><span class="material-symbols-outlined" aria-hidden="true">&#xe1a1;</span>Data Inventaris</a>
         <p class="nav-group-title">Fasilitas Akademik</p>
-        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">school</span>Ruang Kelas</a>
-        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">science</span>Laboratorium</a>
-        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">local_library</span>Perpustakaan</a>
+        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">&#xe80c;</span>Ruang Kelas</a>
+        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">&#xea4b;</span>Laboratorium</a>
+        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">&#xe54b;</span>Perpustakaan</a>
         <p class="nav-group-title">Manajemen &amp; Pelaporan</p>
-        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">fact_check</span>Kondisi Inventaris</a>
-        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">build</span>Pemeliharaan</a>
-        <a class="nav-link" href="laporan.html"><span class="material-symbols-outlined" aria-hidden="true">assessment</span>Laporan &amp; Audit</a>
+        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">&#xf0c5;</span>Kondisi Inventaris</a>
+        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">&#xe869;</span>Pemeliharaan</a>
+        <a class="nav-link" href="laporan.html"><span class="material-symbols-outlined" aria-hidden="true">&#xe26b;</span>Laporan &amp; Audit</a>
         <p class="nav-group-title">Pengaturan</p>
-        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">manage_accounts</span>Pengguna &amp; Hak Akses</a>
-        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">settings</span>Pengaturan Sistem</a>
+        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">&#xf02e;</span>Pengguna &amp; Hak Akses</a>
+        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">&#xe8b8;</span>Pengaturan Sistem</a>
       </nav>
     </div>
     <div class="p-4 m-2 bg-surface-container-low rounded-xl flex items-center gap-2 flex-shrink-0">
-      <span class="material-symbols-outlined p-2 rounded-lg bg-surface-container text-primary" aria-hidden="true">dns</span>
+      <span class="material-symbols-outlined p-2 rounded-lg bg-surface-container text-primary" aria-hidden="true">&#xe875;</span>
       <div class="min-w-0">
 <p class="font-mono text-label-md font-semibold">v2.4.0 • Node Viktor</p>
 <p class="text-label-sm text-on-surface-variant">Sistem Sarpras Terpadu</p>
@@ -301,33 +193,33 @@
       <div class="header-row">
         <button id="menu-open" type="button" aria-label="Buka menu navigasi" aria-controls="app-sidebar" aria-expanded="false" title="Buka menu navigasi"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h11"></path></svg></button>
         <div class="header-breadcrumb flex items-center gap-4">
-          <nav class="flex items-center gap-2 text-label-md" aria-label="Breadcrumb"><span class="text-on-surface-variant">Data Master</span><span class="material-symbols-outlined text-sm" aria-hidden="true">chevron_right</span><span class="text-on-surface-variant">Data Inventaris</span><span class="material-symbols-outlined text-sm" aria-hidden="true">chevron_right</span><span class="font-semibold">Form Inventaris</span></nav>
+          <nav class="flex items-center gap-2 text-label-md" aria-label="Breadcrumb"><span class="text-on-surface-variant">Data Master</span><span class="material-symbols-outlined text-sm" aria-hidden="true">&#xe409;</span><span class="text-on-surface-variant">Data Inventaris</span><span class="material-symbols-outlined text-sm" aria-hidden="true">&#xe409;</span><span class="font-semibold">Form Inventaris</span></nav>
           <div class="header-campus flex items-center gap-2 px-3 py-2 rounded-lg bg-surface-container">
-<span class="material-symbols-outlined text-primary" aria-hidden="true">domain</span><span class="text-label-md">Kampus Viktor - Gedung Utama</span>
+<span class="material-symbols-outlined text-primary" aria-hidden="true">&#xe0af;</span><span class="text-label-md">Kampus Viktor - Gedung Utama</span>
 </div>
         </div>
         <div class="header-search">
           <label for="global-search" class="sr-only">Pencarian inventaris, belum tersedia</label>
           <div class="relative">
-<span class="material-symbols-outlined absolute left-3 top-3 text-outline" aria-hidden="true">search</span><input id="global-search" type="search" placeholder="Cari inventaris, ruangan, atau buku..." class="w-full h-10 pl-10 pr-3 bg-white rounded-xl text-body-sm shadow-sm" title="Pencarian dikembangkan pada tahap interaktivitas" disabled>
+<span class="material-symbols-outlined absolute left-3 top-3 text-outline" aria-hidden="true">&#xe8b6;</span><input id="global-search" type="search" placeholder="Cari inventaris, ruangan, atau buku..." class="w-full h-10 pl-10 pr-3 bg-white rounded-xl text-body-sm shadow-sm" title="Pencarian dikembangkan pada tahap interaktivitas" disabled>
 </div>
         </div>
         <div class="header-actions">
-          <a href="pengajuan.html" class="header-request button bg-secondary-container text-on-secondary-container"><span class="material-symbols-outlined" aria-hidden="true">add</span>Ajukan Sarpras</a>
+          <a href="pengajuan.html" class="header-request button bg-secondary-container text-on-secondary-container"><span class="material-symbols-outlined" aria-hidden="true">&#xe145;</span>Ajukan Sarpras</a>
           <div class="relative">
-<button type="button" class="icon-button" aria-label="Notifikasi, tampilan contoh" title="Notifikasi belum tersedia" disabled><span class="material-symbols-outlined" aria-hidden="true">notifications</span></button><span class="absolute top-0 right-0 w-4 h-4 rounded-full bg-error text-white text-[10px] flex items-center justify-center">3</span>
+<button type="button" class="icon-button" aria-label="Notifikasi, tampilan contoh" title="Notifikasi belum tersedia" disabled><span class="material-symbols-outlined" aria-hidden="true">&#xe7f4;</span></button><span class="absolute top-0 right-0 w-4 h-4 rounded-full bg-error text-white text-[10px] flex items-center justify-center">3</span>
 </div>
-          <button type="button" class="header-help icon-button" aria-label="Bantuan, belum tersedia" disabled><span class="material-symbols-outlined" aria-hidden="true">help</span></button>
+          <button type="button" class="header-help icon-button" aria-label="Bantuan, belum tersedia" disabled><span class="material-symbols-outlined" aria-hidden="true">&#xe887;</span></button>
           <div class="flex items-center gap-2">
-            <span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center" aria-hidden="true"><span class="material-symbols-outlined">person</span></span>
+            <span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center" aria-hidden="true"><span class="material-symbols-outlined">&#xe7fd;</span></span>
             <div class="header-profile-text text-label-sm">
 <p class="font-bold">Admin Sarpras</p>
 <p class="text-on-surface-variant">Universitas Pamulang - Viktor</p>
 </div>
-            <span class="material-symbols-outlined text-outline" aria-hidden="true">expand_more</span>
+            <span class="material-symbols-outlined text-outline" aria-hidden="true">&#xe5cf;</span>
           </div>
-          <button type="button" id="theme-toggle" aria-label="Aktifkan mode gelap" title="Ubah tema terang/gelap"><span class="material-symbols-outlined theme-icon-light" aria-hidden="true">dark_mode</span><span class="material-symbols-outlined theme-icon-dark" aria-hidden="true">light_mode</span></button>
-          <button type="button" id="logout-button" class="inline-flex items-center gap-2 h-10 px-3 rounded-lg text-label-md font-semibold text-on-surface-variant hover:bg-error-container hover:text-error transition-colors" title="Keluar dari sesi demo"><span class="material-symbols-outlined" aria-hidden="true">logout</span>Keluar</button>
+          <button type="button" id="theme-toggle" aria-label="Aktifkan mode gelap" title="Ubah tema terang/gelap"><span class="material-symbols-outlined theme-icon-light" aria-hidden="true">&#xe51c;</span><span class="material-symbols-outlined theme-icon-dark" aria-hidden="true">&#xe518;</span></button>
+          <button type="button" id="logout-button" class="inline-flex items-center gap-2 h-10 px-3 rounded-lg text-label-md font-semibold text-on-surface-variant hover:bg-error-container hover:text-error transition-colors" title="Keluar dari sesi demo"><span class="material-symbols-outlined" aria-hidden="true">&#xe9ba;</span>Keluar</button>
         </div>
       </div>
     </header>
@@ -336,11 +228,11 @@
       <!-- Not Found -->
       <div id="not-found" class="hidden px-space-xl py-space-lg">
         <div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-lg flex flex-col items-center gap-3 text-center">
-          <span class="material-symbols-outlined text-[48px] text-outline" aria-hidden="true">search_off</span>
+          <span class="material-symbols-outlined text-[48px] text-outline" aria-hidden="true">&#xea76;</span>
           <h1 class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight">Data inventaris tidak ditemukan</h1>
           <p class="font-body-md text-body-md text-on-surface-variant">Inventaris dengan ID tersebut tidak ditemukan atau telah dihapus.</p>
           <a href="data-master.html" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-primary text-on-primary hover:bg-primary-container font-label-md text-label-md font-bold transition-all shadow-md">
-            <span class="material-symbols-outlined text-[18px]" aria-hidden="true">arrow_back</span>
+            <span class="material-symbols-outlined text-[18px]" aria-hidden="true">&#xe5c4;</span>
             <span>Kembali ke Data Inventaris</span>
           </a>
         </div>
@@ -351,9 +243,9 @@
         <div class="flex flex-wrap items-center justify-between gap-space-sm">
           <div class="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant">
             <a class="hover:text-primary transition-colors cursor-pointer" href="data-master.html">Data Master</a>
-            <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+            <span class="material-symbols-outlined text-[14px]">&#xe409;</span>
             <a class="hover:text-primary transition-colors cursor-pointer" href="data-master.html">Data Inventaris</a>
-            <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+            <span class="material-symbols-outlined text-[14px]">&#xe409;</span>
             <span class="text-primary font-bold" id="crumb-current">Form Inventaris</span>
           </div>
           <div class="flex items-center gap-2 text-on-surface-variant font-code-sm text-code-sm bg-surface-container px-3 py-1 rounded-md">
@@ -494,7 +386,7 @@
           <div class="p-space-md bg-surface-container-low flex items-center justify-end gap-space-sm">
             <a href="data-master.html" class="px-4 py-2 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors" id="btn-cancel" type="button">Batal</a>
             <button class="flex items-center gap-1.5 px-5 py-2 rounded-xl bg-primary text-on-primary hover:bg-primary-container font-label-md text-label-md font-bold transition-all shadow-md disabled:opacity-60" id="btn-save" type="submit" aria-label="check_circle Simpan Inventaris">
-              <span class="material-symbols-outlined text-[18px]">check_circle</span>
+              <span class="material-symbols-outlined text-[18px]">&#xe86c;</span>
               <span id="btn-save-label">Simpan</span>
             </button>
           </div>
