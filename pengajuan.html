@@ -10,36 +10,7 @@
   <link rel="stylesheet" href="assets/fonts/fonts.css">
   <script src="assets/js/auth.js"></script>
   <script>Auth.protectPage();</script>
-  <script src="assets/vendor/tailwindcss-play.js"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: "#2563EB",
-            "primary-container": "#1D4ED8",
-            "on-primary": "#FFFFFF",
-            background: "#F7F8FA",
-            surface: "#F7F8FA",
-            "surface-container-lowest": "#FFFFFF",
-            "surface-container-low": "#F2F3FF",
-            "surface-container": "#EAEDFF",
-            "on-surface": "#111827",
-            "on-surface-variant": "#6B7280",
-            "outline-variant": "#E5E7EB",
-            success: "#16A34A",
-            warning: "#D97706",
-            error: "#DC2626",
-            "error-container": "#FEE2E2"
-          },
-          fontFamily: {
-            sans: ["Plus Jakarta Sans", "Arial", "sans-serif"],
-            mono: ["JetBrains Mono", "monospace"]
-          }
-        }
-      }
-    };
-  </script>
+  <link rel="stylesheet" href="assets/css/tailwind.css">
   <style>
     html { scroll-padding-top: 80px; }
     body { margin: 0; }
@@ -103,7 +74,7 @@
   <header class="bg-surface-container-lowest border-b border-outline-variant sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-4 h-16 flex items-center gap-3">
       <a href="layout.html" class="flex items-center gap-2 font-bold text-[16px]" aria-label="Kembali ke Dashboard">
-        <span class="material-symbols-outlined text-primary" aria-hidden="true">inventory_2</span>
+        <span class="material-symbols-outlined text-primary" aria-hidden="true">&#xe1a1;</span>
         <span>SIMSARPRAS <span class="text-on-surface-variant font-semibold">UNPAM</span></span>
       </a>
       <nav class="topnav-links flex items-center gap-1 ml-4" aria-label="Navigasi">
@@ -115,9 +86,9 @@
       <div class="ml-auto flex items-center gap-1">
         <span id="user-chip" class="badge badge-info" title="Pengguna aktif"></span>
         <button type="button" id="theme-toggle" class="icon-button" aria-label="Ubah tema terang/gelap" title="Ubah tema terang/gelap">
-          <span class="material-symbols-outlined theme-icon-light" aria-hidden="true">dark_mode</span><span class="material-symbols-outlined theme-icon-dark" aria-hidden="true">light_mode</span>
+          <span class="material-symbols-outlined theme-icon-light" aria-hidden="true">&#xe51c;</span><span class="material-symbols-outlined theme-icon-dark" aria-hidden="true">&#xe518;</span>
         </button>
-        <button type="button" id="logout-button" class="icon-button" aria-label="Keluar" title="Keluar"><span class="material-symbols-outlined" aria-hidden="true">logout</span></button>
+        <button type="button" id="logout-button" class="icon-button" aria-label="Keluar" title="Keluar"><span class="material-symbols-outlined" aria-hidden="true">&#xe9ba;</span></button>
       </div>
     </div>
   </header>
@@ -137,8 +108,8 @@
         <p class="text-on-surface-variant text-[13px] mb-4">Pengajuan tersimpan di server dan dapat dilihat serta divalidasi oleh admin.</p>
 
         <div role="tablist" aria-label="Jenis pengajuan" class="flex gap-2 mb-5">
-          <button type="button" class="tab" role="tab" id="tab-peminjaman" aria-selected="true" aria-controls="form-peminjaman"><span class="material-symbols-outlined" aria-hidden="true">event_available</span>Peminjaman Fasilitas</button>
-          <button type="button" class="tab" role="tab" id="tab-perbaikan" aria-selected="false" aria-controls="form-perbaikan"><span class="material-symbols-outlined" aria-hidden="true">build</span>Perbaikan Inventaris</button>
+          <button type="button" class="tab" role="tab" id="tab-peminjaman" aria-selected="true" aria-controls="form-peminjaman"><span class="material-symbols-outlined" aria-hidden="true">&#xe614;</span>Peminjaman Fasilitas</button>
+          <button type="button" class="tab" role="tab" id="tab-perbaikan" aria-selected="false" aria-controls="form-perbaikan"><span class="material-symbols-outlined" aria-hidden="true">&#xe869;</span>Perbaikan Inventaris</button>
         </div>
 
         <form id="form-peminjaman" role="tabpanel" aria-labelledby="tab-peminjaman" novalidate>
@@ -162,7 +133,7 @@
             </div>
           </div>
           <div class="mt-5 flex gap-2">
-            <button type="submit" class="button button-primary" id="btn-kirim-peminjaman"><span class="material-symbols-outlined" aria-hidden="true">send</span>Kirim Pengajuan</button>
+            <button type="submit" class="button button-primary" id="btn-kirim-peminjaman"><span class="material-symbols-outlined" aria-hidden="true">&#xe163;</span>Kirim Pengajuan</button>
           </div>
         </form>
 
@@ -179,7 +150,7 @@
             </div>
           </div>
           <div class="mt-5 flex gap-2">
-            <button type="submit" class="button button-primary" id="btn-kirim-perbaikan"><span class="material-symbols-outlined" aria-hidden="true">send</span>Kirim Pengajuan</button>
+            <button type="submit" class="button button-primary" id="btn-kirim-perbaikan"><span class="material-symbols-outlined" aria-hidden="true">&#xe163;</span>Kirim Pengajuan</button>
           </div>
         </form>
       </div>
@@ -221,7 +192,7 @@
             </select>
           </div>
           <div class="field justify-end">
-            <button type="button" class="button button-secondary" id="btn-refresh"><span class="material-symbols-outlined" aria-hidden="true">refresh</span>Muat Ulang</button>
+            <button type="button" class="button button-secondary" id="btn-refresh"><span class="material-symbols-outlined" aria-hidden="true">&#xe5d5;</span>Muat Ulang</button>
           </div>
         </div>
         <div class="table-wrap">

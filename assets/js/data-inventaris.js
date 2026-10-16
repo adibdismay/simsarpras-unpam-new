@@ -8,6 +8,22 @@
 (function() {
   'use strict';
 
+  /* Peta nama ikon Material Symbols -> karakter PUA.
+     Font ikon diself-host sebagai subset (tanpa ligature), jadi nama ikon
+     dari data (termasuk localStorage lama) harus dipetakan ke codepoint.
+     textContent tetap dipakai (aman dari XSS); entity HTML tidak cocok. */
+  var ICON_PUA = {
+    videocam: '', chair_alt: '', desktop_windows: '',
+    monitor: '', router: '', touch_app: '',
+    mode_fan: '', hub: '', crop_landscape: '',
+    shelves: '', inventory_2: ''
+  };
+  function resolveIcon(name) {
+    if (!name) return '';
+    if (name.charCodeAt(0) > 127) return name; // sudah karakter PUA
+    return ICON_PUA[name] || '';
+  }
+
   // Elemen DOM
   let tbody;
   let resultCountElement;
@@ -133,18 +149,18 @@
       <td class="py-3 px-4 text-center sticky right-0 bg-surface-container-lowest shadow-[-4px_0_6px_rgba(0,0,0,0.02)]">
         <div class="flex items-center justify-center gap-1">
           <button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="visibility">
-            <span class="material-symbols-outlined text-[18px]">visibility</span>
+            <span class="material-symbols-outlined text-[18px]">&#xe417;</span>
           </button>
           <a class="inline-flex items-center gap-1 p-1.5 rounded hover:bg-surface-container text-primary hover:text-primary-container font-label-sm text-label-sm font-semibold transition-colors" href="form-inventaris.html?id=${encodeURIComponent(item.id)}" title="Edit data inventaris" aria-label="Edit">
-            <span class="material-symbols-outlined text-[18px]">edit</span>
+            <span class="material-symbols-outlined text-[18px]">&#xe150;</span>
             <span>Edit</span>
           </a>
           <button class="inline-flex items-center gap-1 p-1.5 rounded hover:bg-surface-container text-error hover:text-error-container font-label-sm text-label-sm font-semibold transition-colors row-delete" type="button" data-id="${item.id}" title="Hapus data inventaris" aria-label="Hapus">
-            <span class="material-symbols-outlined text-[18px]">delete</span>
+            <span class="material-symbols-outlined text-[18px]">&#xe872;</span>
             <span>Hapus</span>
           </button>
           <button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-surface-tint transition-colors" type="button" disabled title="Fitur belum tersedia pada Milestone 2" aria-label="build">
-            <span class="material-symbols-outlined text-[18px]">build</span>
+            <span class="material-symbols-outlined text-[18px]">&#xe869;</span>
           </button>
         </div>
       </td>
@@ -155,7 +171,7 @@
     cells[1].textContent = item.kode || '';
     
     const iconSpan = cells[2].querySelector('.material-symbols-outlined');
-    iconSpan.textContent = item.icon || 'inventory_2';
+    iconSpan.textContent = resolveIcon(item.icon);
     
     const namaSpan = cells[2].querySelector('.font-label-md');
     namaSpan.textContent = item.nama || '';
@@ -198,7 +214,7 @@
       tr.innerHTML = `
         <td colspan="12" class="py-12 text-center">
           <div class="flex flex-col items-center gap-3">
-            <span class="material-symbols-outlined text-[48px] text-outline">inventory_2</span>
+            <span class="material-symbols-outlined text-[48px] text-outline">&#xe1a1;</span>
             <p class="font-label-lg text-label-lg text-on-surface-variant">Tidak ada data inventaris</p>
             <p class="font-body-sm text-body-sm text-on-surface-variant">Data inventaris kosong atau belum dimuat</p>
           </div>
@@ -522,7 +538,7 @@
             <tr>
               <td colspan="12" class="py-12 text-center">
                 <div class="flex flex-col items-center gap-3">
-                  <span class="material-symbols-outlined text-[48px] text-error">error</span>
+                  <span class="material-symbols-outlined text-[48px] text-error">&#xe000;</span>
                   <p class="font-label-lg text-label-lg text-error">Error: Modul penyimpanan tidak ditemukan</p>
                   <p class="font-body-sm text-body-sm text-on-surface-variant">Pastikan inventory-store.js dimuat dengan benar</p>
                 </div>
@@ -548,7 +564,7 @@
           <tr>
             <td colspan="12" class="py-12 text-center">
               <div class="flex flex-col items-center gap-3">
-                <span class="material-symbols-outlined text-[48px] text-error">error</span>
+                <span class="material-symbols-outlined text-[48px] text-error">&#xe000;</span>
                 <p class="font-label-lg text-label-lg text-error">Error saat memuat data</p>
                 <p class="font-body-sm text-body-sm text-on-surface-variant">${error.message}</p>
               </div>
