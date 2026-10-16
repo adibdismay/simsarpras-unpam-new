@@ -1,6 +1,8 @@
 /* ============================================================
-   SIMSARPRAS UNPAM — Logika login demo (client-side)
-   Akun demo: admin / Demo123!
+   SIMSARPRAS UNPAM — Logika login (terverifikasi backend)
+   Kredensial dikirim ke POST /api/auth/login; server memverifikasi
+   hash scrypt dan menerbitkan cookie sesi httpOnly.
+   Akun demo: admin / Demo123!  dan  mahasiswa / Demo123!
    Tidak menyimpan kata sandi ke storage apa pun.
    ============================================================ */
 (function () {
@@ -101,9 +103,6 @@
       } else if (!password) {
         showAlert("error", "Kata sandi wajib diisi.");
         invalidField = passwordInput;
-      } else if (username !== DEMO_USERNAME || password !== DEMO_PASSWORD) {
-        showAlert("error", "Username atau kata sandi salah. Gunakan akun demo (admin / Demo123!).");
-        invalidField = usernameInput;
       }
 
       if (invalidField) {
@@ -114,25 +113,37 @@
         return;
       }
 
-      // Kredensial cocok — simpan penanda sesi, lalu arahkan.
+      // Kredensial diverifikasi ke backend — jangan pernah dibandingkan di client.
       setInvalid(usernameInput, false);
       setInvalid(passwordInput, false);
 
-      if (typeof Auth === "undefined" || !Auth.signIn()) {
-        showAlert("error", "Penyimpanan sesi (sessionStorage) tidak tersedia. Aktifkan sessionStorage, lalu coba lagi.");
-        robotMessage.textContent = "Ups! Sesi tidak dapat disimpan.";
+      if (typeof Auth === "undefined" || typeof Auth.signIn !== "function") {
+        showAlert("error", "Modul autentikasi tidak termuat. Muat ulang halaman.");
+        robotMessage.textContent = "Ups! Terjadi kesalahan.";
         return;
       }
-
-      showAlert("success", "Autentikasi berhasil! Mengalihkan ke Dashboard…");
-      robotMessage.textContent = "Akses diterima. Selamat datang!";
 
       submitButton.disabled = true;
       submitLabel.textContent = "Memverifikasi…";
 
-      setTimeout(function () {
-        window.location.replace(TARGET_PAGE);
-      }, 900);
+      Auth.signIn(username, password).then(function (result) {
+        if (!result.ok) {
+          submitButton.disabled = false;
+          submitLabel.textContent = "Masuk";
+          showAlert("error", (result.errors && result.errors[0]) || "Login gagal.");
+          setInvalid(usernameInput, true);
+          robotMessage.textContent = "Ups! Periksa kembali kredensial Anda.";
+          usernameInput.focus();
+          return;
+        }
+
+        showAlert("success", "Autentikasi berhasil! Mengalihkan ke Dashboard…");
+        robotMessage.textContent = "Akses diterima. Selamat datang!";
+
+        setTimeout(function () {
+          window.location.replace(TARGET_PAGE);
+        }, 900);
+      });
     });
   }
 

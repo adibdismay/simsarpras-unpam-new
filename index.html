@@ -6,12 +6,12 @@
   <title>SIMSARPRAS UNPAM — Universitas Pamulang</title>
   <script src="assets/js/auth.js"></script>
   <script>
-    // Arahkan berdasarkan sesi demo: dashboard jika ada, selain itu login.
-    if (!Auth.storageUnavailable() && Auth.isAuthenticated()) {
-      window.location.replace(Auth.DASHBOARD_PAGE);
-    } else {
+    // Arahkan berdasarkan sesi backend: dashboard jika login, selain itu login.
+    Auth.isAuthenticated().then(function (ok) {
+      window.location.replace(ok ? Auth.DASHBOARD_PAGE : Auth.LOGIN_PAGE);
+    }).catch(function () {
       window.location.replace(Auth.LOGIN_PAGE);
-    }
+    });
   </script>
   <style>
     body {

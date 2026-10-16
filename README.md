@@ -49,16 +49,41 @@ saat kolom kata sandi difokus, dan berkedip sesekali saat idle. Animasi dihormat
 
 ## Cara Menjalankan
 
-Jalankan melalui server lokal (bukan membuka file langsung) agar sumber daya relatif dan
-modul JavaScript termuat dengan benar.
-
-Contoh menggunakan Python:
+Aplikasi membutuhkan backend terpadu (Node.js) untuk login dan pengajuan.
+Backend **tanpa dependensi npm** (memakai `node:http` + `node:sqlite` bawaan).
 
 ```bash
-python -m http.server 8000
+node server.js
 ```
 
-Lalu buka `http://localhost:8000/` di peramban.
+Lalu buka `http://localhost:3000/` di peramban. Database SQLite dibuat otomatis
+di `data/simsarpras.db` saat pertama dijalankan (diabaikan git).
+
+Variabel lingkungan opsional:
+
+```bash
+PORT=8080 node server.js
+SIMSARPRAS_DB=/path/ke/db.sqlite node server.js
+```
+
+## Akun Demo
+
+| Username    | Kata sandi | Peran     |
+| ----------- | ---------- | --------- |
+| `admin`     | `Demo123!` | Admin     |
+| `mahasiswa` | `Demo123!` | Mahasiswa |
+
+Kata sandi disimpan sebagai hash scrypt di database; login menerbitkan cookie
+sesi httpOnly. Halaman yang dilindungi memeriksa sesi ke server.
+
+## Alur Pengajuan (baru)
+
+1. Login sebagai `mahasiswa` / `Demo123!`.
+2. Buka halaman **Pengajuan** (tombol "Ajukan Sarpras" di header atau menu).
+3. Pilih tab **Peminjaman Fasilitas** (ruangan/fasilitas + tanggal + keperluan)
+   atau **Perbaikan Inventaris** (kode inventaris + deskripsi kerusakan), lalu kirim.
+4. Login sebagai `admin` / `Demo123!` untuk melihat semua pengajuan dan
+   **Setujui** / **Tolak** beserta catatan. Status langsung terlihat oleh mahasiswa.
 
 ## Data Mock
 

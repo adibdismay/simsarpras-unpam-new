@@ -3,3 +3,8 @@
 node_modules/
 .vscode/
 *.log
+# Database SQLite lokal (dibuat otomatis saat server dijalankan)
+data/
+*.db
+*.db-wal
+*.db-shm
