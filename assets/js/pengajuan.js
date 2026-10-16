@@ -303,8 +303,9 @@
           catatan_admin: el("m-catatan").value
         })
       }).then(function () {
+        var doneId = pendingAction.id;
         closeModal();
-        toast("success", "Pengajuan #" + pendingAction.id + " berhasil diproses.");
+        toast("success", "Pengajuan #" + doneId + " berhasil diproses.");
         return loadAdmin();
       }).catch(function (err) {
         toast("error", err.message);
