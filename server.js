@@ -127,6 +127,14 @@ function seedUsers(db) {
     }
     insert.run(adminUser, hashPassword(adminPass), 'Administrator', 'admin', 'aktif', now);
     console.log(`[server] akun admin awal "${adminUser}" dibuat dari environment variables.`);
+    // Opsional: akun mahasiswa demo untuk keperluan demo (mis. hosting ephemeral).
+    // Hanya dibuat bila MAHASISWA_USERNAME/MAHASISWA_PASSWORD diset.
+    const mhsUser = (process.env.MAHASISWA_USERNAME || '').trim();
+    const mhsPass = process.env.MAHASISWA_PASSWORD || '';
+    if (mhsUser && mhsPass) {
+      insert.run(mhsUser, hashPassword(mhsPass), 'Mahasiswa Demo', 'mahasiswa', 'aktif', now);
+      console.log(`[server] akun mahasiswa demo "${mhsUser}" dibuat dari environment variables.`);
+    }
     return;
   }
   // Dev/test: akun demo untuk kemudahan pengujian lokal.
@@ -689,7 +697,8 @@ setInterval(() => {
   }
 }, 60 * 60 * 1000).unref();
 
-server.listen(PORT, () => {
+// Bind eksplisit ke 0.0.0.0 agar menerima koneksi dari load balancer platform hosting (Render, dll).
+server.listen(PORT, '0.0.0.0', () => {
   console.log(`SIMSARPRAS UNPAM berjalan di http://localhost:${PORT}`);
   console.log(`Database: ${DB_PATH}`);
 });
