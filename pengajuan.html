@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pengajuan Sarpras | SIMSARPRAS EDU — UNPAM</title>
+  <meta name="description" content="Pengajuan peminjaman fasilitas dan perbaikan inventaris — terintegrasi backend.">
+  <script src="assets/js/theme.js"></script>
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <script src="assets/js/auth.js"></script>
+  <script>Auth.protectPage();</script>
+  <link rel="stylesheet" href="assets/css/tailwind.css">
+  <style>
+    html { scroll-padding-top: 80px; }
+    body { margin: 0; }
+    [hidden] { display: none !important; }
+    *, *::before, *::after { box-sizing: border-box; }
+    :focus-visible { outline: 2px solid #2563eb; outline-offset: 3px; }
+    .material-symbols-outlined { flex-shrink: 0; font-size: 20px; line-height: 1; vertical-align: middle; }
+    .skip-link { position: fixed; top: -100px; left: 16px; z-index: 200; padding: 12px 16px; background: #fff; color: #2563eb; border-radius: 8px; }
+    .skip-link:focus { top: 12px; }
+    .panel { min-width: 0; padding: 24px; border-radius: 8px; background: #fff; box-shadow: 0 1px 3px rgb(0 0 0 / 6%); }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 0 16px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; border: 0; }
+    .button-primary { background: #1d4ed8; color: #fff; }
+    .button-primary:hover { background: #1e40af; }
+    .button-secondary { background: #f2f3ff; color: #111827; }
+    .button-secondary:hover { background: #e2e7ff; }
+    .button-danger { background: #dc2626; color: #fff; }
+    .button-danger:hover { background: #b91c1c; }
+    .button-success { background: #16a34a; color: #fff; }
+    .button-success:hover { background: #15803d; }
+    .button:disabled { cursor: not-allowed; opacity: .6; }
+    .icon-button { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; flex-shrink: 0; border-radius: 8px; color: #6b7280; background: transparent; border: 0; cursor: pointer; }
+    .icon-button:hover { background: #f2f3ff; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 8px; font-size: 11px; line-height: 16px; font-weight: 600; white-space: nowrap; }
+    .badge-good { background: #f0fdf4; color: #166534; }
+    .badge-warning { background: #fffbeb; color: #92400e; }
+    .badge-danger { background: #fef2f2; color: #b91c1c; }
+    .badge-info { background: #eff6ff; color: #1d4ed8; }
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    .field > label { font-size: 12px; line-height: 18px; font-weight: 600; color: #111827; }
+    .input { width: 100%; min-height: 40px; padding: 8px 12px; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 14px; font-family: inherit; background: #fff; color: #111827; }
+    .input:focus { border-color: #2563eb; outline: 2px solid #2563eb; outline-offset: 1px; }
+    textarea.input { min-height: 88px; resize: vertical; }
+    .field-error { font-size: 12px; color: #dc2626; }
+    .tab { padding: 10px 16px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #6b7280; background: transparent; border: 0; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+    .tab[aria-selected="true"] { background: #eaedff; color: #1d4ed8; }
+    .table-wrap { overflow-x: auto; border: 1px solid #e5e7eb; border-radius: 8px; }
+    table.data { width: 100%; border-collapse: collapse; font-size: 13px; }
+    table.data th { text-align: left; padding: 10px 12px; background: #f7f8fa; color: #6b7280; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; }
+    table.data td { padding: 12px; border-top: 1px solid #e5e7eb; vertical-align: top; }
+    table.data tr:hover td { background: #fafbff; }
+    .empty-state { padding: 40px 24px; text-align: center; color: #6b7280; }
+    .modal-backdrop { position: fixed; inset: 0; z-index: 150; background: rgb(17 24 39 / 45%); display: flex; align-items: center; justify-content: center; padding: 16px; }
+    .modal { width: 100%; max-width: 480px; background: #fff; border-radius: 12px; padding: 24px; box-shadow: 0 8px 30px rgb(0 0 0 / 18%); }
+    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 180; display: flex; align-items: center; gap: 10px; padding: 12px 18px; border-radius: 10px; font-size: 14px; font-weight: 600; color: #fff; box-shadow: 0 4px 16px rgb(0 0 0 / 20%); }
+    .toast-success { background: #16a34a; }
+    .toast-error { background: #dc2626; }
+    .alert { padding: 12px 16px; border-radius: 8px; font-size: 14px; }
+    .alert-error { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
+    .nav-link { display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; border-radius: 8px; font-size: 13px; font-weight: 600; color: #6b7280; text-decoration: none; }
+    .nav-link:hover { background: #f2f3ff; color: #111827; }
+    .nav-link[aria-current="page"] { background: #eaedff; color: #1d4ed8; }
+    @media (max-width: 720px) {
+      .panel { padding: 16px; }
+      .topnav-links { display: none; }
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-sans">
+  <a class="skip-link" href="#main">Lewati ke konten utama</a>
+
+  <header class="bg-surface-container-lowest border-b border-outline-variant sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center gap-3">
+      <a href="layout.html" class="flex items-center gap-2 font-bold text-[16px]" aria-label="Kembali ke Dashboard">
+        <span class="material-symbols-outlined text-primary" aria-hidden="true">&#xe1a1;</span>
+        <span>SIMSARPRAS <span class="text-on-surface-variant font-semibold">UNPAM</span></span>
+      </a>
+      <nav class="topnav-links flex items-center gap-1 ml-4" aria-label="Navigasi">
+        <a class="nav-link" href="layout.html">Dashboard</a>
+        <a class="nav-link" href="data-master.html">Data Inventaris</a>
+        <a class="nav-link" href="pengajuan.html" aria-current="page">Pengajuan</a>
+        <a class="nav-link" href="laporan.html">Laporan</a>
+      </nav>
+      <div class="ml-auto flex items-center gap-1">
+        <span id="user-chip" class="badge badge-info" title="Pengguna aktif"></span>
+        <button type="button" id="theme-toggle" class="icon-button" aria-label="Ubah tema terang/gelap" title="Ubah tema terang/gelap">
+          <span class="material-symbols-outlined theme-icon-light" aria-hidden="true">&#xe51c;</span><span class="material-symbols-outlined theme-icon-dark" aria-hidden="true">&#xe518;</span>
+        </button>
+        <button type="button" id="logout-button" class="icon-button" aria-label="Keluar" title="Keluar"><span class="material-symbols-outlined" aria-hidden="true">&#xe9ba;</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="max-w-6xl mx-auto px-4 py-8 flex flex-col gap-6">
+    <div>
+      <h1 class="text-[24px] font-bold">Pengajuan Sarana &amp; Prasarana</h1>
+      <p id="page-subtitle" class="text-on-surface-variant text-[14px] mt-1">Memuat…</p>
+    </div>
+
+    <div id="alert-area" class="alert alert-error" hidden></div>
+
+    <!-- ============ TAMPILAN MAHASISWA ============ -->
+    <section id="view-mahasiswa" hidden aria-label="Pengajuan mahasiswa">
+      <div class="panel">
+        <h2 class="text-[18px] font-bold mb-1">Buat Pengajuan Baru</h2>
+        <p class="text-on-surface-variant text-[13px] mb-4">Pengajuan tersimpan di server dan dapat dilihat serta divalidasi oleh admin.</p>
+
+        <div role="tablist" aria-label="Jenis pengajuan" class="flex gap-2 mb-5">
+          <button type="button" class="tab" role="tab" id="tab-peminjaman" aria-selected="true" aria-controls="form-peminjaman"><span class="material-symbols-outlined" aria-hidden="true">&#xe614;</span>Peminjaman Fasilitas</button>
+          <button type="button" class="tab" role="tab" id="tab-perbaikan" aria-selected="false" aria-controls="form-perbaikan"><span class="material-symbols-outlined" aria-hidden="true">&#xe869;</span>Perbaikan Inventaris</button>
+        </div>
+
+        <form id="form-peminjaman" role="tabpanel" aria-labelledby="tab-peminjaman" novalidate>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="field md:col-span-2">
+              <label for="f-fasilitas">Fasilitas / Ruangan <span class="text-error">*</span></label>
+              <input class="input" id="f-fasilitas" name="fasilitas" list="dl-fasilitas" placeholder="cth: Aula Gedung A, Lab Komputer 1" autocomplete="off">
+              <datalist id="dl-fasilitas"></datalist>
+            </div>
+            <div class="field">
+              <label for="f-tgl-mulai">Tanggal Mulai <span class="text-error">*</span></label>
+              <input class="input" id="f-tgl-mulai" name="tanggal_mulai" type="date">
+            </div>
+            <div class="field">
+              <label for="f-tgl-selesai">Tanggal Selesai <span class="text-error">*</span></label>
+              <input class="input" id="f-tgl-selesai" name="tanggal_selesai" type="date">
+            </div>
+            <div class="field md:col-span-2">
+              <label for="f-keperluan">Keperluan <span class="text-error">*</span></label>
+              <textarea class="input" id="f-keperluan" name="keperluan" placeholder="cth: Praktikum jaringan komputer kelas TI-3A"></textarea>
+            </div>
+          </div>
+          <div class="mt-5 flex gap-2">
+            <button type="submit" class="button button-primary" id="btn-kirim-peminjaman"><span class="material-symbols-outlined" aria-hidden="true">&#xe163;</span>Kirim Pengajuan</button>
+          </div>
+        </form>
+
+        <form id="form-perbaikan" role="tabpanel" aria-labelledby="tab-perbaikan" novalidate hidden>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="field md:col-span-2">
+              <label for="f-kode">Kode Inventaris <span class="text-error">*</span></label>
+              <input class="input font-mono" id="f-kode" name="kode_inventaris" list="dl-inventaris" placeholder="cth: INV-LAB-001" autocomplete="off">
+              <datalist id="dl-inventaris"></datalist>
+            </div>
+            <div class="field md:col-span-2">
+              <label for="f-kerusakan">Deskripsi Kerusakan <span class="text-error">*</span></label>
+              <textarea class="input" id="f-kerusakan" name="deskripsi_kerusakan" placeholder="cth: Proyektor tidak menampilkan gambar, lampu indikator merah"></textarea>
+            </div>
+          </div>
+          <div class="mt-5 flex gap-2">
+            <button type="submit" class="button button-primary" id="btn-kirim-perbaikan"><span class="material-symbols-outlined" aria-hidden="true">&#xe163;</span>Kirim Pengajuan</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="panel mt-6">
+        <h2 class="text-[18px] font-bold mb-1">Pengajuan Saya</h2>
+        <p class="text-on-surface-variant text-[13px] mb-4">Status diperbarui otomatis setelah admin memvalidasi.</p>
+        <div class="table-wrap">
+          <table class="data" id="tabel-mine">
+            <thead><tr><th>ID</th><th>Jenis</th><th>Detail</th><th>Dibuat</th><th>Status</th><th>Catatan Admin</th></tr></thead>
+            <tbody></tbody>
+          </table>
+          <div class="empty-state" id="empty-mine" hidden>Belum ada pengajuan. Buat pengajuan pertama Anda di atas.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TAMPILAN ADMIN ============ -->
+    <section id="view-admin" hidden aria-label="Validasi admin">
+      <div class="panel">
+        <h2 class="text-[18px] font-bold mb-1">Validasi Pengajuan</h2>
+        <p class="text-on-surface-variant text-[13px] mb-4">Setujui atau tolak pengajuan yang masuk. Keputusan tersimpan dan langsung terlihat oleh pengaju.</p>
+        <div class="flex flex-wrap gap-3 mb-4">
+          <div class="field" style="min-width:180px">
+            <label for="flt-status">Status</label>
+            <select class="input" id="flt-status">
+              <option value="">Semua</option>
+              <option value="menunggu" selected>Menunggu</option>
+              <option value="disetujui">Disetujui</option>
+              <option value="ditolak">Ditolak</option>
+            </select>
+          </div>
+          <div class="field" style="min-width:180px">
+            <label for="flt-jenis">Jenis</label>
+            <select class="input" id="flt-jenis">
+              <option value="">Semua</option>
+              <option value="peminjaman">Peminjaman</option>
+              <option value="perbaikan">Perbaikan</option>
+            </select>
+          </div>
+          <div class="field justify-end">
+            <button type="button" class="button button-secondary" id="btn-refresh"><span class="material-symbols-outlined" aria-hidden="true">&#xe5d5;</span>Muat Ulang</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="data" id="tabel-admin">
+            <thead><tr><th>ID</th><th>Pengaju</th><th>Jenis</th><th>Detail</th><th>Dibuat</th><th>Status</th><th>Aksi</th></tr></thead>
+            <tbody></tbody>
+          </table>
+          <div class="empty-state" id="empty-admin" hidden>Tidak ada pengajuan pada filter ini.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal keputusan admin -->
+  <div class="modal-backdrop" id="modal-backdrop" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <h3 id="modal-title" class="text-[18px] font-bold mb-2">Validasi Pengajuan</h3>
+      <p id="modal-desc" class="text-on-surface-variant text-[14px] mb-4"></p>
+      <div class="field mb-5">
+        <label for="m-catatan">Catatan untuk pengaju (opsional)</label>
+        <textarea class="input" id="m-catatan" placeholder="cth: Disetujui, kunci diambil di petugas lantai 1"></textarea>
+      </div>
+      <div class="flex justify-end gap-2">
+        <button type="button" class="button button-secondary" id="m-batal">Batal</button>
+        <button type="button" class="button" id="m-ok">Konfirmasi</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-area" aria-live="polite"></div>
+
+  <script src="assets/js/inventory-store.js"></script>
+  <script src="assets/js/pengajuan.js"></script>
+</body>
+</html>

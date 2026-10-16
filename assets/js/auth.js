@@ -1,98 +1,110 @@
 /* ============================================================
-   SIMSARPRAS UNPAM — Auth (sesi demo client-side)
-   Menyimpan penanda sesi di sessionStorage, BUKAN kata sandi.
-   Key: simsarpras.session.v1 (terpisah dari simsarpras.inventory.v1).
-   Ini simulasi client-side, bukan autentikasi aman.
+   SIMSARPRAS UNPAM — Auth (sesi backend)
+   Menggantikan flag sessionStorage demo dengan sesi server
+   (cookie httpOnly `simsarpras.sid`, diverifikasi via /api).
+
+   API publik window.Auth dipertahankan agar page guard di
+   semua halaman tetap berfungsi tanpa perubahan besar:
+     Auth.protectPage()            -> Promise, redirect ke login bila 401
+     Auth.redirectIfAuthenticated()-> Promise, redirect ke dashboard bila login
+     Auth.isAuthenticated()        -> Promise<boolean>
+     Auth.signIn(username,password)-> Promise<{ok,user?,errors?}>
+     Auth.signOut()                -> Promise<void>
+     Auth.getUser()                -> objek user terakhir / null
    ============================================================ */
 (function () {
   "use strict";
 
-  var SESSION_KEY = "simsarpras.session.v1";
   var LOGIN_PAGE = "login.html";
   var DASHBOARD_PAGE = "layout.html";
+  var ME_URL = "/api/auth/me";
+  var LOGIN_URL = "/api/auth/login";
+  var LOGOUT_URL = "/api/auth/logout";
 
-  /* sessionStorage tidak dapat diakses (mis. diblokir). */
-  function storageUnavailable() {
-    try {
-      window.sessionStorage.getItem(SESSION_KEY);
-      return false;
-    } catch (err) {
-      return true;
+  var cachedUser = null;      // hasil /api/auth/me terakhir
+  var mePromise = null;       // deduplikasi request bersamaan
+
+  function fetchMe() {
+    if (!mePromise) {
+      mePromise = fetch(ME_URL, { credentials: "same-origin" })
+        .then(function (res) {
+          if (!res.ok) {
+            cachedUser = null;
+            return null;
+          }
+          return res.json().then(function (data) {
+            cachedUser = data && data.ok ? data.user : null;
+            return cachedUser;
+          });
+        })
+        .catch(function () {
+          cachedUser = null;
+          return null;
+        })
+        .finally(function () {
+          mePromise = null;
+        });
     }
+    return mePromise;
   }
 
   function isAuthenticated() {
-    try {
-      return window.sessionStorage.getItem(SESSION_KEY) === "1";
-    } catch (err) {
-      return false;
-    }
+    return fetchMe().then(function (user) { return !!user; });
   }
 
-  function signIn() {
-    try {
-      window.sessionStorage.setItem(SESSION_KEY, "1");
-      return true;
-    } catch (err) {
-      return false;
-    }
+  function getUser() {
+    return cachedUser;
   }
 
-  /* Hanya menghapus key sesi demo. Tidak memakai clear(). */
+  function signIn(username, password) {
+    return fetch(LOGIN_URL, {
+      method: "POST",
+      credentials: "same-origin",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username: username, password: password })
+    })
+      .then(function (res) {
+        return res.json().catch(function () { return { ok: false }; }).then(function (data) {
+          if (res.ok && data && data.ok) {
+            cachedUser = data.user || null;
+            mePromise = null;
+            return { ok: true, user: cachedUser };
+          }
+          cachedUser = null;
+          var errors = (data && data.errors) || ["Login gagal. Coba lagi."];
+          return { ok: false, errors: errors };
+        });
+      })
+      .catch(function () {
+        cachedUser = null;
+        return { ok: false, errors: ["Server tidak dapat dihubungi. Pastikan backend (node server.js) berjalan."] };
+      });
+  }
+
   function signOut() {
-    try {
-      window.sessionStorage.removeItem(SESSION_KEY);
-      return true;
-    } catch (err) {
-      return false;
-    }
+    cachedUser = null;
+    mePromise = null;
+    return fetch(LOGOUT_URL, { method: "POST", credentials: "same-origin" })
+      .catch(function () { /* abaikan: sesi lokal tetap dibersihkan */ })
+      .then(function () { cachedUser = null; });
   }
 
-  function showStorageError() {
-    function render() {
-      if (!document.body) {
-        document.addEventListener("DOMContentLoaded", render);
-        return;
-      }
-      document.body.innerHTML =
-        '<main style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:#F7F8FA;font-family:\'Plus Jakarta Sans\',Arial,sans-serif;color:#111827;">' +
-        '<div style="max-width:420px;width:100%;background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:32px;text-align:center;">' +
-        '<h1 style="font-size:18px;margin:0 0 8px;font-weight:700;">Sesi tidak dapat dimuat</h1>' +
-        '<p style="font-size:14px;color:#6b7280;margin:0 0 20px;line-height:20px;">Penyimpanan sesi peramban (sessionStorage) tidak tersedia atau diblokir. Aktifkan sessionStorage, lalu muat ulang halaman.</p>' +
-        '<a href="' + LOGIN_PAGE + '" style="display:inline-block;padding:10px 16px;border-radius:8px;background:#2563eb;color:#fff;text-decoration:none;font-weight:600;font-size:14px;">Muat ulang</a>' +
-        '</div></main>';
-    }
-    render();
-  }
-
-  /* Halaman terlindungi: tanpa sesi, arahkan ke login (location.replace).
-     Jika sessionStorage gagal, tampilkan pesan (tanpa loop redirect). */
+  /* Halaman terlindungi: tanpa sesi server, arahkan ke login. */
   function protectPage() {
-    if (storageUnavailable()) {
-      showStorageError();
-      return;
-    }
-    if (!isAuthenticated()) {
-      window.location.replace(LOGIN_PAGE);
-      return;
-    }
-    // Cek ulang saat halaman dipulihkan dari cache (tombol Back setelah logout).
-    window.addEventListener("pageshow", function (event) {
-      if (!event.persisted) return;
-      if (storageUnavailable()) {
-        showStorageError();
-      } else if (!isAuthenticated()) {
+    return fetchMe().then(function (user) {
+      if (!user) {
         window.location.replace(LOGIN_PAGE);
+        return false;
       }
+      return true;
     });
   }
 
   /* Halaman login: jika sesi sudah aktif, arahkan ke dashboard. */
   function redirectIfAuthenticated() {
-    if (storageUnavailable()) return;
-    if (isAuthenticated()) {
-      window.location.replace(DASHBOARD_PAGE);
-    }
+    return fetchMe().then(function (user) {
+      if (user) window.location.replace(DASHBOARD_PAGE);
+    });
   }
 
   /* Logout via tombol #logout-button (delegasi, aman di semua halaman). */
@@ -102,16 +114,16 @@
     var button = target.closest("#logout-button");
     if (!button) return;
     event.preventDefault();
-    signOut();
-    window.location.replace(LOGIN_PAGE);
+    signOut().then(function () {
+      window.location.replace(LOGIN_PAGE);
+    });
   });
 
   window.Auth = {
-    SESSION_KEY: SESSION_KEY,
     LOGIN_PAGE: LOGIN_PAGE,
     DASHBOARD_PAGE: DASHBOARD_PAGE,
     isAuthenticated: isAuthenticated,
-    storageUnavailable: storageUnavailable,
+    getUser: getUser,
     signIn: signIn,
     signOut: signOut,
     protectPage: protectPage,
