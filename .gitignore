@@ -2,6 +2,7 @@
 .env.*
 node_modules/
 .vscode/
+.vercel/
 *.log
 # Database SQLite lokal (dibuat otomatis saat server dijalankan)
 data/

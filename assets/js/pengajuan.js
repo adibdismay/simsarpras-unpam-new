@@ -8,7 +8,9 @@
 (function () {
   "use strict";
 
-  var API = "/api/pengajuan";
+  // Backend API eksternal (Vercel). Override: window.SIMSARPRAS_API_BASE = "https://...";
+  var API_BASE = window.SIMSARPRAS_API_BASE || "https://simsarpras-unpam-new.vercel.app";
+  var API = API_BASE + "/api/pengajuan";
 
   var STATUS_BADGE = {
     menunggu: "badge-warning",
@@ -64,10 +66,19 @@
     box.textContent = message;
   }
 
+  function authHeader() {
+    try {
+      var token = sessionStorage.getItem("simsarpras.token");
+      if (token) return { "Authorization": "Bearer " + token };
+    } catch (e) { /* abaikan */ }
+    return {};
+  }
+
   function api(path, options) {
     options = options || {};
-    options.credentials = "same-origin";
-    options.headers = Object.assign({ "Content-Type": "application/json" }, options.headers || {});
+    options.credentials = "include";
+    options.headers = Object.assign(
+      { "Content-Type": "application/json" }, authHeader(), options.headers || {});
     return fetch(path, options).then(function (res) {
       return res.json().catch(function () { return { ok: false }; }).then(function (data) {
         if (res.ok && data && data.ok) return data;
@@ -79,7 +90,7 @@
       });
     }).catch(function (err) {
       if (err instanceof TypeError) {
-        throw new Error("Server tidak dapat dihubungi. Pastikan backend (node server.js) berjalan.");
+        throw new Error("Server tidak dapat dihubungi. Periksa koneksi atau URL backend API.");
       }
       throw err;
     });

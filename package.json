@@ -1,14 +1,19 @@
 {
-  "description": "SIMSARPRAS UNPAM \u2014 Sistem Informasi Manajemen Sarana & Prasarana (Node.js + SQLite, tanpa dependensi).",
+  "description": "SIMSARPRAS UNPAM — Sistem Informasi Manajemen Sarana & Prasarana (Node.js + SQLite, tanpa dependensi).",
   "engines": {
     "node": ">=22"
   },
   "license": "UNLICENSED",
-  "main": "server.js",
+  "main": "dev-server.js",
   "name": "simsarpras-unpam",
   "scripts": {
-    "start": "node server.js",
-    "test": "node test/api-test.js && node test/security-test.js"
+    "start": "node dev-server.js",
+    "test": "node test/api-test.js && node test/security-test.js",
+    "test:serverless": "node test/api-serverless-test.js",
+    "migrate": "node scripts/migrate-sqlite-to-turso.js"
   },
-  "version": "2.4.0"
+  "version": "2.4.0",
+  "dependencies": {
+    "@libsql/client": "^0.18.0"
+  }
 }

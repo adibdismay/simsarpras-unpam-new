@@ -1,0 +1,18 @@
+# SIMSARPRAS UNPAM — file yang TIDAK ikut di-deploy ke Vercel.
+# Backend produksi hanya memakai api/ (+ node_modules hasil install).
+# Ini mencegah server.js / dev-server.js terekspos sebagai file statis.
+server.js
+dev-server.js
+data/
+test/
+scripts/
+docs/
+design/
+railway.json
+Dockerfile
+.dockerignore
+.git
+.github
+*.log
+.env
+.env.*
