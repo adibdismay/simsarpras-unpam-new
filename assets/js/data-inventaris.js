@@ -183,7 +183,7 @@
 
     tr.innerHTML = `
       <td class="py-3 px-4 text-center">
-        <input class="row-checkbox w-4 h-4 rounded text-primary focus:ring-0 cursor-pointer" type="checkbox" aria-label="Pilih ${item.kode}">
+        <input class="row-checkbox w-4 h-4 rounded text-primary focus:ring-0 cursor-pointer" type="checkbox" data-id="${item.id}" aria-label="Pilih ${item.kode}">
       </td>
       <td class="py-3 px-3 font-code-sm text-code-sm font-semibold text-primary"></td>
       <td class="py-3 px-3">

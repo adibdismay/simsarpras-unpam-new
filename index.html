@@ -7,10 +7,12 @@
   <script src="assets/js/auth.js"></script>
   <script>
     // Arahkan berdasarkan sesi demo: dashboard jika ada, selain itu login.
+    // Berbeda dari halaman di dalam pages/, file ini berada di akar proyek,
+    // jadi path halaman perlu diawali "pages/".
     if (!Auth.storageUnavailable() && Auth.isAuthenticated()) {
-      window.location.replace(Auth.DASHBOARD_PAGE);
+      window.location.replace("pages/" + Auth.DASHBOARD_PAGE);
     } else {
-      window.location.replace(Auth.LOGIN_PAGE);
+      window.location.replace("pages/" + Auth.LOGIN_PAGE);
     }
   </script>
   <style>
@@ -51,7 +53,7 @@
   <div class="card">
     <h1>SIMSARPRAS UNPAM</h1>
     <p>Mengarahkan…</p>
-    <a href="login.html">Buka halaman login</a>
+    <a href="pages/login.html">Buka halaman login</a>
   </div>
 </body>
 </html>

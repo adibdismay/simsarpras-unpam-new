@@ -644,7 +644,7 @@ flowchart LR
 
 ### Alur Masuk dan Keluar (Login/Logout)
 
-Halaman login (`login.html`) menggunakan akun demo `admin` / `Demo123!` sebagai
+Halaman login (`pages/login.html`) menggunakan akun demo `admin` / `Demo123!` sebagai
 simulasi client-side (bukan autentikasi aman). Setelah login berhasil, penanda sesi
 disimpan di `sessionStorage` (key `simsarpras.session.v1`); halaman dashboard, data
 inventaris, form, dan laporan memeriksa sesi dan mengarahkan ke halaman login bila
@@ -896,30 +896,30 @@ Sistem tidak menggunakan backend maupun database server pada tahap tugas Client-
 Screenshot hasil wireframe Google Stitch / Figma akan dimasukkan pada bagian ini.
 
 
-![Dashboard Wireframe](./screenshots/dashboard-wireframe.png)
+![Dashboard Wireframe](./design/stitch/stitch_simsarpras_unpam/wireframe_dashboard_sarana_prasarana_simsarpras_unpam/screen.png)
 
 
 ## Data Master Inventaris
 
 
-![Data Master Wireframe](./screenshots/data-master-wireframe.png)
+![Data Master Wireframe](./design/stitch/stitch_simsarpras_unpam/wireframe_data_master_inventaris_simsarpras_unpam/screen.png)
 
 # 21. High-Fidelity Design
 
 ## Dashboard
 
 
-![Dashboard High Fidelity](./screenshots/dashboard-final.png)
+![Dashboard High Fidelity](./design/dashboard-final.png)
 
 
 ## Data Master Inventaris
 
 
-![Data Master High Fidelity](./screenshots/data-master-final.png)
+![Data Master High Fidelity](./design/data-master-final.png)
 
 ## Design System
 
-![Design System SIMSARPRAS UNPAM](./screenshots/design-system-figma.png)
+![Design System SIMSARPRAS UNPAM](./design/design-system-figma.png)
 
 ---
 

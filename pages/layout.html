@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard | SIMSARPRAS EDU — UNPAM</title>
   <meta name="description" content="Dashboard simulasi pengelolaan inventaris ruang kelas, laboratorium, dan perpustakaan Universitas Pamulang.">
-  <script src="assets/js/theme.js"></script>
-  <link rel="stylesheet" href="assets/css/theme.css">
-  <script src="assets/js/auth.js"></script>
+  <script src="../assets/js/theme.js"></script>
+  <link rel="stylesheet" href="../assets/css/theme.css">
+  <script src="../assets/js/auth.js"></script>
   <script>Auth.protectPage();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -261,7 +261,7 @@
     <div class="sidebar-scroll">
       <div class="p-6 flex items-center gap-2 sidebar-brand">
         <div class="w-10 h-10 flex-shrink-0">
-          <img src="assets/images/logo-unpam.png" alt="Logo Universitas Pamulang" width="40" height="40" class="h-10 w-10 object-contain" data-local-image>
+          <img src="../assets/images/logo-unpam.png" alt="Logo Universitas Pamulang" width="40" height="40" class="h-10 w-10 object-contain" data-local-image>
           <span hidden class="h-10 w-10 rounded-xl bg-blue-50 text-primary items-center justify-center" data-image-fallback role="img" aria-label="Logo Universitas Pamulang belum tersedia" style="display: flex;">
             <span class="material-symbols-outlined" aria-hidden="true">school</span>
           </span>
@@ -280,21 +280,21 @@
         <p class="nav-group-title">Menu Utama</p>
         <a class="nav-link" href="#dashboard" aria-current="page"><span class="material-symbols-outlined" aria-hidden="true">dashboard</span>Dashboard</a>
         <p class="nav-group-title">Data Master</p>
-        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">apartment</span>Gedung</a>
-        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">meeting_room</span>Ruangan</a>
-        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">category</span>Kategori Inventaris</a>
+        <a class="nav-link" href="gedung.html"><span class="material-symbols-outlined" aria-hidden="true">apartment</span>Gedung</a>
+        <a class="nav-link" href="ruangan.html"><span class="material-symbols-outlined" aria-hidden="true">meeting_room</span>Ruangan</a>
+        <a class="nav-link" href="kategori.html"><span class="material-symbols-outlined" aria-hidden="true">category</span>Kategori Inventaris</a>
         <a class="nav-link" href="./data-master.html"><span class="material-symbols-outlined" aria-hidden="true">inventory_2</span>Data Inventaris</a>
         <p class="nav-group-title">Fasilitas Akademik</p>
-        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">school</span>Ruang Kelas</a>
-        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">science</span>Laboratorium</a>
-        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">local_library</span>Perpustakaan</a>
+        <a class="nav-link" href="ruang-kelas.html"><span class="material-symbols-outlined" aria-hidden="true">school</span>Ruang Kelas</a>
+        <a class="nav-link" href="laboratorium.html"><span class="material-symbols-outlined" aria-hidden="true">science</span>Laboratorium</a>
+        <a class="nav-link" href="perpustakaan.html"><span class="material-symbols-outlined" aria-hidden="true">local_library</span>Perpustakaan</a>
         <p class="nav-group-title">Manajemen &amp; Pelaporan</p>
-        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">fact_check</span>Kondisi Inventaris</a>
-        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">build</span>Pemeliharaan</a>
+        <a class="nav-link" href="kondisi.html"><span class="material-symbols-outlined" aria-hidden="true">fact_check</span>Kondisi Inventaris</a>
+        <a class="nav-link" href="pemeliharaan.html"><span class="material-symbols-outlined" aria-hidden="true">build</span>Pemeliharaan</a>
         <a class="nav-link" href="laporan.html"><span class="material-symbols-outlined" aria-hidden="true">assessment</span>Laporan &amp; Audit</a>
         <p class="nav-group-title">Pengaturan</p>
-        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">manage_accounts</span>Pengguna &amp; Hak Akses</a>
-        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">settings</span>Pengaturan Sistem</a>
+        <a class="nav-link" href="pengguna.html"><span class="material-symbols-outlined" aria-hidden="true">manage_accounts</span>Pengguna &amp; Hak Akses</a>
+        <a class="nav-link" href="pengaturan.html"><span class="material-symbols-outlined" aria-hidden="true">settings</span>Pengaturan Sistem</a>
       </nav>
     </div>
     <div class="p-4 m-2 bg-surface-container-low rounded-xl flex items-center gap-2 flex-shrink-0">
@@ -354,15 +354,7 @@
               <p class="mt-3 text-on-surface-variant">Monitoring inventaris fisik, ruang akademik, serta kesiapan fasilitas perkuliahan Universitas Pamulang.</p>
             </div>
             <div class="flex flex-wrap items-center gap-3">
-              <div class="relative" id="campus-wrapper">
-                <button id="campus-button" type="button" class="button bg-surface-container" aria-expanded="false" aria-controls="campus-menu"><span class="w-2 h-2 rounded-full bg-primary" aria-hidden="true"></span>Kampus Viktor (Aktif)<span class="material-symbols-outlined" aria-hidden="true">expand_more</span></button>
-                <div id="campus-menu" hidden class="absolute left-0 mt-2 w-56 max-w-[calc(100vw-72px)] bg-white rounded-xl shadow-xl z-20 p-2">
-                  <p class="px-2 py-1 text-label-sm text-outline">Lokasi kampus — data simulasi</p>
-                  <button type="button" id="campus-active" class="w-full px-2 py-2 text-left flex items-center justify-between bg-blue-50 rounded-lg">Kampus Viktor<span class="badge badge-info">Aktif</span></button>
-                  <button type="button" class="w-full px-2 py-2 text-left text-on-surface-variant" title="Data kampus belum tersedia" disabled>Kampus Utama <span class="text-label-sm">(belum tersedia)</span></button>
-                  <button type="button" class="w-full px-2 py-2 text-left text-on-surface-variant" title="Data kampus belum tersedia" disabled>Kampus Witana Harja <span class="text-label-sm">(belum tersedia)</span></button>
-                </div>
-              </div>
+              <div class="px-3 py-2 rounded-lg bg-surface-container text-on-surface font-semibold text-label-md inline-flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary" aria-hidden="true"></span>Lingkup: UNPAM</div>
               <a href="laporan.html" class="button button-secondary" title="Lihat rekap laporan inventaris"><span class="material-symbols-outlined text-primary" aria-hidden="true">description</span>Lihat Rekap Laporan</a>
               <a href="form-inventaris.html" class="button button-primary" title="Tambah inventaris"><span class="material-symbols-outlined" aria-hidden="true">add</span>Tambah Inventaris</a>
             </div>
@@ -434,9 +426,9 @@
 <h2 class="panel-title">Distribusi Inventaris Fasilitas</h2>
 <p class="panel-description">Sebaran kategori aset pada zona akademik kampus Viktor.</p>
 </div>
-                <div class="inline-flex p-1 rounded-lg bg-surface-container text-label-sm" aria-label="Tampilan filter gedung">
-<button type="button" class="px-3 py-2 bg-white rounded-lg text-primary font-bold shadow-sm" disabled>Semua</button><button type="button" class="px-3 py-2 text-on-surface-variant" title="Filter gedung belum tersedia" disabled>Gedung A</button><button type="button" class="px-3 py-2 text-on-surface-variant" title="Filter gedung belum tersedia" disabled>Gedung B</button>
-</div>
+                <div class="inline-flex flex-wrap p-1 rounded-lg bg-surface-container text-label-sm gap-1" id="building-filter" aria-label="Tampilan filter gedung">
+                  <button type="button" class="px-3 py-2 bg-white dark:bg-slate-800 rounded-lg text-primary font-bold shadow-sm" data-building="all" aria-pressed="true">Semua Gedung</button>
+                </div>
               </div>
               <div class="mt-6 space-y-6" id="category-distribution"></div>
               <p class="text-label-sm text-on-surface-variant mt-3">Persentase dibulatkan ke satu angka desimal.</p>
@@ -451,20 +443,18 @@
             <div>
               <div class="flex items-start justify-between gap-3">
 <div>
-<h2 class="panel-title">Kondisi Inventaris Keseluruhan</h2>
-<p class="panel-description">Distribusi total kuantitas barang berdasarkan kondisi.</p>
+<h2 class="panel-title">Kondisi Inventaris</h2>
+<p class="panel-description">Ringkasan berdasarkan kondisi inventaris yang tercatat.</p>
 </div>
 <span class="material-symbols-outlined text-outline" aria-hidden="true">pie_chart</span>
 </div>
-              <div class="condition-layout">
+              <div class="condition-layout mt-4">
                 <div class="flex-shrink-0 w-full" style="max-width:360px;">
                   <canvas id="condition-chart" width="360" height="360" role="img" aria-label="Grafik kondisi inventaris berdasarkan total kuantitas"></canvas>
                   <p id="chart-fallback" class="hidden panel-description mt-2" role="alert">Grafik kondisi tidak dapat dimuat.</p>
                 </div>
                 <div class="condition-list space-y-2" id="condition-list"></div>
               </div>
-            </div>
-            <button type="button" class="mt-6 inline-flex items-center gap-2 text-primary text-label-md font-bold self-start" title="Detail audit belum tersedia" disabled>Lihat Detail Audit Fisik<span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></button>
           </section>
         </div>
 
@@ -561,21 +551,21 @@
 </div>
           <div class="gallery-grid">
             <figure class="gallery-card">
-              <img src="assets/images/gedung-unpam.png" alt="Gedung Utama Kampus Viktor" loading="lazy" data-local-image>
+              <img src="../assets/images/gedung-unpam.png" alt="Gedung Utama Kampus Viktor" loading="lazy" data-local-image>
               <div hidden class="image-fallback" data-image-fallback>
 <span class="material-symbols-outlined text-3xl" aria-hidden="true">apartment</span><span>Foto belum tersedia</span>
 </div>
               <figcaption class="gallery-caption"><span class="text-label-md font-bold">Gedung Utama Kampus Viktor</span><span class="text-body-sm">Pusat kegiatan akademik dan administrasi.</span></figcaption>
             </figure>
             <figure class="gallery-card">
-              <img src="assets/images/laboratorium-unpam.png" alt="Laboratorium Komputer Terpadu" loading="lazy" data-local-image>
+              <img src="../assets/images/laboratorium-unpam.png" alt="Laboratorium Komputer Terpadu" loading="lazy" data-local-image>
               <div hidden class="image-fallback" data-image-fallback>
 <span class="material-symbols-outlined text-3xl" aria-hidden="true">science</span><span>Foto belum tersedia</span>
 </div>
               <figcaption class="gallery-caption"><span class="text-label-md font-bold">Laboratorium Komputer Terpadu</span><span class="text-body-sm">Fasilitas praktikum komputer dan pembelajaran digital.</span></figcaption>
             </figure>
             <figure class="gallery-card">
-              <img src="assets/images/perpustakaan-unpam.png" alt="Perpustakaan Digital Viktor" loading="lazy" data-local-image>
+              <img src="../assets/images/perpustakaan-unpam.png" alt="Perpustakaan Digital Viktor" loading="lazy" data-local-image>
               <div hidden class="image-fallback" data-image-fallback>
 <span class="material-symbols-outlined text-3xl" aria-hidden="true">local_library</span><span>Foto belum tersedia</span>
 </div>
@@ -654,35 +644,13 @@
         }
       });
 
-      // Dropdown kampus: hanya buka/tutup, belum mengganti data.
-      const campusWrapper = document.getElementById("campus-wrapper");
-      const campusButton = document.getElementById("campus-button");
-      const campusMenu = document.getElementById("campus-menu");
-      const campusActive = document.getElementById("campus-active");
-
-      function setCampusMenu(open, restoreFocus = false) {
-        campusMenu.hidden = !open;
-        campusButton.setAttribute("aria-expanded", String(open));
-        if (restoreFocus) campusButton.focus();
-      }
-
-      campusButton.addEventListener("click", () => setCampusMenu(campusMenu.hidden));
-      campusActive.addEventListener("click", () => setCampusMenu(false, true));
-      document.addEventListener("click", (event) => {
-        if (!campusWrapper.contains(event.target)) setCampusMenu(false);
-      });
-      document.addEventListener("focusin", (event) => {
-        if (!campusWrapper.contains(event.target)) setCampusMenu(false);
-      });
+      // Dropdown kampus telah diganti dengan label informatif statis.
 
       document.addEventListener("keydown", (event) => {
         if (event.key === "Escape") {
           if (menuIsOpen) {
             event.preventDefault();
             setMenu(false, true);
-          } else if (!campusMenu.hidden) {
-            event.preventDefault();
-            setCampusMenu(false, true);
           }
           return;
         }
@@ -723,9 +691,9 @@
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-  <script src="assets/js/inventory-store.js"></script>
-  <script src="assets/js/notifications.js"></script>
-  <script src="assets/js/profile.js"></script>
-  <script src="assets/js/dashboard.js"></script>
+  <script src="../assets/js/inventory-store.js"></script>
+  <script src="../assets/js/notifications.js"></script>
+  <script src="../assets/js/profile.js"></script>
+  <script src="../assets/js/dashboard.js"></script>
 </body>
 </html>

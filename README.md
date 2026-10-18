@@ -8,11 +8,30 @@ dengan data simulasi yang disimpan di `localStorage` peramban (tanpa backend/ser
 
 | Halaman | File | Keterangan |
 | --- | --- | --- |
-| Login | `login.html` | Halaman masuk demo (maskot robot + validasi) |
-| Dashboard | `layout.html` | Ringkasan statistik dan grafik kondisi (Chart.js) |
-| Data Inventaris | `data-master.html` | Tabel, pencarian, filter, tambah/edit/hapus (CRUD) |
-| Form Inventaris | `form-inventaris.html` | Formulir tambah/edit data inventaris |
-| Laporan | `laporan.html` | Rekap seluruh inventaris + tombol cetak |
+| Login | `pages/login.html` | Halaman masuk demo (maskot robot + validasi) |
+| Dashboard | `pages/layout.html` | Ringkasan statistik dan grafik kondisi (Chart.js) |
+| Data Inventaris | `pages/data-master.html` | Tabel, pencarian, filter, tambah/edit/hapus (CRUD) |
+| Form Inventaris | `pages/form-inventaris.html` | Formulir tambah/edit data inventaris |
+| Laporan | `pages/laporan.html` | Rekap seluruh inventaris + tombol cetak |
+| Data Master | `pages/gedung.html`, `pages/perpustakaan.html`, `pages/laboratorium.html`, `pages/ruang-kelas.html`, `pages/ruangan.html` | Referensi master lokasi |
+| Referensi | `pages/kategori.html`, `pages/kondisi.html` | Referensi kategori dan kondisi barang |
+| Operasional | `pages/pemeliharaan.html`, `pages/pengguna.html`, `pages/pengaturan.html` | Pemeliharaan, pengguna, pengaturan |
+
+## Struktur Folder
+
+```text
+.
+├── index.html            # Pengalihan awal ke login atau dashboard
+├── pages/                # Seluruh halaman aplikasi
+├── assets/
+│   ├── css/              # theme.css, login.css
+│   ├── js/               # Logika per halaman + inti (inventory-store, auth, theme)
+│   ├── images/           # Logo dan foto gedung/kampus
+│   └── vendor/           # Pustaka lokal (qrcode.min.js)
+├── design/               # Aset desain & prototipe Stitch (bukan bagian dari aplikasi)
+├── PERANCANGAN.md        # Dokumen perancangan proyek
+└── README.md
+```
 
 ## Akun Demo
 
@@ -22,7 +41,7 @@ dengan data simulasi yang disimpan di `localStorage` peramban (tanpa backend/ser
 Login adalah **simulasi client-side**, bukan autentikasi aman. Kata sandi tidak disimpan
 ke storage; setelah login berhasil hanya disimpan penanda sesi di `sessionStorage`
 (key `simsarpras.session.v1`). Halaman Dashboard, Data Inventaris, Form, dan Laporan
-memeriksa sesi; tanpa sesi akan diarahkan ke halaman login. Tombol **Keluar** menghapus
+memeriksa sesi; tanpa sesi akan diarahkan ke `pages/login.html`. Tombol **Keluar** menghapus
 penanda sesi.
 
 ## Teknologi

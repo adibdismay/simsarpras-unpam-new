@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pemeliharaan | SIMSARPRAS EDU — UNPAM</title>
+  <meta name="description" content="Daftar tindak lanjut pemeliharaan berdasarkan kondisi inventaris SIMSARPRAS EDU.">
+  <script src="../assets/js/theme.js"></script>
+  <link rel="stylesheet" href="../assets/css/theme.css">
+  <script src="../assets/js/auth.js"></script>
+  <script>Auth.protectPage();</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#2563EB",
+            "primary-container": "#1D4ED8",
+            "on-primary": "#FFFFFF",
+            "on-primary-fixed-variant": "#1C3BA8",
+            background: "#F7F8FA",
+            surface: "#F7F8FA",
+            "surface-container-lowest": "#FFFFFF",
+            "surface-container-low": "#F2F3FF",
+            "surface-container": "#EAEDFF",
+            "surface-container-high": "#E2E7FF",
+            "surface-variant": "#DAE2FD",
+            "surface-tint": "#3A55C1",
+            "on-surface": "#111827",
+            "on-surface-variant": "#6B7280",
+            outline: "#6B7280",
+            "outline-variant": "#E5E7EB",
+            secondary: "#6E5E00",
+            "secondary-container": "#FCD801",
+            "on-secondary-container": "#6F5E00",
+            success: "#16A34A",
+            warning: "#D97706",
+            error: "#DC2626",
+            "error-container": "#FEE2E2",
+            "on-error": "#FFFFFF"
+          },
+          fontFamily: {
+            sans: ["Plus Jakarta Sans", "Arial", "sans-serif"],
+            mono: ["JetBrains Mono", "monospace"]
+          },
+          fontSize: {
+            "body-md": ["14px", { lineHeight: "20px" }],
+            "body-sm": ["12px", { lineHeight: "18px" }],
+            "label-sm": ["11px", { lineHeight: "16px" }],
+            "label-md": ["12px", { lineHeight: "18px" }],
+            "headline-sm": ["18px", { lineHeight: "26px" }],
+            "headline-lg": ["28px", { lineHeight: "36px" }],
+            "display-lg": ["36px", { lineHeight: "44px" }]
+          },
+          borderRadius: { lg: "4px", xl: "8px" }
+        }
+      }
+    };
+  </script>
+    <style>
+    html { scroll-padding-top: 80px; }
+    body { margin: 0; }
+    [hidden] { display: none !important; }
+    *, *::before, *::after { box-sizing: border-box; }
+    :focus-visible { outline: 2px solid #2563eb; outline-offset: 3px; }
+    .material-symbols-outlined { flex-shrink: 0; font-size: 20px; line-height: 1; vertical-align: middle; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 8px; }
+    #app-sidebar { position: fixed; inset: 0 auto 0 0; z-index: 100; display: flex; flex-direction: column; width: 288px; height: 100vh; height: 100dvh; background: #fff; box-shadow: 0 1px 8px rgb(0 0 0 / 4%); }
+    .sidebar-scroll { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+    .nav-group-title { margin: 16px 0 4px; padding: 4px 16px; color: #6b7280; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+    .nav-link { display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-radius: 4px; color: #6b7280; text-decoration: none; }
+    .nav-link:hover { background: #f2f3ff; color: #111827; }
+    .nav-link[aria-current="page"] { background: #eaedff; color: #2563eb; font-weight: 700; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 8px; font-size: 11px; line-height: 16px; font-weight: 600; }
+    .badge-good { background: #f0fdf4; color: #166534; }
+    .badge-warning { background: #fffbeb; color: #92400e; }
+    .badge-danger { background: #fef2f2; color: #b91c1c; }
+    .badge-info { background: #eff6ff; color: #1d4ed8; }
+    #app-shell { display: flex; flex-direction: column; min-height: 100vh; min-width: 0; padding-left: 288px; }
+    #app-header { position: fixed; top: 0; right: 0; left: 288px; z-index: 40; height: 64px; background: rgb(247 248 250 / 95%); backdrop-filter: blur(16px); box-shadow: 0 1px 8px rgb(0 0 0 / 4%); }
+    .header-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 100%; padding: 0 24px; }
+    .content-canvas { display: grid; gap: 24px; width: 100%; max-width: 1600px; margin: 0 auto; padding: 32px; }
+    .panel { padding: 24px; border-radius: 8px; background: #fff; box-shadow: 0 1px 3px rgb(0 0 0 / 6%); }
+    .panel-title { color: #111827; font-size: 18px; line-height: 26px; font-weight: 600; }
+    .panel-description { margin-top: 4px; color: #6b7280; font-size: 12px; line-height: 18px; }
+    #menu-open, #menu-close, #sidebar-overlay { display: none; }
+    @media (max-width: 1023px) {
+      #app-shell { padding-left: 0; }
+      #app-header { left: 0; }
+      #app-sidebar { display: flex; width: min(320px, calc(100vw - 32px)); transform: translateX(-105%); visibility: hidden; pointer-events: none; transition: transform 220ms cubic-bezier(.2,.8,.2,1), visibility 0s 220ms; border-radius: 0 20px 20px 0; box-shadow: 12px 0 40px rgb(17 24 39 / 14%); }
+      #app-sidebar[data-open="true"] { transform: translateX(0); visibility: visible; pointer-events: auto; transition-delay: 0s; }
+      #sidebar-overlay { display: block; position: fixed; inset: 0; z-index: 90; background: rgb(17 24 39 / 40%); backdrop-filter: blur(2px); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 220ms ease, visibility 0s 220ms; }
+      #sidebar-overlay[data-open="true"] { opacity: 1; visibility: visible; pointer-events: auto; transition-delay: 0s; }
+      #menu-open, #menu-close { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; flex-shrink: 0; border-radius: 12px; border: 1px solid #e5e7eb; background: #fff; color: #2563eb; cursor: pointer; }
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-sans antialiased">
+  <!-- SIDEBAR -->
+    <aside id="app-sidebar" data-open="false" aria-label="Navigasi utama SIMSARPRAS EDU">
+    <div class="sidebar-scroll">
+      <div class="p-6 flex items-center justify-between sidebar-brand">
+        <div class="flex items-center gap-2">
+          <div class="w-10 h-10 flex-shrink-0">
+            <img src="../assets/images/logo-unpam.png" alt="Logo Universitas Pamulang" width="40" height="40" class="h-10 w-10 object-contain" data-local-image>
+            <span hidden class="h-10 w-10 rounded-xl bg-blue-50 text-primary items-center justify-center" data-image-fallback role="img" aria-label="Logo Universitas Pamulang belum tersedia" style="display: flex;">
+              <span class="material-symbols-outlined" aria-hidden="true">school</span>
+            </span>
+          </div>
+          <div class="min-w-0">
+            <p class="text-[17px] font-bold tracking-tight leading-tight">SIMSARPRAS EDU</p>
+            <p class="text-label-sm text-on-surface-variant mt-1">Universitas Pamulang</p>
+          </div>
+        </div>
+        <button id="menu-close" type="button" aria-label="Tutup menu navigasi" title="Tutup menu navigasi" aria-controls="app-sidebar" aria-expanded="false"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button>
+      </div>
+      <div class="px-6 pb-2">
+        <span class="badge bg-surface-container text-primary"><span class="w-2 h-2 rounded-full bg-primary" aria-hidden="true"></span>Kampus Viktor</span>
+      </div>
+      <nav class="px-2 pb-4" aria-label="Menu aplikasi">
+        <p class="nav-group-title">Menu Utama</p>
+        <a class="nav-link" href="layout.html"><span class="material-symbols-outlined" aria-hidden="true">dashboard</span>Dashboard</a>
+        <p class="nav-group-title">Data Master</p>
+        <a class="nav-link" href="gedung.html"><span class="material-symbols-outlined" aria-hidden="true">apartment</span>Gedung</a>
+        <a class="nav-link" href="ruangan.html"><span class="material-symbols-outlined" aria-hidden="true">meeting_room</span>Ruangan</a>
+        <a class="nav-link" href="kategori.html"><span class="material-symbols-outlined" aria-hidden="true">category</span>Kategori Inventaris</a>
+        <a class="nav-link" href="data-master.html"><span class="material-symbols-outlined" aria-hidden="true">inventory_2</span>Data Inventaris</a>
+        <p class="nav-group-title">Fasilitas Akademik</p>
+        <a class="nav-link" href="ruang-kelas.html"><span class="material-symbols-outlined" aria-hidden="true">school</span>Ruang Kelas</a>
+        <a class="nav-link" href="laboratorium.html"><span class="material-symbols-outlined" aria-hidden="true">science</span>Laboratorium</a>
+        <a class="nav-link" href="perpustakaan.html"><span class="material-symbols-outlined" aria-hidden="true">local_library</span>Perpustakaan</a>
+        <p class="nav-group-title">Manajemen &amp; Pelaporan</p>
+        <a class="nav-link" href="kondisi.html"><span class="material-symbols-outlined" aria-hidden="true">fact_check</span>Kondisi Inventaris</a>
+        <a class="nav-link" href="pemeliharaan.html" aria-current="page"><span class="material-symbols-outlined" aria-hidden="true">build</span>Pemeliharaan</a>
+        <a class="nav-link" href="laporan.html"><span class="material-symbols-outlined" aria-hidden="true">assessment</span>Laporan &amp; Audit</a>
+        <p class="nav-group-title">Pengaturan</p>
+        <a class="nav-link" href="pengguna.html"><span class="material-symbols-outlined" aria-hidden="true">manage_accounts</span>Pengguna &amp; Hak Akses</a>
+        <a class="nav-link" href="pengaturan.html"><span class="material-symbols-outlined" aria-hidden="true">settings</span>Pengaturan Sistem</a>
+      </nav>
+    </div>
+    <div class="p-4 m-2 bg-surface-container-low rounded-xl flex items-center gap-2 flex-shrink-0">
+      <span class="material-symbols-outlined p-2 rounded-lg bg-surface-container text-primary" aria-hidden="true">dns</span>
+      <div class="min-w-0">
+        <p class="font-mono text-label-md font-semibold">v2.4.0 • Node Viktor</p>
+        <p class="text-label-sm text-on-surface-variant">Sistem Sarpras Terpadu</p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- APP SHELL -->
+  <div id="app-shell">
+    <header id="app-header">
+      <div class="header-row">
+        <button id="menu-open" type="button" aria-label="Buka menu" aria-controls="app-sidebar" aria-expanded="false"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h11"></path></svg></button>
+        <div class="header-breadcrumb flex items-center gap-4">
+          <nav class="flex items-center gap-2 text-label-md" aria-label="Breadcrumb"><span class="text-on-surface-variant">Fasilitas &amp; Laporan</span><span class="material-symbols-outlined text-sm" aria-hidden="true">chevron_right</span><span class="font-semibold">Pemeliharaan</span></nav>
+        </div>
+        <div class="header-actions flex items-center gap-3">
+          <button type="button" id="theme-toggle" aria-label="Ubah tema" title="Ubah tema"><span class="material-symbols-outlined theme-icon-light" aria-hidden="true">dark_mode</span><span class="material-symbols-outlined theme-icon-dark" aria-hidden="true">light_mode</span></button>
+          <button type="button" id="logout-button" class="inline-flex items-center gap-2 h-10 px-3 rounded-lg text-label-md font-semibold text-on-surface-variant hover:bg-error-container hover:text-error transition-colors" title="Keluar"><span class="material-symbols-outlined" aria-hidden="true">logout</span><span>Keluar</span></button>
+        </div>
+      </div>
+    </header>
+
+    <main class="w-full pt-16 bg-surface" tabindex="-1">
+      <div class="content-canvas">
+        <!-- Header Panel -->
+        <section class="panel flex flex-col gap-4">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <h1 class="text-[24px] font-bold tracking-tight">Pemeliharaan Inventaris</h1>
+              <p class="mt-1 text-on-surface-variant">Daftar tindak lanjut berdasarkan kondisi inventaris, bukan riwayat servis.</p>
+            </div>
+            <div class="flex flex-wrap items-center gap-3 w-full sm:w-auto">
+              <div class="w-full sm:w-48">
+                <label for="filter-kondisi" class="sr-only">Filter Kondisi</label>
+                <select id="filter-kondisi" class="w-full h-11 px-3 rounded-xl border border-outline-variant bg-surface text-on-surface text-body-sm focus:outline-none focus:border-primary transition-colors">
+                  <option value="">Semua Kondisi Tindak Lanjut</option>
+                  <option value="perlu pemeriksaan">Perlu Pemeriksaan</option>
+                  <option value="rusak ringan">Rusak Ringan</option>
+                  <option value="rusak berat">Rusak Berat</option>
+                  <option value="dalam perbaikan">Dalam Perbaikan</option>
+                </select>
+              </div>
+              <div class="w-full sm:w-64">
+                <label for="search-input" class="sr-only">Cari berdasarkan nama atau kode</label>
+                <div class="relative">
+                  <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-on-surface-variant"><span class="material-symbols-outlined" aria-hidden="true">search</span></span>
+                  <input type="text" id="search-input" placeholder="Cari nama atau kode..." class="w-full h-11 pl-10 pr-4 rounded-xl border border-outline-variant bg-surface text-on-surface text-body-sm focus:outline-none focus:border-primary transition-colors">
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Ringkasan Statistik -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <article class="panel flex flex-col justify-between gap-4">
+            <div>
+              <p class="uppercase text-label-sm text-outline font-bold">Total Record Pemeliharaan</p>
+              <p class="text-display-lg font-bold mt-1" id="summary-total-records">0</p>
+            </div>
+            <p class="text-body-sm text-primary font-semibold">Entri yang memerlukan tindak lanjut</p>
+          </article>
+          <article class="panel flex flex-col justify-between gap-4">
+            <div>
+              <p class="uppercase text-label-sm text-outline font-bold">Total Unit Kuantitas</p>
+              <p class="text-display-lg font-bold mt-1" id="summary-total-qty">0</p>
+            </div>
+            <p class="text-body-sm text-primary font-semibold">Akumulasi unit fisik dalam pemeliharaan</p>
+          </article>
+        </div>
+
+        <!-- Tabel Pemeliharaan -->
+        <section class="panel">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-headline-sm font-bold">Daftar Tindak Lanjut Inventaris</h2>
+          </div>
+
+          <div id="maint-error" hidden class="p-4 rounded-xl bg-error-container text-error text-body-sm">
+            Gagal memuat data inventaris dari penyimpanan lokal.
+          </div>
+
+          <div id="maint-empty" hidden class="p-8 text-center text-on-surface-variant">
+            <span class="material-symbols-outlined text-4xl mb-2" aria-hidden="true">build</span>
+            <p>Tidak ada inventaris yang memerlukan pemeliharaan atau tindak lanjut saat ini.</p>
+          </div>
+
+          <div id="maint-table-wrap" class="overflow-x-auto border border-outline-variant rounded-xl">
+            <table class="w-full text-left text-body-sm border-collapse">
+              <thead>
+                <tr class="bg-surface-container-low text-on-surface-variant font-semibold">
+                  <th class="py-3 px-4">#</th>
+                  <th class="py-3 px-4">Kode</th>
+                  <th class="py-3 px-4">Nama Barang</th>
+                  <th class="py-3 px-4">Lokasi</th>
+                  <th class="py-3 px-4">Kondisi</th>
+                  <th class="py-3 px-4">Jumlah</th>
+                  <th class="py-3 px-4">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="maint-tbody">
+                <!-- Rendered by pemeliharaan.js -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div id="sidebar-overlay" data-open="false" aria-hidden="true"></div>
+
+  <!-- INTERAKSI DASAR SIDEBAR -->
+  <script>
+    (() => {
+      "use strict";
+      const sidebar = document.getElementById("app-sidebar");
+      const openButton = document.getElementById("menu-open");
+      const closeButton = document.getElementById("menu-close");
+      const overlay = document.getElementById("sidebar-overlay");
+      const mobile = window.matchMedia("(max-width: 1023px)");
+      let menuIsOpen = false;
+
+      function setMenu(nextOpen, restoreFocus = false) {
+        menuIsOpen = mobile.matches && nextOpen;
+        sidebar.dataset.open = String(menuIsOpen);
+        overlay.dataset.open = String(menuIsOpen);
+        openButton.setAttribute("aria-expanded", String(menuIsOpen));
+        document.body.style.overflow = menuIsOpen ? "hidden" : "";
+        if (menuIsOpen) {
+          closeButton.focus();
+        } else if (restoreFocus && mobile.matches) {
+          openButton.focus();
+        }
+      }
+
+      openButton.addEventListener("click", () => setMenu(!menuIsOpen));
+      closeButton.addEventListener("click", () => setMenu(false, true));
+      overlay.addEventListener("click", () => setMenu(false, true));
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && menuIsOpen) setMenu(false, true);
+      });
+      setMenu(false);
+    })();
+  </script>
+
+  <script src="../assets/js/inventory-store.js"></script>
+  <script src="../assets/js/notifications.js"></script>
+  <script src="../assets/js/profile.js"></script>
+  <script src="../assets/js/pemeliharaan.js"></script>
+</body>
+</html>

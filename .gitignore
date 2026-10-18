@@ -3,3 +3,11 @@
 node_modules/
 .vscode/
 *.log
+
+# Konfigurasi lokal OpenCode (memuat API key) - jangan pernah di-commit
+opencode.json
+
+# Sampah sistem operasi
+.DS_Store
+Thumbs.db
+desktop.ini

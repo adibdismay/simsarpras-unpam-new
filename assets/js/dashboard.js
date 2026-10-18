@@ -402,6 +402,71 @@
     renderCards(stats);
     renderConditionList(stats.byCondition);
     renderChart(stats.byCondition);
+
+    // Inisialisasi Filter Gedung untuk Distribusi Inventaris
+    const filterContainer = byId('building-filter');
+    let currentBuilding = 'all';
+
+    function updateDistribution() {
+      const filteredData = currentBuilding === 'all' 
+        ? data 
+        : data.filter(function(item) {
+            const g = (item.gedung || '').trim();
+            if (currentBuilding === '__empty__') return !g;
+            return g.toLowerCase() === currentBuilding.toLowerCase();
+          });
+      const filteredStats = compute(filteredData);
+      renderCategoryDistribution(filteredStats);
+    }
+
+    if (filterContainer) {
+      const buildingsSet = new Set();
+      data.forEach(function(item) {
+        const g = (item.gedung || '').trim();
+        if (g) buildingsSet.add(g);
+      });
+      const buildings = Array.from(buildingsSet).sort();
+
+      // Hapus tombol statis jika ada, sisakan tombol "Semua Gedung"
+      filterContainer.textContent = '';
+      
+      const allBtn = document.createElement('button');
+      allBtn.type = 'button';
+      allBtn.className = 'px-3 py-2 rounded-lg font-bold shadow-sm bg-white dark:bg-slate-800 text-primary';
+      allBtn.setAttribute('data-building', 'all');
+      allBtn.setAttribute('aria-pressed', 'true');
+      allBtn.textContent = 'Semua Gedung';
+      filterContainer.appendChild(allBtn);
+
+      buildings.forEach(function(b) {
+        const bBtn = document.createElement('button');
+        bBtn.type = 'button';
+        bBtn.className = 'px-3 py-2 rounded-lg font-semibold text-on-surface-variant hover:text-on-surface';
+        bBtn.setAttribute('data-building', b);
+        bBtn.setAttribute('aria-pressed', 'false');
+        bBtn.textContent = b;
+        filterContainer.appendChild(bBtn);
+      });
+
+      filterContainer.addEventListener('click', function(e) {
+        const btn = e.target.closest('button[data-building]');
+        if (!btn) return;
+        currentBuilding = btn.getAttribute('data-building');
+
+        filterContainer.querySelectorAll('button').forEach(function(b) {
+          const active = b === btn;
+          b.setAttribute('aria-pressed', String(active));
+          if (active) {
+            b.className = 'px-3 py-2 rounded-lg font-bold shadow-sm bg-white dark:bg-slate-800 text-primary';
+          } else {
+            b.className = 'px-3 py-2 rounded-lg font-semibold text-on-surface-variant hover:text-on-surface';
+          }
+        });
+
+        updateDistribution();
+      });
+    }
+
     renderCategoryDistribution(stats);
     renderAttention(data);
     renderCapacityPct(stats);

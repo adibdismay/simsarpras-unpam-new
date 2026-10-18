@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Form Inventaris | SIMSARPRAS EDU — UNPAM</title>
   <meta name="description" content="Form tambah dan ubah data inventaris SIMSARPRAS EDU untuk Milestone 3.">
-  <script src="assets/js/theme.js"></script>
-  <link rel="stylesheet" href="assets/css/theme.css">
-  <script src="assets/js/auth.js"></script>
+  <script src="../assets/js/theme.js"></script>
+  <link rel="stylesheet" href="../assets/css/theme.css">
+  <script src="../assets/js/auth.js"></script>
   <script>Auth.protectPage();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -269,7 +269,7 @@
     <div class="sidebar-scroll">
       <div class="p-6 flex items-center gap-2 sidebar-brand">
         <div class="w-10 h-10 flex-shrink-0">
-          <img src="assets/images/logo-unpam.png" alt="Logo Universitas Pamulang" width="40" height="40" class="h-10 w-10 object-contain" data-local-image>
+          <img src="../assets/images/logo-unpam.png" alt="Logo Universitas Pamulang" width="40" height="40" class="h-10 w-10 object-contain" data-local-image>
           <span hidden class="h-10 w-10 rounded-xl bg-blue-50 text-primary items-center justify-center" data-image-fallback role="img" aria-label="Logo Universitas Pamulang belum tersedia" style="display: flex;">
             <span class="material-symbols-outlined" aria-hidden="true">school</span>
           </span>
@@ -287,21 +287,21 @@
         <p class="nav-group-title">Menu Utama</p>
         <a class="nav-link" href="layout.html"><span class="material-symbols-outlined" aria-hidden="true">dashboard</span>Dashboard</a>
         <p class="nav-group-title">Data Master</p>
-        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">apartment</span>Gedung</a>
-        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">meeting_room</span>Ruangan</a>
-        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">category</span>Kategori Inventaris</a>
+        <a class="nav-link" href="gedung.html"><span class="material-symbols-outlined" aria-hidden="true">apartment</span>Gedung</a>
+        <a class="nav-link" href="ruangan.html"><span class="material-symbols-outlined" aria-hidden="true">meeting_room</span>Ruangan</a>
+        <a class="nav-link" href="kategori.html"><span class="material-symbols-outlined" aria-hidden="true">category</span>Kategori Inventaris</a>
         <a class="nav-link" href="data-master.html" aria-current="page"><span class="material-symbols-outlined" aria-hidden="true">inventory_2</span>Data Inventaris</a>
         <p class="nav-group-title">Fasilitas Akademik</p>
-        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">school</span>Ruang Kelas</a>
-        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">science</span>Laboratorium</a>
-        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">local_library</span>Perpustakaan</a>
+        <a class="nav-link" href="ruang-kelas.html"><span class="material-symbols-outlined" aria-hidden="true">school</span>Ruang Kelas</a>
+        <a class="nav-link" href="laboratorium.html"><span class="material-symbols-outlined" aria-hidden="true">science</span>Laboratorium</a>
+        <a class="nav-link" href="perpustakaan.html"><span class="material-symbols-outlined" aria-hidden="true">local_library</span>Perpustakaan</a>
         <p class="nav-group-title">Manajemen &amp; Pelaporan</p>
-        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">fact_check</span>Kondisi Inventaris</a>
-        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">build</span>Pemeliharaan</a>
+        <a class="nav-link" href="kondisi.html"><span class="material-symbols-outlined" aria-hidden="true">fact_check</span>Kondisi Inventaris</a>
+        <a class="nav-link" href="pemeliharaan.html"><span class="material-symbols-outlined" aria-hidden="true">build</span>Pemeliharaan</a>
         <a class="nav-link" href="laporan.html"><span class="material-symbols-outlined" aria-hidden="true">assessment</span>Laporan &amp; Audit</a>
         <p class="nav-group-title">Pengaturan</p>
-        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">manage_accounts</span>Pengguna &amp; Hak Akses</a>
-        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">settings</span>Pengaturan Sistem</a>
+        <a class="nav-link" href="pengguna.html"><span class="material-symbols-outlined" aria-hidden="true">manage_accounts</span>Pengguna &amp; Hak Akses</a>
+        <a class="nav-link" href="pengaturan.html"><span class="material-symbols-outlined" aria-hidden="true">settings</span>Pengaturan Sistem</a>
       </nav>
     </div>
     <div class="p-4 m-2 bg-surface-container-low rounded-xl flex items-center gap-2 flex-shrink-0">
@@ -623,8 +623,8 @@
     })();
   </script>
 
-  <script src="assets/js/inventory-store.js"></script>
-  <script src="assets/js/form-inventaris.js"></script>
+  <script src="../assets/js/inventory-store.js"></script>
+  <script src="../assets/js/form-inventaris.js"></script>
 
 </body>
 </html>

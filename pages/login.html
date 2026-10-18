@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Masuk | SIMSARPRAS UNPAM</title>
   <meta name="description" content="Halaman masuk demo SIMSARPRAS UNPAM — simulasi client-side, bukan autentikasi aman.">
-  <script src="assets/js/theme.js"></script>
-  <link rel="stylesheet" href="assets/css/theme.css">
-  <script src="assets/js/auth.js"></script>
+  <script src="../assets/js/theme.js"></script>
+  <link rel="stylesheet" href="../assets/css/theme.css">
+  <script src="../assets/js/auth.js"></script>
   <script>Auth.redirectIfAuthenticated();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/login.css">
+  <link rel="stylesheet" href="../assets/css/login.css">
 </head>
 <body>
   <!-- Topbar -->
@@ -105,7 +105,7 @@
       <!-- Kartu login -->
       <div class="login-card">
         <div class="card-header">
-          <img class="card-logo" src="assets/images/logo-unpam.png" alt="Logo Universitas Pamulang" width="48" height="48">
+          <img class="card-logo" src="../assets/images/logo-unpam.png" alt="Logo Universitas Pamulang" width="48" height="48">
           <div>
             <h1>SIMSARPRAS UNPAM</h1>
             <p>Universitas Pamulang</p>
@@ -113,8 +113,8 @@
         </div>
 
         <div class="card-heading">
-          <h2>Masuk ke panel admin</h2>
-          <p>Kelola inventaris dan fasilitas kampus secara tersentralisasi.</p>
+          <h2>Masuk ke SIMSARPRAS</h2>
+          <p>Gunakan akun yang telah diberikan.</p>
         </div>
 
         <!-- Pesan umpan balik -->
@@ -166,15 +166,6 @@
           </button>
         </form>
 
-        <!-- Keterangan akun demo -->
-        <div class="demo-box">
-          <div class="demo-cred">
-            <span class="demo-badge">Demo</span>
-            <span class="demo-text"><span class="mono">admin</span> / <span class="mono">Demo123!</span></span>
-          </div>
-          <button type="button" id="btn-autofill" class="autofill-btn">Isi Otomatis</button>
-        </div>
-
         <div class="card-footer">
           <span>Simulasi client-side — bukan autentikasi aman</span>
           <span class="mono">v2.4.0</span>
@@ -188,6 +179,6 @@
     <p>© 2025 Biro Sarana &amp; Prasarana Universitas Pamulang (UNPAM). Hak Cipta Dilindungi.</p>
   </footer>
 
-  <script src="assets/js/login.js"></script>
+  <script src="../assets/js/login.js"></script>
 </body>
 </html>

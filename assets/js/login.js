@@ -1,6 +1,5 @@
 /* ============================================================
-   SIMSARPRAS UNPAM — Logika login demo (client-side)
-   Akun demo: admin / Demo123!
+   SIMSARPRAS UNPAM — Logika login (client-side)
    Tidak menyimpan kata sandi ke storage apa pun.
    ============================================================ */
 (function () {
@@ -9,7 +8,6 @@
   const DEMO_USERNAME = "admin";
   const DEMO_PASSWORD = "Demo123!";
   const TARGET_PAGE = "layout.html";
-
   const usernameInput = document.getElementById("username");
   const passwordInput = document.getElementById("password");
   const togglePassword = document.getElementById("toggle-password");
@@ -21,7 +19,6 @@
   const alertBox = document.getElementById("login-alert");
   const alertText = document.getElementById("login-alert-text");
   const robotMessage = document.getElementById("robot-message");
-  const autofillButton = document.getElementById("btn-autofill");
 
   const DEFAULT_MESSAGE = "Sistem Inventaris Siap • Silakan Masuk";
 
@@ -62,19 +59,6 @@
     });
   }
 
-  /* ---------- Isi otomatis akun demo ---------- */
-  if (autofillButton) {
-    autofillButton.addEventListener("click", function () {
-      usernameInput.value = DEMO_USERNAME;
-      passwordInput.value = DEMO_PASSWORD;
-      setInvalid(usernameInput, false);
-      setInvalid(passwordInput, false);
-      clearAlert();
-      robotMessage.textContent = "Kredensial demo diisikan. Silakan masuk!";
-      usernameInput.focus();
-    });
-  }
-
   /* Hapus tanda error saat pengguna mengetik ulang. */
   [usernameInput, passwordInput].forEach(function (input) {
     input.addEventListener("input", function () {
@@ -102,7 +86,7 @@
         showAlert("error", "Kata sandi wajib diisi.");
         invalidField = passwordInput;
       } else if (username !== DEMO_USERNAME || password !== DEMO_PASSWORD) {
-        showAlert("error", "Username atau kata sandi salah. Gunakan akun demo (admin / Demo123!).");
+        showAlert("error", "Username atau kata sandi salah. Silakan periksa kembali kredensial Anda.");
         invalidField = usernameInput;
       }
 
