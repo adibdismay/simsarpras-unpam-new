@@ -35,6 +35,11 @@
   let deleteTargetId = null;
   let deleteTrigger = null;
 
+  // State pagination
+  let currentPage = 1;
+  const pageSize = 10;
+  let filteredDataCache = [];
+
   /**
    * Inisialisasi elemen DOM
    */
@@ -263,9 +268,15 @@
   }
 
   /**
-   * Render tabel inventaris
+   * Render tabel inventaris dengan pagination
    */
   function renderTable(data) {
+    // Simpan data terfilter untuk pagination
+    filteredDataCache = data || [];
+    
+    // Reset ke halaman pertama saat data baru difilter
+    currentPage = 1;
+    
     // KPI selalu menampilkan TOTAL, bukan hasil filter.
     renderKpi();
 
@@ -277,7 +288,7 @@
     // Hapus konten lama
     tbody.innerHTML = '';
 
-    if (!data || data.length === 0) {
+    if (!filteredDataCache || filteredDataCache.length === 0) {
       // Tampilkan pesan kosong
       const tr = document.createElement('tr');
       tr.innerHTML = `
@@ -291,17 +302,24 @@
       `;
       tbody.appendChild(tr);
       updateResultCount(0);
+      renderPagination(0);
       updateSelection();
       return;
     }
 
+    // Hitung slice untuk halaman saat ini
+    const start = (currentPage - 1) * pageSize;
+    const end = start + pageSize;
+    const pageData = filteredDataCache.slice(start, end);
+
     // Render setiap baris
-    data.forEach(item => {
+    pageData.forEach(item => {
       const row = renderRow(item);
       tbody.appendChild(row);
     });
 
-    updateResultCount(data.length);
+    updateResultCount(pageData.length);
+    renderPagination(filteredDataCache.length);
 
     // Pasang ulang event listener checkbox
     attachCheckboxListeners();
@@ -311,12 +329,87 @@
   }
 
   /**
+   * Render kontrol pagination
+   */
+  function renderPagination(totalItems) {
+    const paginationNav = document.getElementById('pagination');
+    if (!paginationNav) return;
+
+    const totalPages = Math.ceil(totalItems / pageSize);
+    
+    if (totalPages <= 1) {
+      paginationNav.innerHTML = '';
+      return;
+    }
+
+    let html = '';
+    
+    // Tombol Previous
+    html += `<button type="button" class="pagination-btn px-3 py-1.5 rounded-lg text-label-md font-medium transition-colors ${currentPage === 1 ? 'text-outline cursor-not-allowed' : 'text-on-surface hover:bg-surface-container'}" ${currentPage === 1 ? 'disabled' : ''} data-page="${currentPage - 1}" aria-label="Halaman sebelumnya"><span class="material-symbols-outlined text-[18px]">chevron_left</span></button>`;
+    
+    // Nomor halaman
+    const maxVisiblePages = 5;
+    let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+    let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+    
+    if (endPage - startPage + 1 < maxVisiblePages) {
+      startPage = Math.max(1, endPage - maxVisiblePages + 1);
+    }
+    
+    if (startPage > 1) {
+      html += `<button type="button" class="pagination-btn px-3 py-1.5 rounded-lg text-label-md font-medium text-on-surface hover:bg-surface-container transition-colors" data-page="1" aria-label="Halaman 1">1</button>`;
+      if (startPage > 2) {
+        html += `<span class="px-2 text-outline">…</span>`;
+      }
+    }
+    
+    for (let i = startPage; i <= endPage; i++) {
+      html += `<button type="button" class="pagination-btn px-3 py-1.5 rounded-lg text-label-md font-medium transition-colors ${i === currentPage ? 'bg-primary text-on-primary' : 'text-on-surface hover:bg-surface-container'}" data-page="${i}" aria-label="Halaman ${i}" ${i === currentPage ? 'aria-current="page"' : ''}>${i}</button>`;
+    }
+    
+    if (endPage < totalPages) {
+      if (endPage < totalPages - 1) {
+        html += `<span class="px-2 text-outline">…</span>`;
+      }
+      html += `<button type="button" class="pagination-btn px-3 py-1.5 rounded-lg text-label-md font-medium text-on-surface hover:bg-surface-container transition-colors" data-page="${totalPages}" aria-label="Halaman ${totalPages}">${totalPages}</button>`;
+    }
+    
+    // Tombol Next
+    html += `<button type="button" class="pagination-btn px-3 py-1.5 rounded-lg text-label-md font-medium transition-colors ${currentPage === totalPages ? 'text-outline cursor-not-allowed' : 'text-on-surface hover:bg-surface-container'}" ${currentPage === totalPages ? 'disabled' : ''} data-page="${currentPage + 1}" aria-label="Halaman selanjutnya"><span class="material-symbols-outlined text-[18px]">chevron_right</span></button>`;
+    
+    paginationNav.innerHTML = html;
+    
+    // Event delegation untuk pagination
+    paginationNav.onclick = function(e) {
+      const btn = e.target.closest('.pagination-btn');
+      if (!btn || btn.disabled) return;
+      const page = Number(btn.getAttribute('data-page'));
+      if (Number.isInteger(page) && page >= 1 && page <= totalPages && page !== currentPage) {
+        goToPage(page);
+      }
+    };
+  }
+
+  /**
+   * Pindah ke halaman tertentu
+   */
+  function goToPage(page) {
+    currentPage = page;
+    renderTable(filteredDataCache);
+  }
+
+  /**
    * Update jumlah hasil
    */
-  function updateResultCount(count) {
-    const total = typeof InventoryStore !== 'undefined' ? InventoryStore.getAll().length : count;
+  function updateResultCount(visibleCount) {
+    const totalFiltered = filteredDataCache.length;
+    const totalAll = typeof InventoryStore !== 'undefined' ? InventoryStore.getAll().length : 0;
     if (resultCountElement) {
-      resultCountElement.textContent = `Menampilkan ${count} dari ${total} baris`;
+      if (totalFiltered === totalAll) {
+        resultCountElement.textContent = `Menampilkan ${visibleCount} dari ${totalAll} baris`;
+      } else {
+        resultCountElement.textContent = `Menampilkan ${visibleCount} dari ${totalFiltered} baris (difilter dari ${totalAll})`;
+      }
     }
   }
 

@@ -767,7 +767,7 @@ Material Design dengan pendekatan modern educational administration dashboard.
 Mendukung mode terang (default) dan mode gelap. Pilihan tema disimpan di
 `localStorage` (key `simsarpras.theme.v1`); bila belum ada pilihan, mengikuti
 preferensi sistem (`prefers-color-scheme`). Tombol tema tersedia di header setiap
-halaman dan dapat digunakan dengan keyboard.
+halaman dan dapat digunakan dengan keyboard. **Status: Terealisasi pada Milestone 2–3.**
 
 ## Typography
 
@@ -876,16 +876,17 @@ Tools yang digunakan dalam perancangan dan pengembangan:
 
 # 19. Teknologi Implementasi
 
-Rencana teknologi frontend:
+Teknologi frontend yang **sebenarnya dipakai** pada Milestone 2–3:
 
-* React
-* TypeScript
-* Vite
-* Tailwind CSS
-* LocalStorage
-* Mock Data
+* HTML5, CSS3, JavaScript (vanilla, ES2020+) — **tanpa framework**
+* Tailwind CSS (via CDN)
+* Chart.js (via CDN) untuk grafik kondisi doughnut
+* Material Symbols (ikon) via Google Fonts
+* Font Plus Jakarta Sans / JetBrains Mono via Google Fonts
+* `localStorage` untuk data mock (key `simsarpras.inventory.v1`) dan preferensi tema (key `simsarpras.theme.v1`)
+* `sessionStorage` untuk penanda sesi login simulasi (key `simsarpras.session.v1`)
 
-Sistem tidak menggunakan backend maupun database server pada tahap tugas Client-Side Programming.
+Sistem tidak menggunakan backend, database server, React, TypeScript, atau Vite pada tahap tugas Client-Side Programming. Rencana awal (React/TS/Vite) terdokumentasi di arsip perancangan namun **tidak terealisasi** dalam implementasi akhir.
 
 ---
 
@@ -906,20 +907,22 @@ Screenshot hasil wireframe Google Stitch / Figma akan dimasukkan pada bagian ini
 
 # 21. High-Fidelity Design
 
-## Dashboard
+**Catatan:** Desain high-fidelity berikut merupakan hasil prototipe Google Stitch/Figma pada tahap perencanaan (Milestone 1). Implementasi akhir pada Milestone 2–3 menggunakan HTML/CSS/JS vanilla dengan Tailwind CDN, sehingga mungkin terdapat perbedaan visual dengan prototipe.
+
+## Dashboard (Prototipe)
 
 
-![Dashboard High Fidelity](./design/dashboard-final.png)
+![Dashboard High Fidelity (Prototipe)](./design/dashboard-final.png)
 
 
-## Data Master Inventaris
+## Data Master Inventaris (Prototipe)
 
 
-![Data Master High Fidelity](./design/data-master-final.png)
+![Data Master High Fidelity (Prototipe)](./design/data-master-final.png)
 
-## Design System
+## Design System (Prototipe)
 
-![Design System SIMSARPRAS UNPAM](./design/design-system-figma.png)
+![Design System SIMSARPRAS UNPAM (Prototipe)](./design/design-system-figma.png)
 
 ---
 

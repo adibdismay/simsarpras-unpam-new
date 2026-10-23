@@ -44,6 +44,16 @@ ke storage; setelah login berhasil hanya disimpan penanda sesi di `sessionStorag
 memeriksa sesi; tanpa sesi akan diarahkan ke `pages/login.html`. Tombol **Keluar** menghapus
 penanda sesi.
 
+## Batasan Keamanan (Penting)
+
+**Login menggunakan `sessionStorage` hanyalah simulasi untuk keperluan tugas akademik, BUKAN autentikasi aman untuk data nyata.**
+
+- Kata sandi **tidak diverifikasi** di server — validasi hanya mencocokkan string `admin` / `Demo123!` di sisi klien (`login.js`).
+- Setelah "login", hanya penanda boolean (`simsarpras.session.v1 = "1"`) yang disimpan di `sessionStorage`. Tidak ada token JWT, session ID kriptografis, atau validasi sisi server.
+- Siapapun yang mengakses `sessionStorage` via DevTools bisa mengubah nilai tersebut menjadi `"1"` dan mengakses halaman terlindungi tanpa tahu kata sandi.
+- Data `localStorage` (`simsarpras.inventory.v1`) **tidak terenkripsi** dan bisa dibaca/dimodifikasi siapapun yang punya akses ke peramban.
+- **Jangan gunakan pola ini untuk aplikasi produksi nyata.** Untuk sistem nyata, gunakan autentikasi sisi server (backend), HTTPS, hash kata sandi (bcrypt/argon2), token sesi aman (JWT/httpOnly cookie), dan otorisasi berbasis peran (RBAC) yang diverifikasi di server.
+
 ## Teknologi
 
 - HTML, CSS, JavaScript (vanilla, tanpa framework)

@@ -264,10 +264,21 @@
       #main-content { padding-top: 0; }
       body { background: #fff; }
       .print-full { width: 100% !important; }
-      table { border-collapse: collapse; }
+      table { border-collapse: collapse; width: 100%; }
       thead { display: table-header-group; }
       tr { break-inside: avoid; page-break-inside: avoid; }
-      th, td { border: 1px solid #9ca3af; padding: 8px; }
+      th, td { border: 1px solid #9ca3af; padding: 8px; font-size: 11px; }
+      th { background: #f3f4f6 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      #report-table-wrap { box-shadow: none; border: none; }
+      .panel { box-shadow: none; border: none; padding: 0; }
+      #main-content > div { max-width: 100%; padding: 0; }
+      .bg-surface-container-lowest { background: #fff !important; }
+      .shadow-sm { box-shadow: none !important; }
+      .rounded-xl { border-radius: 0 !important; }
+      /* Show print-only header */
+      .print-only { display: block !important; }
+      /* Hide screen header in print */
+      #main-content > div > div:first-child { display: none; }
     }
   </style>
 </head>
@@ -385,7 +396,36 @@
             <span>Cetak Laporan</span>
           </button>
         </div>
-
+ 
+        <!-- Filter Laporan -->
+        <div class="no-print bg-surface-container-lowest rounded-xl shadow-sm p-space-md">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="flex flex-col gap-1">
+              <label class="font-label-sm text-label-sm text-outline uppercase tracking-wider" for="report-filter-gedung">Gedung</label>
+              <select class="h-10 px-3 bg-surface-container-low text-on-surface font-body-sm text-body-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer" id="report-filter-gedung">
+                <option value="">Semua Gedung</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="font-label-sm text-label-sm text-outline uppercase tracking-wider" for="report-filter-kategori">Kategori</label>
+              <select class="h-10 px-3 bg-surface-container-low text-on-surface font-body-sm text-body-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer" id="report-filter-kategori">
+                <option value="">Semua Kategori</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="font-label-sm text-label-sm text-outline uppercase tracking-wider" for="report-filter-kondisi">Kondisi</label>
+              <select class="h-10 px-3 bg-surface-container-low text-on-surface font-body-sm text-body-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer" id="report-filter-kondisi">
+                <option value="">Semua Kondisi</option>
+                <option value="Baik">Baik</option>
+                <option value="Rusak Ringan">Rusak Ringan</option>
+                <option value="Rusak Berat">Rusak Berat</option>
+                <option value="Dalam Perbaikan">Dalam Perbaikan</option>
+                <option value="Perlu Pemeriksaan">Perlu Pemeriksaan</option>
+              </select>
+            </div>
+          </div>
+        </div>
+ 
         <!-- Ringkasan -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-space-md">
           <div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-md">
