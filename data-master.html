@@ -1613,5 +1613,29 @@
 <script src="assets/js/inventory-store.js"></script>
 <script src="assets/js/data-inventaris.js"></script>
 
+
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/master-form.js"></script>
+  <script>
+    // Load filters on page load
+    (function() {
+      if (typeof MasterStore !== 'undefined') {
+        const loadSelect = (id, data, displayKey = 'name') => {
+          const select = document.getElementById(id);
+          if (!select) return;
+          select.innerHTML = '<option value="">Semua ' + id.replace('filter-', '') + '</option>';
+          data.forEach(item => {
+            const opt = document.createElement('option');
+            opt.value = item.id;
+            opt.textContent = item[displayKey] || item.id;
+            select.appendChild(opt);
+          });
+        };
+        loadSelect('filter-kategori', MasterStore.getCategories(), 'name');
+        loadSelect('filter-gedung', MasterStore.getBuildings(), 'name');
+        loadSelect('filter-ruangan', MasterStore.getRooms(), 'name');
+      }
+    })();
+  </script>
 </body>
 </html>
