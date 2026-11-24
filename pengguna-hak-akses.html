@@ -8,7 +8,8 @@
   <script src="assets/js/theme.js"></script>
   <link rel="stylesheet" href="assets/css/theme.css">
   <script src="assets/js/auth.js"></script>
-  <script>Auth.protectPage();</script>
+  <script src="assets/js/rbac.js"></script>
+  <script>Auth.protectPage(true, "admin");</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -358,6 +359,7 @@
 
 
 <script src="assets/js/storage.js"></script>
-<script src="assets/js/pengguna-hak-akses.js"></script>
+<script src="assets/js/inventory-store.js"></script>
+  <script src="assets/js/pengguna-hak-akses.js"></script>
 </body>
 </html>

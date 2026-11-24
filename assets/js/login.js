@@ -1,14 +1,27 @@
 /* ============================================================
-   SIMSARPRAS UNPAM — Logika login demo (client-side)
-   Akun demo: admin / Demo123!
+   SIMSARPRAS UNPAM — Logika login demo (client-side, two roles)
+   Akun demo:
+     - Admin:    admin / Demo123!
+     - Mahasiswa: mahasiswa / Mahasiswa123!
    Tidak menyimpan kata sandi ke storage apa pun.
    ============================================================ */
 (function () {
   "use strict";
 
-  const DEMO_USERNAME = "admin";
-  const DEMO_PASSWORD = "Demo123!";
-  const TARGET_PAGE = "layout.html";
+  const DEMO_USERS = {
+    admin: {
+      username: "admin",
+      password: "Demo123!",
+      role: "admin",
+      displayName: "Admin Sarpras"
+    },
+    mahasiswa: {
+      username: "mahasiswa",
+      password: "Mahasiswa123!",
+      role: "mahasiswa",
+      displayName: "Mahasiswa"
+    }
+  };
 
   const usernameInput = document.getElementById("username");
   const passwordInput = document.getElementById("password");
@@ -65,12 +78,24 @@
   /* ---------- Isi otomatis akun demo ---------- */
   if (autofillButton) {
     autofillButton.addEventListener("click", function () {
-      usernameInput.value = DEMO_USERNAME;
-      passwordInput.value = DEMO_PASSWORD;
+      usernameInput.value = DEMO_USERS.admin.username;
+      passwordInput.value = DEMO_USERS.admin.password;
       setInvalid(usernameInput, false);
       setInvalid(passwordInput, false);
       clearAlert();
-      robotMessage.textContent = "Kredensial demo diisikan. Silakan masuk!";
+      robotMessage.textContent = "Kredensial demo admin diisikan. Silakan masuk!";
+      usernameInput.focus();
+    });
+  }
+
+  if (document.getElementById("btn-autofill-mahasiswa")) {
+    document.getElementById("btn-autofill-mahasiswa").addEventListener("click", function () {
+      usernameInput.value = DEMO_USERS.mahasiswa.username;
+      passwordInput.value = DEMO_USERS.mahasiswa.password;
+      setInvalid(usernameInput, false);
+      setInvalid(passwordInput, false);
+      clearAlert();
+      robotMessage.textContent = "Kredensial demo mahasiswa diisikan. Silakan masuk!";
       usernameInput.focus();
     });
   }
@@ -87,10 +112,11 @@
     form.addEventListener("submit", function (event) {
       event.preventDefault();
 
-      const username = usernameInput.value.trim();
+      let username = usernameInput.value.trim();
       const password = passwordInput.value;
 
       let invalidField = null;
+      let user = null;
 
       if (!username && !password) {
         showAlert("error", "Masukkan username dan kata sandi terlebih dahulu.");
@@ -101,9 +127,18 @@
       } else if (!password) {
         showAlert("error", "Kata sandi wajib diisi.");
         invalidField = passwordInput;
-      } else if (username !== DEMO_USERNAME || password !== DEMO_PASSWORD) {
-        showAlert("error", "Username atau kata sandi salah. Gunakan akun demo (admin / Demo123!).");
-        invalidField = usernameInput;
+      } else {
+        // Find matching user
+        for (const key in DEMO_USERS) {
+          if (DEMO_USERS[key].username === username && DEMO_USERS[key].password === password) {
+            user = DEMO_USERS[key];
+            break;
+          }
+        }
+        if (!user) {
+          showAlert("error", "Username atau kata sandi salah. Gunakan akun demo (admin / Demo123! atau mahasiswa / Mahasiswa123!).");
+          invalidField = usernameInput;
+        }
       }
 
       if (invalidField) {
@@ -114,29 +149,35 @@
         return;
       }
 
-      // Kredensial cocok — simpan penanda sesi, lalu arahkan.
+      /* Kredensial cocok */
       setInvalid(usernameInput, false);
       setInvalid(passwordInput, false);
 
-      if (typeof Auth === "undefined" || !Auth.signIn()) {
+      if (typeof Auth === "undefined" || !Auth.signIn(user.username, user.username, user.role, user.displayName)) {
         showAlert("error", "Penyimpanan sesi (sessionStorage) tidak tersedia. Aktifkan sessionStorage, lalu coba lagi.");
         robotMessage.textContent = "Ups! Sesi tidak dapat disimpan.";
         return;
       }
 
       showAlert("success", "Autentikasi berhasil! Mengalihkan ke Dashboard…");
-      robotMessage.textContent = "Akses diterima. Selamat datang!";
+      robotMessage.textContent = "Akses diterima. Selamat datang, " + user.displayName + "!";
 
       submitButton.disabled = true;
       submitLabel.textContent = "Memverifikasi…";
 
       setTimeout(function () {
-        window.location.replace(TARGET_PAGE);
+        if (user.role === "admin") {
+          window.location.replace(Auth.ADMIN_DASHBOARD);
+        } else if (user.role === "mahasiswa") {
+          window.location.replace(Auth.MAHASISWA_DASHBOARD);
+        } else {
+          window.location.replace(Auth.LOGIN_PAGE);
+        }
       }, 900);
     });
   }
 
-  /* ---------- Animasi robot (dekoratif) ---------- */
+  /* ---------- Biru untuk animasi robot ---------- */
   (function initRobotAnimation() {
     const robotSvg = document.getElementById("robot-svg");
     const mascot = robotSvg ? robotSvg.closest(".mascot") : null;
@@ -211,21 +252,18 @@
       }, 3000 + Math.random() * 3000);
     }
 
-    // Kelopak: menutup saat kata sandi fokus, terbuka saat fokus keluar.
     if (passwordInput) {
       passwordInput.addEventListener("focus", function () {
         eyesClosed = true;
         setEyes(true);
       });
       passwordInput.addEventListener("blur", function (event) {
-        // Fokus pindah ke tombol tampilkan sandi — biarkan mata tetap tertutup.
         if (event.relatedTarget === togglePassword) return;
         eyesClosed = false;
         setEyes(false);
       });
     }
 
-    // Pelacakan pointer (nonaktif saat reduced-motion / perangkat sentuh).
     if (!reducedMotion && robotSvg) {
       updateFaceRect();
       window.addEventListener("resize", updateFaceRect);
@@ -237,7 +275,6 @@
       window.addEventListener("blur", resetPupils);
     }
 
-    // Kedipan sesekali saat idle.
     if (!reducedMotion) scheduleBlink();
   })();
 })();

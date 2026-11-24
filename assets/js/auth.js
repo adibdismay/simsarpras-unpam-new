@@ -1,15 +1,19 @@
 /* ============================================================
-   SIMSARPRAS UNPAM — Auth (sesi demo client-side)
-   Menyimpan penanda sesi di sessionStorage, BUKAN kata sandi.
-   Key: simsarpras.session.v1 (terpisah dari simsarpras.inventory.v1).
-   Ini simulasi client-side, bukan autentikasi aman.
+   SIMSARPRAS UNPAM — Auth (sesi demo client-side, ROLE-BASED)
+   - Mendukung dua role: admin dan mahasiswa
+   - Session disimpan di sessionStorage dengan format JSON
+   - Session expiry (default: 8 jam)
+   - Breadcrumbs: Tombol Back setelah logout tidak membuka halaman privat
+   - Role verification setiap halaman admin
    ============================================================ */
 (function () {
   "use strict";
 
   var SESSION_KEY = "simsarpras.session.v1";
   var LOGIN_PAGE = "login.html";
-  var DASHBOARD_PAGE = "layout.html";
+  var ADMIN_DASHBOARD = "layout.html";
+  var MAHASISWA_DASHBOARD = "mahasiswa.html";
+  var SESSION_EXPIRY = 8 * 60 * 60 * 1000; // 8 jam
 
   /* sessionStorage tidak dapat diakses (mis. diblokir). */
   function storageUnavailable() {
@@ -21,31 +25,74 @@
     }
   }
 
-  function isAuthenticated() {
+  /* Parse session dari sessionStorage */
+  function getSession() {
     try {
-      return window.sessionStorage.getItem(SESSION_KEY) === "1";
+      var data = window.sessionStorage.getItem(SESSION_KEY);
+      return data ? JSON.parse(data) : null;
     } catch (err) {
-      return false;
+      return null;
     }
   }
 
-  function signIn() {
+  function isAuthenticated() {
     try {
-      window.sessionStorage.setItem(SESSION_KEY, "1");
+      var session = getSession();
+      if (!session) return false;
+      // Cek expiry
+      if (session.expiresAt && Date.now() > session.expiresAt) {
+        signOut();
+        return false;
+      }
       return true;
     } catch (err) {
       return false;
     }
   }
 
-  /* Hanya menghapus key sesi demo. Tidak memakai clear(). */
+  function getRole() {
+    var session = getSession();
+    return session ? session.role : null;
+  }
+
+  function getUserId() {
+    var session = getSession();
+    return session ? session.userId : null;
+  }
+
+  function getUsername() {
+    var session = getSession();
+    return session ? session.username : null;
+  }
+
+  function signIn(userId, username, role, displayName) {
+    try {
+      var session = {
+        userId: userId,
+        username: username,
+        role: role,
+        displayName: displayName,
+        loggedAt: Date.now(),
+        expiresAt: Date.now() + SESSION_EXPIRY
+      };
+      window.sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  /* Hanya menghapus key sesi, then refresh page to clear cached state. */
   function signOut() {
     try {
       window.sessionStorage.removeItem(SESSION_KEY);
-      return true;
-    } catch (err) {
-      return false;
-    }
+    } catch (err) {}
+  }
+
+  function invalidateSession() {
+    try {
+      window.sessionStorage.removeItem(SESSION_KEY);
+    } catch (err) {}
   }
 
   function showStorageError() {
@@ -66,15 +113,29 @@
   }
 
   /* Halaman terlindungi: tanpa sesi, arahkan ke login (location.replace).
-     Jika sessionStorage gagal, tampilkan pesan (tanpa loop redirect). */
-  function protectPage() {
+     Jika sessionStorage gagal, tampilkan pesan (tanpa loop redirect).
+     allowedRole opsional: jika provided, hanya role yang cocok yang boleh mengakses. */
+  function protectPage(redirectToLogin, allowedRole) {
+    if (redirectToLogin === undefined) redirectToLogin = true;
     if (storageUnavailable()) {
       showStorageError();
       return;
     }
     if (!isAuthenticated()) {
-      window.location.replace(LOGIN_PAGE);
+      if (redirectToLogin) {
+        window.location.replace(LOGIN_PAGE);
+      }
       return;
+    }
+    // Cek role bila allowedRole diberikan
+    if (allowedRole !== undefined && allowedRole !== null) {
+      var userRole = getRole();
+      if (userRole !== allowedRole) {
+        if (redirectToLogin) {
+          window.location.replace(LOGIN_PAGE);
+        }
+        return;
+      }
     }
     // Cek ulang saat halaman dipulihkan dari cache (tombol Back setelah logout).
     window.addEventListener("pageshow", function (event) {
@@ -87,11 +148,18 @@
     });
   }
 
-  /* Halaman login: jika sesi sudah aktif, arahkan ke dashboard. */
+  /* Halaman login: jika sesi sudah aktif, arahkan ke dashboard sesuai role. */
   function redirectIfAuthenticated() {
     if (storageUnavailable()) return;
     if (isAuthenticated()) {
-      window.location.replace(DASHBOARD_PAGE);
+      var role = getRole();
+      if (role === "admin") {
+        window.location.replace(ADMIN_DASHBOARD);
+      } else if (role === "mahasiswa") {
+        window.location.replace(MAHASISWA_DASHBOARD);
+      } else {
+        window.location.replace(LOGIN_PAGE);
+      }
     }
   }
 
@@ -102,18 +170,61 @@
     var button = target.closest("#logout-button");
     if (!button) return;
     event.preventDefault();
-    signOut();
+    invalidateSession();
     window.location.replace(LOGIN_PAGE);
+  });
+
+  /* Override window.history.back to prevent access after logout. */
+  var originalPushState = history.pushState;
+  var originalReplaceState = history.replaceState;
+  var isAfterLogout = false;
+
+  window.pushState = function () {
+    if (isAfterLogout) {
+      window.location.replace(LOGIN_PAGE);
+      return;
+    }
+    return originalPushState.apply(this, arguments);
+  };
+
+  window.replaceState = function () {
+    if (isAfterLogout) {
+      window.location.replace(LOGIN_PAGE);
+      return;
+    }
+    return originalReplaceState.apply(this, arguments);
+  };
+
+  window.addEventListener("popstate", function (event) {
+    if (isAfterLogout) {
+      window.location.replace(LOGIN_PAGE);
+      return;
+    }
+    if (isAuthenticated()) {
+      var role = getRole();
+      if (role === "admin") {
+        window.location.replace(ADMIN_DASHBOARD);
+      } else if (role === "mahasiswa") {
+        window.location.replace(MAHASISWA_DASHBOARD);
+      }
+    }
   });
 
   window.Auth = {
     SESSION_KEY: SESSION_KEY,
     LOGIN_PAGE: LOGIN_PAGE,
-    DASHBOARD_PAGE: DASHBOARD_PAGE,
+    ADMIN_DASHBOARD: ADMIN_DASHBOARD,
+    MAHASISWA_DASHBOARD: MAHASISWA_DASHBOARD,
+    SESSION_EXPIRY: SESSION_EXPIRY,
+    getSession: getSession,
     isAuthenticated: isAuthenticated,
-    storageUnavailable: storageUnavailable,
+    getRole: getRole,
+    getUserId: getUserId,
+    getUsername: getUsername,
     signIn: signIn,
     signOut: signOut,
+    invalidateSession: invalidateSession,
+    storageUnavailable: storageUnavailable,
     protectPage: protectPage,
     redirectIfAuthenticated: redirectIfAuthenticated
   };

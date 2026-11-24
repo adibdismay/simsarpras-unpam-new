@@ -9,6 +9,20 @@
 (function(global) {
   'use strict';
 
+  // RBAC Check: only admin can manage data
+  function canPerformAction() {
+    return Auth && Auth.canManageData() === true;
+  }
+
+  // Guard function to block mahasiswa access
+  function requireAdmin() {
+    if (!canPerformAction()) {
+      alert('Akses ditolak: Anda tidak memiliki wewenang untuk melakukan tindakan ini.');
+      return false;
+    }
+    return true;
+  }
+
   // DOM Elements
   const kategoriTableBody = document.getElementById('kategori-table-body');
   const btnTambah = document.getElementById('btn-tambah');

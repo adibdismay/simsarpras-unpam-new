@@ -8,6 +8,7 @@
   <script src="assets/js/theme.js"></script>
   <link rel="stylesheet" href="assets/css/theme.css">
   <script src="assets/js/auth.js"></script>
+  <script src="assets/js/rbac.js"></script>
   <script>Auth.protectPage();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -673,7 +674,9 @@
           event.preventDefault();
           return;
         }
+        // Close sidebar on mobile after clicking a link
         if (mobile.matches) setMenu(false);
+        // Handle dashboard hash navigation
         if (link.getAttribute("href") === "#dashboard") {
           event.preventDefault();
           const main = document.getElementById("dashboard");
@@ -681,6 +684,48 @@
           window.scrollTo({ top: 0 });
         }
       });
+
+      // Attach event listeners only once (guards against duplicate attachments)
+      if (!openButton._listenerAttached) {
+        openButton.addEventListener("click", () => setMenu(!menuIsOpen));
+        openButton._listenerAttached = true;
+      }
+      if (!closeButton._listenerAttached) {
+        closeButton.addEventListener("click", () => setMenu(false, true));
+        closeButton._listenerAttached = true;
+      }
+      if (!overlay._listenerAttached) {
+        overlay.addEventListener("click", () => setMenu(false, true));
+        overlay._listenerAttached = true;
+      }
+      if (!sidebar._listenerAttached) {
+        sidebar.addEventListener("click", (event) => {
+          const link = event.target.closest("a");
+          if (link) {
+            if (link.getAttribute("aria-disabled") === "true") {
+              event.preventDefault();
+              return;
+            }
+            if (mobile.matches) setMenu(false);
+            if (link.getAttribute("href") === "#dashboard") {
+              event.preventDefault();
+              const main = document.getElementById("dashboard");
+              main.focus({ preventScroll: true });
+              window.scrollTo({ top: 0 });
+            }
+          }
+        });
+        sidebar._listenerAttached = true;
+      }
+      if (!document._sidebarClickListenerAttached) {
+        document.addEventListener("click", (event) => {
+          // Close sidebar when clicking outside on mobile
+          if (mobile.matches && menuIsOpen && !sidebar.contains(event.target) && !openButton.contains(event.target)) {
+            setMenu(false);
+          }
+        });
+        document._sidebarClickListenerAttached = true;
+      }
 
       // Dropdown kampus: hanya buka/tutup, belum mengganti data.
       const campusWrapper = document.getElementById("campus-wrapper");
@@ -752,6 +797,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script src="assets/js/inventory-store.js"></script>
+  <script src="assets/js/storage.js"></script>
   <script src="assets/js/dashboard.js"></script>
 </body>
 </html>

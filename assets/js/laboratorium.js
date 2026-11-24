@@ -4,9 +4,23 @@
  */
 
 (function(global) {
-  'use strict';
+'use strict';
 
-  const tableBody = document.getElementById('laboratorium-table-body');
+// RBAC Check: only admin can manage data
+function canPerformAction() {
+  return Auth && Auth.canManageData() === true;
+}
+
+// Guard function to block mahasiswa access
+function requireAdmin() {
+  if (!canPerformAction()) {
+    alert('Akses ditolak: Anda tidak memiliki wewenang untuk melakukan tindakan ini.');
+    return false;
+  }
+  return true;
+}
+
+var tableBody = document.getElementById('laboratorium-table-body');
   const btnTambah = document.getElementById('btn-tambah');
   const modalBackdrop = document.getElementById('laboratorium-modal-backdrop');
   const modalTitle = document.getElementById('laboratorium-modal-title');
@@ -157,7 +171,43 @@
       const building = MasterStore.getBuildingById(laboratorium.buildingId);
       const buildingName = building ? building.name : '-';
 
-      tr.innerHTML = `
+      // RBAC: only admin can see edit/delete buttons
+      let actionsHtml = '';
+      if (Auth && Auth.canManageData() === true) {
+        actionsHtml = `
+          <td class="py-3 px-4 text-center">
+            <div class="flex items-center justify-center gap-1">
+              <button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors" type="button" aria-label="Detail" onclick="laboratorium.viewDetail('${laboratorium.id}')">
+                <span class="material-symbols-outlined">visibility</span>
+              </button>
+              <button class="p-1.5 rounded hover:bg-surface-container text-primary hover:text-primary-container transition-colors" type="button" aria-label="Edit" onclick="laboratorium.edit('${laboratorium.id}')">
+                <span class="material-symbols-outlined">edit</span>
+              </button>
+              <button class="p-1.5 rounded hover:bg-surface-container text-error hover:text-error-container transition-colors" type="button" aria-label="Hapus" onclick="laboratorium.confirmDelete('${laboratorium.id}')">
+                <span class="material-symbols-outlined">delete</span>
+              </button>
+            </div>
+          </td>
+        `;
+      } else {
+        // Mahasiswa: show disabled read-only view
+        actionsHtml = `
+          <td class="py-3 px-4 text-center">
+            <div class="flex items-center justify-center gap-1">
+              <button class="p-1.5 rounded cursor-not-allowed bg-surface-container text-on-surface-variant opacity-40" type="button" aria-label="Detail (Admin only)" onclick="laboratorium.viewDetail('${laboratorium.id}')" disabled>
+                <span class="material-symbols-outlined">visibility</span>
+              </button>
+              <button class="p-1.5 rounded cursor-not-allowed bg-surface-container text-on-surface-variant opacity-40" type="button" aria-label="Edit (Admin only)" disabled>
+                <span class="material-symbols-outlined">edit</span>
+              </button>
+              <button class="p-1.5 rounded cursor-not-allowed bg-surface-container text-on-surface-variant opacity-40" type="button" aria-label="Hapus (Admin only)" disabled>
+                <span class="material-symbols-outlined">delete</span>
+              </button>
+            </div>
+          </td>
+        `;
+      }
+      const trContent = `
         <td class="py-3 px-4 text-center"><input class="row-checkbox w-4 h-4 rounded text-primary focus:ring-0 cursor-pointer" type="checkbox"></td>
         <td class="py-3 px-3 font-code-sm text-code-sm font-semibold text-primary">${laboratorium.id}</td>
         <td class="py-3 px-3">
@@ -174,25 +224,17 @@
           </span>
         </td>
         <td class="py-3 px-3 text-on-surface-variant font-body-sm text-body-sm">${laboratorium.capacity || '-'}</td>
-        <td class="py-3 px-4 text-center">
-          <div class="flex items-center justify-center gap-1">
-            <button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors" type="button" aria-label="Detail" onclick="laboratorium.viewDetail('${laboratorium.id}')">
-              <span class="material-symbols-outlined">visibility</span>
-            </button>
-            <button class="p-1.5 rounded hover:bg-surface-container text-primary hover:text-primary-container transition-colors" type="button" aria-label="Edit" onclick="laboratorium.edit('${laboratorium.id}')">
-              <span class="material-symbols-outlined">edit</span>
-            </button>
-            <button class="p-1.5 rounded hover:bg-surface-container text-error hover:text-error-container transition-colors" type="button" aria-label="Hapus" onclick="laboratorium.confirmDelete('${laboratorium.id}')">
-              <span class="material-symbols-outlined">delete</span>
-            </button>
-          </div>
-        </td>
+        <td class="py-3 px-4 text-center">${actionsHtml}</td>
       `;
-      tableBody.appendChild(tr);
+      tr.innerHTML = trContent;
     });
   }
 
   function confirmDelete(id) {
+    if (!requireAdmin()) {
+      alert('Akses ditolak: Anda tidak memiliki wewenang untuk mengakses fitur ini.');
+      return;
+    }
     if (!confirm('Hapus laboratorium ini? Data terkait akan dihapus.')) return;
     deleteTargetId = id;
     deleteBackdrop.hidden = false;
@@ -250,6 +292,8 @@
   }
 
   function saveForm() {
+    if (!requireAdmin()) return;
+
     if (!validateForm()) return;
 
     const data = {
