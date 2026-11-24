@@ -350,6 +350,9 @@
       return MasterStore._kondisiInventaris.remove(id);
     },
 
+    // Inventory items
+    getInventoryItemById: id => InventoryStore.getById(id),
+
     // List all entities
     getAll: () => ({
       buildings: MasterStore.BUILDING.getAll(),
