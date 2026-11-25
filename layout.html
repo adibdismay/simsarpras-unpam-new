@@ -644,6 +644,7 @@
         overlay.dataset.open = String(menuIsOpen);
         openButton.setAttribute("aria-expanded", String(menuIsOpen));
         document.body.style.overflow = menuIsOpen ? "hidden" : initialOverflow;
+
         if (menuIsOpen) {
           closeButton.focus();
           shell.inert = true;
@@ -685,49 +686,7 @@
         }
       });
 
-      // Attach event listeners only once (guards against duplicate attachments)
-      if (!openButton._listenerAttached) {
-        openButton.addEventListener("click", () => setMenu(!menuIsOpen));
-        openButton._listenerAttached = true;
-      }
-      if (!closeButton._listenerAttached) {
-        closeButton.addEventListener("click", () => setMenu(false, true));
-        closeButton._listenerAttached = true;
-      }
-      if (!overlay._listenerAttached) {
-        overlay.addEventListener("click", () => setMenu(false, true));
-        overlay._listenerAttached = true;
-      }
-      if (!sidebar._listenerAttached) {
-        sidebar.addEventListener("click", (event) => {
-          const link = event.target.closest("a");
-          if (link) {
-            if (link.getAttribute("aria-disabled") === "true") {
-              event.preventDefault();
-              return;
-            }
-            if (mobile.matches) setMenu(false);
-            if (link.getAttribute("href") === "#dashboard") {
-              event.preventDefault();
-              const main = document.getElementById("dashboard");
-              main.focus({ preventScroll: true });
-              window.scrollTo({ top: 0 });
-            }
-          }
-        });
-        sidebar._listenerAttached = true;
-      }
-      if (!document._sidebarClickListenerAttached) {
-        document.addEventListener("click", (event) => {
-          // Close sidebar when clicking outside on mobile
-          if (mobile.matches && menuIsOpen && !sidebar.contains(event.target) && !openButton.contains(event.target)) {
-            setMenu(false);
-          }
-        });
-        document._sidebarClickListenerAttached = true;
-      }
 
-      // Dropdown kampus: hanya buka/tutup, belum mengganti data.
       const campusWrapper = document.getElementById("campus-wrapper");
       const campusButton = document.getElementById("campus-button");
       const campusMenu = document.getElementById("campus-menu");
@@ -744,6 +703,14 @@
       document.addEventListener("click", (event) => {
         if (!campusWrapper.contains(event.target)) setCampusMenu(false);
       });
+
+      // Outside-click: close sidebar on mobile when clicking outside the sidebar
+      document.addEventListener("click", (event) => {
+        if (mobile.matches && menuIsOpen && !sidebar.contains(event.target) && !openButton.contains(event.target)) {
+          setMenu(false);
+        }
+      });
+
       document.addEventListener("focusin", (event) => {
         if (!campusWrapper.contains(event.target)) setCampusMenu(false);
       });
