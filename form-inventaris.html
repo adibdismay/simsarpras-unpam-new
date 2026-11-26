@@ -241,6 +241,14 @@
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }
   </style>
+
+<style>
+#notification-dropdown { display:none; position:absolute; right:0; top:100%; margin-top:4px; width:280px; background:#ffffff; border:1px solid #e5e7eb; border-radius:8px; box-shadow:0 8px 16px rgba(0,0,0,0.1); z-index:30; }
+#notification-dropdown.show { display: block !important; }
+#notification-close:hover { color:#2563eb; }
+@media (max-width: 768px) { #notification-dropdown { width:260px; } }
+</style>
+
 </head>
 
 <body class="bg-background font-sans text-body-md text-on-surface antialiased">
@@ -296,8 +304,8 @@
   </aside>
 
   <!-- PEMBUNGKUS HALAMAN -->
-  <div id="app-shell">
-    <header id="app-header">
+  <div id="app-shell-mobile">
+    <header id="app-header-mobile">
       <div class="header-row">
         <button id="menu-open" type="button" aria-label="Buka menu navigasi" aria-controls="app-sidebar" aria-expanded="false" title="Buka menu navigasi"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h11"></path></svg></button>
         <div class="header-breadcrumb flex items-center gap-4">
@@ -309,13 +317,378 @@
         <div class="header-search">
           <label for="global-search" class="sr-only">Pencarian inventaris, belum tersedia</label>
           <div class="relative">
-<span class="material-symbols-outlined absolute left-3 top-3 text-outline" aria-hidden="true">search</span><input id="global-search" type="search" placeholder="Cari inventaris, ruangan, atau buku..." class="w-full h-10 pl-10 pr-3 bg-white rounded-xl text-body-sm shadow-sm" title="Pencarian dikembangkan pada tahap interaktivitas" disabled>
+<span class="material-symbols-outlined absolute left-3 top-3 text-outline" aria-hidden="true">search</span><input id="global-search-mobile" type="search" placeholder="Cari inventaris, ruangan, atau buku..." class="w-full h-10 pl-10 pr-3 bg-white rounded-xl text-body-sm shadow-sm" title="Pencarian dikembangkan pada tahap interaktivitas" disabled>
 </div>
         </div>
         <div class="header-actions">
           <button type="button" class="header-request button bg-secondary-container text-on-secondary-container" title="Fitur pengajuan belum tersedia" disabled><span class="material-symbols-outlined" aria-hidden="true">add</span>Ajukan Sarpras</button>
           <div class="relative">
-<button type="button" class="icon-button" aria-label="Notifikasi, tampilan contoh" title="Notifikasi belum tersedia" disabled><span class="material-symbols-outlined" aria-hidden="true">notifications</span></button><span class="absolute top-0 right-0 w-4 h-4 rounded-full bg-error text-white text-[10px] flex items-center justify-center">3</span>
+<button type="button" class="icon-button" aria-label="Notifikasi, tampilan contoh" title="Notifikasi belum tersedia"><span class="material-symbols-outlined" aria-hidden="true">notifications</span>
+<div id="notification-dropdown" class="absolute right-0 top-full mt-2 w-72 bg-white rounded-xl shadow-xl z-30 border border-surface-container-low" role="menu" aria-labelledby="notification-button-notif-f27mn58ap">
+  <div class="flex items-center justify-between px-4 py-3 border-b border-surface-container">
+    <p class="text-label-md font-semibold">Notifikasi</p>
+    <button type="button" id="notification-close-desktop" class="text-outline text-label-md font-semibold hover:text-primary" aria-label="Tutup notifikasi">Tutup</button>
+  </div>
+  <ul class="divide-y divide-surface-container">
+    <li class="px-4 py-3 flex items-start gap-3">
+      <span class="w-2 h-2 rounded-full bg-error mt-2 flex-shrink-0"></span>
+      <div class="min-w-0">
+        <p class="text-body-sm font-semibold truncate">Penyimpanan penuh</p>
+        <p class="text-label-sm text-on-surface-variant">Hari ini 14:32</p>
+      </div>
+    </li>
+    <li class="px-4 py-3 flex items-start gap-3">
+      <span class="w-2 h-2 rounded-full bg-warning mt-2 flex-shrink-0"></span>
+      <div class="min-w-0">
+        <p class="text-body-sm font-semibold truncate">Pemeliharaan berlangsung</p>
+        <p class="text-label-sm text-on-surface-variant">18:00 WIB</p>
+      </div>
+    </li>
+  </ul>
+</div>
+ry-fixed": "#dde1ff",
+        "tertiary": "#500003",
+        "surface-dim": "#d2d9f4",
+        "on-primary-fixed": "#001354",
+        "primary-fixed-dim": "#b8c4ff",
+        "secondary": "#6e5e00",
+        "on-error": "#ffffff",
+        "tertiary-fixed": "#ffdad6",
+        "tertiary-fixed-dim": "#ffb4ab",
+        "surface-container-lowest": "#ffffff",
+        "surface-container": "#eaedff",
+        "inverse-surface": "#283044",
+        "error-container": "#ffdad6",
+        "on-tertiary-fixed-variant": "#93000d",
+        "background": "#F7F8FA",
+        "surface-bright": "#faf8ff",
+        "on-secondary": "#ffffff",
+        "secondary-fixed-dim": "#e6c500",
+        "on-primary": "#ffffff",
+        "error": "#DC2626",
+        "secondary-container": "#fcd801",
+        "outline-variant": "#E5E7EB",
+        "on-secondary-container": "#6f5e00",
+        "surface": "#F7F8FA",
+        "secondary-fixed": "#ffe25e",
+        "primary": "#2563EB",
+        "on-error-container": "#93000a",
+        "on-background": "#111827",
+        "outline": "#757684",
+        "on-surface": "#111827",
+        "surface-variant": "#dae2fd",
+        "on-primary-container": "#869dff",
+        "surface-container-high": "#e2e7ff",
+        "inverse-on-surface": "#eef0ff",
+        "on-tertiary-fixed": "#410002",
+        "surface-container-low": "#f2f3ff",
+        "tertiary-container": "#790008",
+        "primary-container": "#1D4ED8",
+        "surface-container-highest": "#dae2fd",
+        "on-secondary-fixed": "#221b00",
+        "on-secondary-fixed-variant": "#534600"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.125rem",
+        "lg": "0.25rem",
+        "xl": "0.5rem",
+        "full": "0.75rem"
+      },
+      "spacing": {
+        "space-xl": "2rem",
+        "gutter": "1.25rem",
+        "space-lg": "1.5rem",
+        "gutter-mobile": "0.75rem",
+        "space-xs": "0.25rem",
+        "space-sm": "0.5rem",
+        "margin-mobile": "1rem",
+        "space-md": "1rem",
+        "margin": "2rem"
+      },
+      "fontFamily": {
+        "body-lg": ["Plus Jakarta Sans", "Arial", "sans-serif"],
+        "display-lg-mobile": ["Plus Jakarta Sans", "Arial", "sans-serif"],
+        "headline-md": ["Plus Jakarta Sans", "Arial", "sans-serif"],
+        "code-sm": ["JetBrains Mono", "monospace"],
+        "label-md": ["Plus Jakarta Sans", "Arial", "sans-serif"],
+        "display-lg": ["Plus Jakarta Sans", "Arial", "sans-serif"],
+        "headline-lg-mobile": ["Plus Jakarta Sans", "Arial", "sans-serif"],
+        "body-md": ["Plus Jakarta Sans", "Arial", "sans-serif"],
+        "label-sm": ["Plus Jakarta Sans", "Arial", "sans-serif"],
+        "body-sm": ["Plus Jakarta Sans", "Arial", "sans-serif"],
+        "headline-sm": ["Plus Jakarta Sans", "Arial", "sans-serif"],
+        "label-lg": ["Plus Jakarta Sans", "Arial", "sans-serif"],
+        "headline-lg": ["Plus Jakarta Sans", "Arial", "sans-serif"],
+        "sans": ["Plus Jakarta Sans", "Arial", "sans-serif"],
+        "mono": ["JetBrains Mono", "monospace"]
+      },
+      "fontSize": {
+        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+        "display-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+        "headline-md": ["22px", { "lineHeight": "30px", "fontWeight": "600" }],
+        "code-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+        "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+        "headline-lg-mobile": ["22px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+        "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "700" }],
+        "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+        "headline-sm": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
+        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+        "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "700" }]
+      }
+    }
+  }
+};</script>
+  <style>
+    html { scroll-padding-top: 80px; }
+    body { margin: 0; }
+    [hidden] { display: none !important; }
+    *, *::before, *::after { box-sizing: border-box; }
+    :focus-visible { outline: 2px solid #2563eb; outline-offset: 3px; }
+    .material-symbols-outlined { flex-shrink: 0; font-size: 20px; line-height: 1; vertical-align: middle; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 8px; }
+    .skip-link { position: fixed; top: -100px; left: 16px; z-index: 200; padding: 12px 16px; background: #fff; color: #2563eb; border-radius: 8px; }
+    .skip-link:focus { top: 12px; }
+
+    #app-sidebar { position: fixed; inset: 0 auto 0 0; z-index: 100; display: flex; flex-direction: column; width: 288px; height: 100vh; height: 100dvh; background: #fff; box-shadow: 0 1px 8px rgb(0 0 0 / 4%); }
+    .sidebar-scroll { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+    .nav-group-title { margin: 16px 0 4px; padding: 4px 16px; color: #6b7280; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+    .nav-link { display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-radius: 4px; color: #6b7280; text-decoration: none; }
+    .nav-link:hover { background: #f2f3ff; color: #111827; }
+    .nav-link[aria-current="page"] { background: #eaedff; color: #2563eb; font-weight: 700; }
+    .nav-link[aria-disabled="true"] { cursor: default; }
+
+    #app-shell { display: flex; flex-direction: column; min-height: 100vh; min-width: 0; padding-left: 288px; }
+    #app-header { position: fixed; top: 0; right: 0; left: 288px; z-index: 40; height: 64px; background: rgb(247 248 250 / 95%); backdrop-filter: blur(16px); box-shadow: 0 1px 8px rgb(0 0 0 / 4%); }
+    .header-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 100%; padding: 0 24px; }
+    .header-search { flex: 1; min-width: 100px; max-width: 420px; }
+    .header-actions { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 10px 14px; border-radius: 4px; font-size: 12px; line-height: 18px; font-weight: 600; text-align: center; }
+    .button:disabled { cursor: not-allowed; }
+    .icon-button { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; flex-shrink: 0; border-radius: 8px; color: #6b7280; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 8px; font-size: 11px; line-height: 16px; font-weight: 600; }
+    #app-footer { margin-top: auto; padding: 20px 24px; border-top: 1px solid #e5e7eb; background: #fff; color: #6b7280; font-size: 12px; line-height: 20px; }
+    #menu-open, #menu-close, #sidebar-overlay { display: none; }
+
+    #main-content { padding-top: 64px; min-width: 0; flex: 1; }
+    #main-content > div { max-width: 1600px; margin-inline: auto; min-width: 0; }
+    .field-error { color: #DC2626; font-size: 11px; line-height: 14px; margin-top: 4px; }
+    .field-input-error { border-color: #DC2626 !important; box-shadow: 0 0 0 1px #DC2626 !important; }
+
+    @media (max-width: 1399px) {
+      .header-campus, .header-profile-text { display: none; }
+    }
+    @media (max-width: 1199px) {
+      .header-search, .header-request { display: none; }
+    }
+    @media (max-width: 1023px) {
+      #app-shell { padding-left: 0; }
+      #app-header { left: 0; }
+      #app-sidebar {
+        display:flex;
+        width:min(320px, calc(100vw - 32px));
+        transform:translateX(-105%);
+        visibility:hidden;
+        pointer-events:none;
+        transition:transform 220ms cubic-bezier(.2,.8,.2,1), visibility 0s 220ms;
+        border-radius:0 20px 20px 0;
+        box-shadow:12px 0 40px rgb(17 24 39 / 14%);
+      }
+      #app-sidebar[data-open="true"] {
+        transform:translateX(0);
+        visibility:visible;
+        pointer-events:auto;
+        transition-delay:0s;
+      }
+      #sidebar-overlay {
+        display:block;
+        position:fixed;
+        inset:0;
+        z-index:90;
+        background:rgb(17 24 39 / 40%);
+        backdrop-filter:blur(2px);
+        opacity:0;
+        visibility:hidden;
+        pointer-events:none;
+        transition:opacity 220ms ease, visibility 0s 220ms;
+      }
+      #sidebar-overlay[data-open="true"] {
+        opacity:1;
+        visibility:visible;
+        pointer-events:auto;
+        transition-delay:0s;
+      }
+      #menu-open, #menu-close {
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        width:44px;
+        height:44px;
+        padding:0;
+        flex-shrink:0;
+        border-radius:12px;
+        border:1px solid #e5e7eb;
+        background:#fff;
+        color:#2563eb;
+        cursor:pointer;
+        transition:background 160ms ease, border-color 160ms ease, transform 160ms ease;
+      }
+      #menu-open:hover, #menu-close:hover { background:#eff6ff; border-color:#bfdbfe; }
+      #menu-open:active, #menu-close:active { transform:scale(.95); }
+      .sidebar-brand {
+        position:sticky;
+        top:0;
+        z-index:1;
+        gap:8px;
+        padding:16px 12px;
+        background:white;
+        border-bottom:1px solid #f1f5f9;
+        margin-bottom:12px;
+      }
+      .sidebar-brand > .min-w-0 { flex:1; }
+      .sidebar-brand p:first-child { font-size:14px; line-height:20px; }
+      .sidebar-brand p:last-child { font-size:10px; line-height:15px; }
+      #menu-close { margin:0 0 0 auto; color:#6b7280; border-color:transparent; background:#f8fafc; }
+      .header-breadcrumb, .header-help { display: none; }
+      .header-row { padding-inline: 16px; gap: 8px; }
+      .header-actions { margin-left: auto; gap: 8px; }
+    }
+    @media (max-width: 767px) {
+      #main-content .px-space-xl { padding-left:16px; padding-right:16px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+
+<style>
+#notification-dropdown { display:none; position:absolute; right:0; top:100%; margin-top:4px; width:280px; background:#ffffff; border:1px solid #e5e7eb; border-radius:8px; box-shadow:0 8px 16px rgba(0,0,0,0.1); z-index:30; }
+#notification-dropdown.show { display: block !important; }
+#notification-close:hover { color:#2563eb; }
+@media (max-width: 768px) { #notification-dropdown { width:260px; } }
+</style>
+
+</head>
+
+<body class="bg-background font-sans text-body-md text-on-surface antialiased">
+  <a class="skip-link" href="#main-content">Lewati ke konten utama</a>
+
+  <!-- SIDEBAR -->
+  <aside id="app-sidebar-2" data-open="false" aria-label="Navigasi utama SIMSARPRAS EDU">
+    <div class="sidebar-scroll">
+      <div class="p-6 flex items-center gap-2 sidebar-brand">
+        <div class="w-10 h-10 flex-shrink-0">
+          <img src="assets/images/logo-unpam.png" alt="Logo Universitas Pamulang" width="40" height="40" class="h-10 w-10 object-contain" data-local-image>
+          <span hidden class="h-10 w-10 rounded-xl bg-blue-50 text-primary items-center justify-center" data-image-fallback role="img" aria-label="Logo Universitas Pamulang belum tersedia" style="display: flex;">
+            <span class="material-symbols-outlined" aria-hidden="true">school</span>
+          </span>
+        </div>
+        <div class="min-w-0">
+          <p class="text-[17px] font-bold tracking-tight leading-tight">SIMSARPRAS EDU</p>
+          <p class="text-label-sm text-on-surface-variant mt-1">Universitas Pamulang</p>
+        </div>
+      <button id="menu-close-2" type="button" aria-label="Tutup menu navigasi" title="Tutup menu navigasi"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button>
+    </div>
+      <div class="px-6 pb-2">
+        <span class="badge bg-surface-container text-primary"><span class="w-2 h-2 rounded-full bg-primary" aria-hidden="true"></span>Kampus Viktor</span>
+      </div>
+      <nav class="px-2 pb-4" aria-label="Menu aplikasi">
+        <p class="nav-group-title">Menu Utama</p>
+        <a class="nav-link" href="layout.html"><span class="material-symbols-outlined" aria-hidden="true">dashboard</span>Dashboard</a>
+        <p class="nav-group-title">Data Master</p>
+        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">apartment</span>Gedung</a>
+        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">meeting_room</span>Ruangan</a>
+        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">category</span>Kategori Inventaris</a>
+        <a class="nav-link" href="data-master.html" aria-current="page"><span class="material-symbols-outlined" aria-hidden="true">inventory_2</span>Data Inventaris</a>
+        <p class="nav-group-title">Fasilitas Akademik</p>
+        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">school</span>Ruang Kelas</a>
+        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">science</span>Laboratorium</a>
+        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">local_library</span>Perpustakaan</a>
+        <p class="nav-group-title">Manajemen &amp; Pelaporan</p>
+        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">fact_check</span>Kondisi Inventaris</a>
+        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">build</span>Pemeliharaan</a>
+        <a class="nav-link" href="laporan.html"><span class="material-symbols-outlined" aria-hidden="true">assessment</span>Laporan &amp; Audit</a>
+        <p class="nav-group-title">Pengaturan</p>
+        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">manage_accounts</span>Pengguna &amp; Hak Akses</a>
+        <a class="nav-link" href="#" aria-disabled="true" title="Halaman belum tersedia pada template ini"><span class="material-symbols-outlined" aria-hidden="true">settings</span>Pengaturan Sistem</a>
+      </nav>
+    </div>
+    <div class="p-4 m-2 bg-surface-container-low rounded-xl flex items-center gap-2 flex-shrink-0">
+      <span class="material-symbols-outlined p-2 rounded-lg bg-surface-container text-primary" aria-hidden="true">dns</span>
+      <div class="min-w-0">
+<p class="font-mono text-label-md font-semibold">v2.4.0 • Node Viktor</p>
+<p class="text-label-sm text-on-surface-variant">Sistem Sarpras Terpadu</p>
+</div>
+    </div>
+  </aside>
+
+  <!-- PEMBUNGKUS HALAMAN -->
+  <div id="app-shell-desktop">
+    <header id="app-header-desktop">
+      <div class="header-row">
+        <div class="header-breadcrumb flex items-center gap-4">
+          <nav class="flex items-center gap-2 text-label-md" aria-label="Breadcrumb"><span class="text-on-surface-variant">Data Master</span><span class="material-symbols-outlined text-sm" aria-hidden="true">chevron_right</span><span class="text-on-surface-variant">Data Inventaris</span><span class="material-symbols-outlined text-sm" aria-hidden="true">chevron_right</span><span class="font-semibold">Form Inventaris</span></nav>
+          <div class="header-campus flex items-center gap-2 px-3 py-2 rounded-lg bg-surface-container">
+<span class="material-symbols-outlined text-primary" aria-hidden="true">domain</span><span class="text-label-md">Kampus Viktor - Gedung Utama</span>
+</div>
+        </div>
+        <div class="header-search">
+          <label for="global-search" class="sr-only">Pencarian inventaris, belum tersedia</label>
+          <div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-3 text-outline" aria-hidden="true">search</span><input id="global-search-desktop" type="search" placeholder="Cari inventaris, ruangan, atau buku..." class="w-full h-10 pl-10 pr-3 bg-white rounded-xl text-body-sm shadow-sm" title="Pencarian dikembangkan pada tahap interaktivitas" disabled>
+</div>
+        </div>
+        <div class="header-actions">
+          <button type="button" class="header-request button bg-secondary-container text-on-secondary-container" title="Fitur pengajuan belum tersedia" disabled><span class="material-symbols-outlined" aria-hidden="true">add</span>Ajukan Sarpras</button>
+          <div class="relative">
+<button type="button" class="icon-button" aria-label="Notifikasi, tampilan contoh" title="Notifikasi belum tersedia"><span class="material-symbols-outlined" aria-hidden="true">notifications</span>
+  <div class="flex items-center justify-between px-4 py-3 border-b border-surface-container">
+    <p class="text-label-md font-semibold">Notifikasi</p>
+    <button type="button" id="notification-close-mobile" class="text-outline text-label-md font-semibold hover:text-primary" aria-label="Tutup notifikasi">Tutup</button>
+  </div>
+  <ul class="divide-y divide-surface-container">
+    <li class="px-4 py-3 flex items-start gap-3">
+      <span class="w-2 h-2 rounded-full bg-error mt-2 flex-shrink-0"></span>
+      <div class="min-w-0">
+        <p class="text-body-sm font-semibold truncate">Penyimpanan penuh</p>
+        <p class="text-label-sm text-on-surface-variant">Hari ini 14:32</p>
+      </div>
+    </li>
+    <li class="px-4 py-3 flex items-start gap-3">
+      <span class="w-2 h-2 rounded-full bg-warning mt-2 flex-shrink-0"></span>
+      <div class="min-w-0">
+        <p class="text-body-sm font-semibold truncate">Pemeliharaan berlangsung</p>
+        <p class="text-label-sm text-on-surface-variant">18:00 WIB</p>
+      </div>
+    </li>
+  </ul>
+</div>
+<div class="relative">
+    <div class="flex items-center justify-between px-4 py-3 border-b border-surface-container">
+      <p class="text-label-md font-semibold">Notifikasi</p>
+      <button type="button" id="notification-close-desktop-2" class="text-outline text-label-md font-semibold hover:text-primary" aria-label="Tutup notifikasi">Tutup</button>
+    </div>
+    <ul class="divide-y divide-surface-container">
+      <li class="px-4 py-3 flex items-start gap-3">
+        <span class="w-2 h-2 rounded-full bg-error mt-2 flex-shrink-0"></span>
+        <div class="min-w-0">
+          <p class="text-body-sm font-semibold truncate">Penyimpanan penuh</p>
+          <p class="text-label-sm text-on-surface-variant">Hari ini 14:32</p>
+        </div>
+      </li>
+      <li class="px-4 py-3 flex items-start gap-3">
+        <span class="w-2 h-2 rounded-full bg-warning mt-2 flex-shrink-0"></span>
+        <div class="min-w-0">
+          <p class="text-body-sm font-semibold truncate">Pemeliharaan berlangsung</p>
+          <p class="text-label-sm text-on-surface-variant">18:00 WIB</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+</button><span class="absolute top-0 right-0 w-4 h-4 rounded-full bg-error text-white text-[10px] flex items-center justify-center">3</span>
 </div>
           <button type="button" class="header-help icon-button" aria-label="Bantuan, belum tersedia" disabled><span class="material-symbols-outlined" aria-hidden="true">help</span></button>
           <div class="flex items-center gap-2">

@@ -156,6 +156,55 @@
       .header-actions { margin-left: auto; gap: 8px; }
     }
   </style>
+
+<style>
+@media (max-width: 1023px) {
+    .header-breadcrumb,
+    .header-help,
+    .header-search,
+    .header-request,
+    .header-campus,
+    .header-profile-text,
+    .theme-toggle,
+    .profile-container {
+        display: none !important;
+    }
+    .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-left: 0;
+        flex: 1 1 auto;
+        min-width: 0;
+        flex-wrap: wrap;
+    }
+    .header-actions > * {
+        flex: 0 1 auto;
+        min-width: 0;
+    }
+    .header-actions .icon-button,
+    .header-actions .logout-button {
+        flex: 0 0 auto;
+        min-width: 0;
+    }
+    @media (max-width: 360px) {
+        .header-actions .icon-button,
+        .header-actions .logout-button {
+            width: 36px;
+            height: 36px;
+        }
+    }
+}
+</style>
+
+
+<style>
+#notification-dropdown { display:none; position:absolute; right:0; top:100%; margin-top:4px; width:280px; background:#ffffff; border:1px solid #e5e7eb; border-radius:8px; box-shadow:0 8px 16px rgba(0,0,0,0.1); z-index:30; }
+#notification-dropdown.show { display: block !important; }
+#notification-close:hover { color:#2563eb; }
+@media (max-width: 768px) { #notification-dropdown { width:260px; } }
+</style>
+
 </head>
 <body class="bg-background font-sans text-body-md text-on-surface antialiased">
   <a class="skip-link" href="#dashboard">Lewati ke konten utama</a>

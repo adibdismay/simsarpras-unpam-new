@@ -526,6 +526,28 @@
           <button type="button" class="header-request button bg-secondary-container text-on-secondary-container" title="Fitur pengajuan belum tersedia" disabled><span class="material-symbols-outlined" aria-hidden="true">add</span>Ajukan Sarpras</button>
           <div class="relative">
 <button type="button" class="icon-button" aria-label="Notifikasi, tampilan contoh" title="Notifikasi belum tersedia" disabled><span class="material-symbols-outlined" aria-hidden="true">notifications</span></button><span class="absolute top-0 right-0 w-4 h-4 rounded-full bg-error text-white text-[10px] flex items-center justify-center">3</span>
+  <div id="notification-dropdown" class="absolute right-0 top-full mt-2 w-72 bg-white rounded-xl shadow-xl z-30 border border-surface-container-low" role="menu" aria-labelledby="notification-button">
+    <div class="flex items-center justify-between px-4 py-3 border-b border-surface-container">
+      <p class="text-label-md font-semibold">Notifikasi</p>
+      <button type="button" id="notification-close" class="text-outline text-label-md font-semibold hover:text-primary" aria-label="Tutup notifikasi">Tutup</button>
+    </div>
+    <ul class="divide-y divide-surface-container">
+      <li class="px-4 py-3 flex items-start gap-3">
+        <span class="w-2 h-2 rounded-full bg-error mt-2 flex-shrink-0"></span>
+        <div class="min-w-0">
+          <p class="text-body-sm font-semibold truncate">Penyimpanan penuh</p>
+          <p class="text-label-sm text-on-surface-variant">Hari ini 14:32</p>
+        </div>
+      </li>
+      <li class="px-4 py-3 flex items-start gap-3">
+        <span class="w-2 h-2 rounded-full bg-warning mt-2 flex-shrink-0"></span>
+        <div class="min-w-0">
+          <p class="text-body-sm font-semibold truncate">Pemeliharaan berlangsung</p>
+          <p class="text-label-sm text-on-surface-variant">18:00 WIB</p>
+        </div>
+      </li>
+    </ul>
+  </div>
 </div>
           <button type="button" class="header-help icon-button" aria-label="Bantuan, belum tersedia" disabled><span class="material-symbols-outlined" aria-hidden="true">help</span></button>
           <div class="flex items-center gap-2">

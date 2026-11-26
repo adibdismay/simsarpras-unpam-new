@@ -229,9 +229,15 @@
       .sidebar-brand p:first-child { font-size:14px; line-height:20px; }
       .sidebar-brand p:last-child { font-size:10px; line-height:15px; }
       #menu-close { margin:0 0 0 auto; color:#6b7280; border-color:transparent; background:#f8fafc; }
-      .header-breadcrumb, .header-help { display: none; }
+      .header-row .header-breadcrumb,
+      .header-row .header-help { display: none !important; }
       .header-row { padding-inline: 16px; gap: 8px; }
-      .header-actions { margin-left: auto; gap: 8px; }
+      .header-actions { display: flex; align-items: center; gap: 4px; margin-left: 0; flex: 1 1 auto; min-width: 0; flex-wrap: wrap; }
+      .header-actions > * { flex: 0 1 auto; min-width: 0; }
+      @media (max-width: 375px) {
+        .header-actions { gap: 2px; }
+        .header-actions .icon-button { width: 36px; height: 36px; }
+      }
     }
     @media (max-width: 767px) {
       #main-content .px-space-xl { padding-left:16px; padding-right:16px; }
@@ -253,6 +259,27 @@
       th, td { border: 1px solid #9ca3af; padding: 8px; }
     }
   </style>
+
+  /* Notification dropdown */
+  #notification-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 4px;
+    width: 280px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    z-index: 30;
+  }
+  #notification-dropdown.show {
+    display: block !important;
+  }
+  #notification-close:hover {
+    color: #2563eb;
+  }
 </head>
 
 <body class="bg-background font-sans text-body-md text-on-surface antialiased">
@@ -313,7 +340,7 @@
       <div class="header-row">
         <button id="menu-open" type="button" aria-label="Buka menu navigasi" aria-controls="app-sidebar" aria-expanded="false" title="Buka menu navigasi"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h11"></path></svg></button>
         <div class="header-breadcrumb flex items-center gap-4">
-          <nav class="flex items-center gap-2 text-label-md" aria-label="Breadcrumb"><span class="text-on-surface-variant">Manajemen &amp; Pelaporan</span><span class="material-symbols-outlined text-sm" aria-hidden="true">chevron_right</span><span class="font-semibold">Laporan Inventaris</span></nav>
+          <nav class="flex items-center gap-2 text-label-md" aria-label="Breadcrumb"><span class="text-on-surface-variant">Laporan &amp; Audit</span><span class="material-symbols-outlined text-sm" aria-hidden="true">chevron_right</span><span class="font-semibold">Laporan Inventaris</span></nav>
           <div class="header-campus flex items-center gap-2 px-3 py-2 rounded-lg bg-surface-container">
 <span class="material-symbols-outlined text-primary" aria-hidden="true">domain</span><span class="text-label-md">Kampus Viktor - Gedung Utama</span>
 </div>
@@ -327,18 +354,40 @@
         <div class="header-actions">
           <button type="button" class="header-request button bg-secondary-container text-on-secondary-container" title="Fitur pengajuan belum tersedia" disabled><span class="material-symbols-outlined" aria-hidden="true">add</span>Ajukan Sarpras</button>
           <div class="relative">
-<button type="button" class="icon-button" aria-label="Notifikasi, tampilan contoh" title="Notifikasi belum tersedia" disabled><span class="material-symbols-outlined" aria-hidden="true">notifications</span></button><span class="absolute top-0 right-0 w-4 h-4 rounded-full bg-error text-white text-[10px] flex items-center justify-center">3</span>
+  <button type="button" id="notification-button" class="icon-button" aria-label="Notifikasi, tampilan contoh" title="Notifikasi belum tersedia"><span class="material-symbols-outlined" aria-hidden="true">notifications</span></button><span class="absolute top-0 right-0 w-4 h-4 rounded-full bg-error text-white text-[10px] flex items-center justify-center">3</span>
+  <div id="notification-dropdown" class="absolute right-0 top-full mt-2 w-72 bg-white rounded-xl shadow-xl z-30 border border-surface-container-low" role="menu" aria-labelledby="notification-button">
+    <div class="flex items-center justify-between px-4 py-3 border-b border-surface-container">
+      <p class="text-label-md font-semibold">Notifikasi</p>
+      <button type="button" id="notification-close" class="text-outline text-label-md font-semibold hover:text-primary" aria-label="Tutup notifikasi">Tutup</button>
+    </div>
+    <ul class="divide-y divide-surface-container">
+      <li class="px-4 py-3 flex items-start gap-3">
+        <span class="w-2 h-2 rounded-full bg-error mt-2 flex-shrink-0"></span>
+        <div class="min-w-0">
+          <p class="text-body-sm font-semibold truncate">Penyimpanan penuh</p>
+          <p class="text-label-sm text-on-surface-variant">Hari ini 14:32</p>
+        </div>
+      </li>
+      <li class="px-4 py-3 flex items-start gap-3">
+        <span class="w-2 h-2 rounded-full bg-warning mt-2 flex-shrink-0"></span>
+        <div class="min-w-0">
+          <p class="text-body-sm font-semibold truncate">Pemeliharaan berlangsung</p>
+          <p class="text-label-sm text-on-surface-variant">18:00 WIB</p>
+        </div>
+      </li>
+    </ul>
+  </div>
 </div>
           <button type="button" class="header-help icon-button" aria-label="Bantuan, belum tersedia" disabled><span class="material-symbols-outlined" aria-hidden="true">help</span></button>
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2 profile-container">
             <span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center" aria-hidden="true"><span class="material-symbols-outlined">person</span></span>
             <div class="header-profile-text text-label-sm">
-<p class="font-bold">Admin Sarpras</p>
-<p class="text-on-surface-variant">Universitas Pamulang - Viktor</p>
-</div>
+              <p class="font-bold">Admin Sarpras</p>
+              <p class="text-on-surface-variant">Universitas Pamulang - Viktor</p>
+            </div>
             <span class="material-symbols-outlined text-outline" aria-hidden="true">expand_more</span>
           </div>
-          <button type="button" id="theme-toggle" aria-label="Aktifkan mode gelap" title="Ubah tema terang/gelap"><span class="material-symbols-outlined theme-icon-light" aria-hidden="true">dark_mode</span><span class="material-symbols-outlined theme-icon-dark" aria-hidden="true">light_mode</span></button>
+          <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Aktifkan mode gelap" title="Ubah tema terang/gelap"><span class="material-symbols-outlined theme-icon-light" aria-hidden="true">dark_mode</span><span class="material-symbols-outlined theme-icon-dark" aria-hidden="true">light_mode</span></button>
           <button type="button" id="logout-button" class="inline-flex items-center gap-2 h-10 px-3 rounded-lg text-label-md font-semibold text-on-surface-variant hover:bg-error-container hover:text-error transition-colors" title="Keluar dari sesi demo"><span class="material-symbols-outlined" aria-hidden="true">logout</span>Keluar</button>
         </div>
       </div>
@@ -522,6 +571,50 @@
   <script src="assets/js/inventory-store.js"></script>
   <script src="assets/js/storage.js"></script>
   <script src="assets/js/laporan.js"></script>
+
+<script>
+  (function() {
+    console.log('NOTIFICATION SCRIPT: START');
+    var notifyBtn = document.querySelector('[aria-label="Notifikasi, tampilan contoh"]');
+    var dropdown = document.getElementById('notification-dropdown');
+    var closeBtn = document.getElementById('notification-close');
+    console.log('NOTIFICATION SCRIPT: notifyBtn=', !!notifyBtn, 'dropdown=', !!dropdown);
+    if (!notifyBtn || !dropdown) return;
+
+    function toggleDropdown(show) {
+      if (show) {
+        dropdown.classList.add('show');
+        notifyBtn.setAttribute('aria-expanded', 'true');
+      } else {
+        dropdown.classList.remove('show');
+        notifyBtn.setAttribute('aria-expanded', 'false');
+      }
+    }
+
+    notifyBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var isOpen = dropdown.classList.contains('show');
+      toggleDropdown(!isOpen);
+    });
+
+    closeBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      toggleDropdown(false);
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!dropdown.contains(e.target) && e.target !== notifyBtn) {
+        toggleDropdown(false);
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && dropdown.classList.contains('show')) {
+        toggleDropdown(false);
+      }
+    });
+  })();
+</script>
 
 </body>
 </html>
